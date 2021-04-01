@@ -1,0 +1,24 @@
+{
+  "name": "birdbox",
+  "version": "1.0.0",
+  "description": "LIve chat application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "Game",
+    "tictactoe",
+    "multiplayer"
+  ],
+  "author": "kadet",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
