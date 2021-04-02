@@ -33,6 +33,8 @@ export default {
 
       // $socket is socket.io-client instance
       this.$socket.emit("chatMessage", {...user, message: this.message});
+
+      this.message = ""
     },
   },
 };

@@ -4,13 +4,17 @@
       :class="
         bird.gender === 'male'
           ? 'bird__avatar bird__avatar--male'
-          : 'bird__avatar bird__avatar--female'
+          : bird.gender === 'female' ? 'bird__avatar bird__avatar--female'
+          : 'bird__avatar bird__avatar--bot'
       "
     >
-      <span class="bird__avatar-text">{{ bird.username.slice(0, 1) }}</span>
+      <span v-if="bird.gender !== 'bot' " class="bird__avatar-text">{{ bird.username.slice(0, 1) }}</span>
+      <span v-else class="bird__avatar-text"><i  class="fas fa-robot"></i></span>
+
       <span class="bird__avatar-icon">
         <i v-if="bird.gender === 'male'" class="fas fa-mars"></i>
         <i v-else-if="bird.gender === 'female'" class="fas fa-venus"></i>
+        <i v-else class="far fa-smile-beam"></i>
       </span>
     </div>
     <p v-if="withName" class="bird__username">
@@ -75,6 +79,14 @@ export default {
 
     .bird__avatar-icon {
       color: rosybrown;
+    }
+  }
+
+  &__avatar--bot {
+    background-color: grey;
+
+    .bird__avatar-icon {
+      color: grey;
     }
   }
 
