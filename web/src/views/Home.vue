@@ -1,6 +1,13 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <nav>
+      <ul>
+        <li><router-link to="/register">Register</router-link></li>
+        <li><router-link to="/create-space">Create Space</router-link></li>
+      </ul>
+    </nav>
+    
+    
   </div>
 </template>
 
@@ -10,3 +17,6 @@ export default {
   name: "Home",
 };
 </script>
+<style lang="scss" scoped>
+
+</style>

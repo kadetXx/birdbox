@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import ChatRoom from '../views/ChatRoom.vue'
+import Space from '../views/Space.vue'
 
 const routes = [
   {
@@ -16,9 +16,23 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/box/:box",
-    name: "ChatRoom",
-    component: ChatRoom
+    path: "/register",
+    name: "Register",
+   
+    component: () =>
+      import(/* webpackChunkName: "create-birdbox" */ "../views/Register.vue"),
+  },
+  {
+    path: "/create-space",
+    name: "CreateSpace",
+   
+    component: () =>
+      import(/* webpackChunkName: "create-space" */ "../views/CreateSpace.vue"),
+  },
+  {
+    path: "/space/:space",
+    name: "Space",
+    component: Space
   }
 ];
 

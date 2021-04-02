@@ -7,34 +7,43 @@ class SocketHandler {
   }
 
   joinRoom(newUser) {
+    
+
     const user = this.helper.userJoin(newUser);
-    this.socket.join(user.room);
 
-  
-    // send message to single user
-    this.socket.emit(
-      "message",
-      this.helper.formatMsg(this.bot, `Welcome ${user.username}`, "message__left", false)
-    );
+    if (newUser.room !== user.room) {
+      this.socket.join(user.room);
 
-    // send message to all other users
-    this.socket.broadcast
-      .to(user.room)
-      .emit(
+      // send message to single user
+      this.socket.emit(
         "message",
-        this.helper.formatMsg(this.bot, `${user.username} has joined`, "left", true)
+        this.helper.formatMsg(this.bot, `Welcome ${user.username}`, "message__left", false)
       );
 
-    // send room users info
-    this.io.to(user.room).emit("roomUsers", {
-      room: user.room,
-      users: this.helper.getRoomUsers(user.room),
-    });
+      // send message to all other users
+      this.socket.broadcast
+        .to(user.room)
+        .emit(
+          "message",
+          this.helper.formatMsg(this.bot, `${user.username} has joined`, "left", true)
+        );
+
+      // send room users info
+      this.io.to(user.room).emit("roomUsers", {
+        room: user.room,
+        users: this.helper.getRoomUsers(user.room),
+      });
+    }   
   }
+
+  // getUser(id) {
+  //   this.socket.emit("currentUser", this.helper.getCurrentUser(id))
+  // }
 
   newChat(msg) {
     let user = this.helper.getCurrentUser(msg.id);
-  
+    console.log(msg);
+
     this.socket.emit(
       "message",
       this.helper.formatMsg(user, msg.message, "message__right")

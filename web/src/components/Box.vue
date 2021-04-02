@@ -17,20 +17,6 @@ export default {
   props: {
     boxName: String,
   },
-
-  created() {
-    const user = {
-      id: 1,
-      username: "kadet",
-      gender: "male",
-      admin: true
-    };
-
-    const room = "southpark"
-
-    // emit joinRoom event to server
-    this.$socket.emit("joinRoom", {...user, room});
-  },
 };
 </script>
 

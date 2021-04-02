@@ -26,10 +26,12 @@ class game {
 
   static getCurrentUser(id) {
     users.forEach((person) => {
-      if (person.id == id) {
+      if (person.id === id) {
         this.currentUser = person;
       }
     });
+
+    console.log(users);
 
     return this.currentUser;
   }

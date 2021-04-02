@@ -24,12 +24,8 @@ export default {
 
   methods: {
     clickButton: function () {
-      const user = {
-        id: 1,
-        username: "kadet",
-        gender: "male",
-        admin: true,
-      };
+
+      const user = JSON.parse(localStorage.getItem('user'))
 
       // $socket is socket.io-client instance
       this.$socket.emit("chatMessage", {...user, message: this.message});

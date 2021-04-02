@@ -31,9 +31,14 @@ io.on("connection", (socket) => {
   const handler = new socketHandler(io, socket, helper, bot);
 
   // join room
-  socket.on("joinRoom", (user) => {
-    handler.joinRoom(user);
+  socket.on("joinRoom", (data) => {
+    handler.joinRoom({...data});
   });
+
+  // // get current user
+  // socket.on("getUser", (id) => {
+  //   handler.getUser(id)
+  // })
 
   // listen for chat message
   socket.on("chatMessage", (msg) => {
