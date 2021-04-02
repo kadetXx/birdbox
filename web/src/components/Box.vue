@@ -3,20 +3,33 @@
     <Header :boxName="boxName" />
     <Messages />
     <NewMessage />
-    
   </div>
 </template>
 
 <script>
 import Header from "./Header.vue";
-import NewMessage from './NewMessage';
-import Messages from './Messages'
+import NewMessage from "./NewMessage";
+import Messages from "./Messages";
 
 export default {
   name: "BoxContainer",
   components: { Header, NewMessage, Messages },
   props: {
     boxName: String,
+  },
+
+  created() {
+    const user = {
+      id: 1,
+      username: "kadet",
+      gender: "male",
+      admin: true
+    };
+
+    const room = "southpark"
+
+    // emit joinRoom event to server
+    this.$socket.emit("joinRoom", {...user, room});
   },
 };
 </script>

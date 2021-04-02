@@ -2,7 +2,7 @@
   <aside class="sidebar">
     <div class="header">
       <div to="/" class="header__link">
-        <Bird :bird="birds[0]" :withName="true" />
+        <Bird v-if="birds.length !== 0" :bird="birds[0]" :withName="true" />
       </div>
       <form class="header__search">
         <i class="fa fa-search header__search-icon"></i>
@@ -34,8 +34,19 @@ export default {
   },
   props: {
     boxName: String,
-    birds: Array,
   },
+
+  data() {
+    return {
+      birds: []
+    }
+  },
+
+  created() {
+    this.sockets.subscribe("roomUsers", (data) => {
+      this.birds = data.users;
+    });
+  }
 };
 </script>
 

@@ -1,19 +1,20 @@
 class SocketHandler {
-  constructor(io, socket, helper, botName) {
+  constructor(io, socket, helper, bot) {
     this.io = io;
     this.socket = socket;
     this.helper = helper;
-    this.botName = botName;
+    this.bot = bot;
   }
 
-  joinRoom(username, room) {
-    const user = this.helper.userJoin(this.socket.id, username, room);
+  joinRoom(newUser) {
+    const user = this.helper.userJoin(newUser);
     this.socket.join(user.room);
 
+  
     // send message to single user
     this.socket.emit(
       "message",
-      this.helper.formatMsg(this.botName, `Welcome ${user.username}`, "left")
+      this.helper.formatMsg(this.bot, `Welcome ${user.username}`, "message__left", false)
     );
 
     // send message to all other users
@@ -21,7 +22,7 @@ class SocketHandler {
       .to(user.room)
       .emit(
         "message",
-        this.helper.formatMsg(this.botName, `${user.username} has joined`, "left")
+        this.helper.formatMsg(this.bot, `${user.username} has joined`, "left", true)
       );
 
     // send room users info
@@ -32,14 +33,15 @@ class SocketHandler {
   }
 
   newChat(msg) {
-    let user = this.helper.getCurrentUser(this.socket.id);
+    let user = this.helper.getCurrentUser(msg.id);
+  
     this.socket.emit(
       "message",
-      this.helper.formatMsg(`${user.username}`, msg, "right")
+      this.helper.formatMsg(user, msg.message, "message__right")
     );
     this.socket.broadcast
       .to(user.room)
-      .emit("message", this.helper.formatMsg(`${user.username}`, msg, "left"));
+      .emit("message", this.helper.formatMsg(user, msg.message, "message__left"));
   }
 
   handleDisconnection(connectedUsers) {
@@ -52,7 +54,7 @@ class SocketHandler {
         .to(user.room)
         .emit(
           "message",
-          this.helper.formatMsg(this.botName, `${user.username} just left`, "left")
+          this.helper.formatMsg(this.bot, `${user.username} just left`, "left")
         );
 
       // send room users info

@@ -1,8 +1,13 @@
 <template>
   <div class="new-chat">
     <form class="form">
-      <input class="form__input" type="text" placeholder="Send a chat">
-      <button class="form__btn">Send</button>
+      <input
+        v-model="message"
+        class="form__input"
+        type="text"
+        placeholder="Send a chat"
+      />
+      <button class="form__btn" @click.prevent="clickButton()">Send</button>
     </form>
   </div>
 </template>
@@ -10,6 +15,28 @@
 <script>
 export default {
   name: "NewMessage",
+
+  data() {
+    return {
+      message: "",
+    };
+  },
+
+  methods: {
+    clickButton: function () {
+      const user = {
+        id: 1,
+        username: "kadet",
+        gender: "male",
+        admin: true,
+      };
+
+      // $socket is socket.io-client instance
+      this.$socket.emit("chatMessage", {...user, message: this.message});
+
+      this.message = ""
+    },
+  },
 };
 </script>
 
