@@ -3,55 +3,55 @@ let users = [];
 class game {
   constructor() {
     this.currentUser = null;
-    this.toPlay = true
+    this.toPlay = true;
   }
 
-  static formatMsg(username, text, position) {
+  static formatMsg(bird, message, className) {
     return {
-      username,
-      text,
-      position
+      bird,
+      message,
+      class: className,
+    };
+  }
+
+  static userJoin(user) {
+
+    if ((users.filter((item) => item.id === user.id)).length !== 0) {
+      return user;
+    } else {
+      users.push(user);
+      return user;
     }
   }
 
-  static userJoin(id, username, room) {
-    const user = {id, username, room};
-
-    users.push(user);
-    return user;
-    
-  }
-
   static getCurrentUser(id) {
-    users.forEach(person => {
+    users.forEach((person) => {
       if (person.id == id) {
         this.currentUser = person;
       }
-    })
+    });
 
     return this.currentUser;
   }
 
   static userLeaves(id) {
-    const index = users.findIndex(user => user.id == id);
+    const index = users.findIndex((user) => user.id == id);
 
     if (index !== -1) {
-     return users.splice(index, 1)[0];
+      return users.splice(index, 1)[0];
     }
   }
 
   static getRoomUsers(room) {
-    return users.filter(user => user.room == room);
+    return users.filter((user) => user.room == room);
   }
 
   static changeTurn(feedback, className) {
     return {
       feedback,
       className,
-    }
+    };
   }
 }
 
-
 module.exports = game;
-

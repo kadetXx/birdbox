@@ -1,7 +1,11 @@
 <template>
   <div class="messages">
     <div class="messages__container">
-      <Message v-bind:key="message.id" v-for="message in messages" :message="message" />
+      <Message
+        v-bind:key="message.id"
+        v-for="message in messages"
+        :message="message"
+      />
     </div>
   </div>
 </template>
@@ -26,7 +30,7 @@ export default {
             admin: true,
           },
           message: "Hello world",
-          class: "message__right"
+          class: "message__right",
         },
         {
           id: 2,
@@ -37,109 +41,16 @@ export default {
             admin: false,
           },
           message: "Another opportunity to be world class",
-          class: "message__left"
-        },
-        {
-          id: 2,
-          bird: {
-            id: 2,
-            username: "Ethel",
-            gender: "female",
-            admin: false,
-          },
-          message: "Another opportunity to be world class",
-          class: "message__left"
-        },
-        {
-          id: 2,
-          bird: {
-            id: 2,
-            username: "Ethel",
-            gender: "female",
-            admin: false,
-          },
-          message: "Another opportunity to be world class",
-          class: "message__left"
-        },
-        {
-          id: 2,
-          bird: {
-            id: 2,
-            username: "Ethel",
-            gender: "female",
-            admin: false,
-          },
-          message: "Another opportunity to be world class",
-          class: "message__left"
-        },
-        {
-          id: 2,
-          bird: {
-            id: 2,
-            username: "Ethel",
-            gender: "female",
-            admin: false,
-          },
-          message: "Another opportunity to be world class",
-          class: "message__left"
-        },
-        {
-          id: 2,
-          bird: {
-            id: 2,
-            username: "Ethel",
-            gender: "female",
-            admin: false,
-          },
-          message: "Another opportunity to be world class",
-          class: "message__left"
-        },
-        {
-          id: 2,
-          bird: {
-            id: 2,
-            username: "Ethel",
-            gender: "female",
-            admin: false,
-          },
-          message: "Another opportunity to be world class",
-          class: "message__left"
-        },
-        {
-          id: 2,
-          bird: {
-            id: 2,
-            username: "Ethel",
-            gender: "female",
-            admin: false,
-          },
-          message: "Another opportunity to be world class",
-          class: "message__left"
-        },
-        {
-          id: 2,
-          bird: {
-            id: 2,
-            username: "Ethel",
-            gender: "female",
-            admin: false,
-          },
-          message: "Another opportunity to be world class",
-          class: "message__left"
-        },
-        {
-          id: 2,
-          bird: {
-            id: 2,
-            username: "Ethel",
-            gender: "female",
-            admin: false,
-          },
-          message: "Another opportunity to be world class",
-          class: "message__left"
+          class: "message__left",
         },
       ],
     };
+  },
+
+  created() {
+    this.sockets.subscribe("message", (data) => {
+      this.messages.push(data);
+    });
   },
 };
 </script>
@@ -147,7 +58,7 @@ export default {
 <style lang="scss" scoped>
 .messages {
   flex-grow: 1;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

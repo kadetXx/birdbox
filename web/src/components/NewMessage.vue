@@ -1,8 +1,8 @@
 <template>
   <div class="new-chat">
     <form class="form">
-      <input class="form__input" type="text" placeholder="Send a chat">
-      <button class="form__btn">Send</button>
+      <input class="form__input" type="text" placeholder="Send a chat" />
+      <button class="form__btn" @click.prevent="clickButton()">Send</button>
     </form>
   </div>
 </template>
@@ -10,6 +10,21 @@
 <script>
 export default {
   name: "NewMessage",
+
+  sockets: {
+    connect: () => {
+      console.log("Hello");
+    },
+  },
+
+  methods: {
+    clickButton: function () {
+      console.log('clicked');
+
+      // $socket is socket.io-client instance
+      this.$socket.emit('joinRoom', {username: 'kadet', room: 'southpark'});
+    },
+  },
 };
 </script>
 

@@ -9,21 +9,30 @@ const socketHandler = require("./utils/socket");
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
+const io = socketio(server, {
+  cors: {
+    origin: "*",
+  },
+});
 
-let botName = "Parrot (bot)";
 let connectedUsers = 0;
+
+const bot = {
+  id: 0,
+  username: "Parrot (bot)",
+  gender: "bot",
+  admin: false,
+};
 
 // run when client connects
 io.on("connection", (socket) => {
   connectedUsers++;
-  console.log(`Connected Users: ${connectedUsers}`);
 
-  const handler = new socketHandler(io, socket, helper, botName);
+  const handler = new socketHandler(io, socket, helper, bot);
 
   // join room
-  socket.on("joinRoom", ({ username, room }) => {
-    handler.joinRoom(username, room);
+  socket.on("joinRoom", (user) => {
+    handler.joinRoom(user);
   });
 
   // listen for chat message
