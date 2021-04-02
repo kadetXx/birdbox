@@ -1,5 +1,5 @@
 <template>
-  <div class="box-container">
+  <div class="box">
     <Header :boxName="boxName" />
     <Messages />
     <NewMessage />
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.box-container {
+.box {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
