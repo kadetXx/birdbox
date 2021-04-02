@@ -24,19 +24,19 @@ export default {
 
     if (!isRegistered) {
       this.$router.push("register");
+    } else {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+
+      const user = {
+        ...storedUser,
+        admin: false,
+      };
+
+      const room = this.boxName;
+
+      // emit joinRoom event to server
+      this.$socket.emit("joinRoom", { ...user, room });
     }
-
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-
-    const user = {
-      ...storedUser,
-      admin: false,
-    };
-
-    const room = this.boxName;
-
-    // emit joinRoom event to server
-    this.$socket.emit("joinRoom", { ...user, room });
   },
 };
 </script>

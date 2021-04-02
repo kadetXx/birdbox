@@ -51,7 +51,7 @@ class Manager {
             user,
           ]
         }
-        
+
         return user
       } 
       else if (rooms[`${user.room}`].filter(item => item.id === user.id).length === 0) {
@@ -84,7 +84,6 @@ class Manager {
   }
 
   static getRoomUsers(room) {
-    console.log(rooms[room]);
     return rooms[room];
   }
 }
