@@ -43,6 +43,7 @@ export default {
   },
 
   created() {
+    console.log('getroomusers');
     this.sockets.subscribe("roomUsers", (data) => {
       console.log(data.users);
       this.birds = data.users;
