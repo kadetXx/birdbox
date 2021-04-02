@@ -33,14 +33,15 @@ class SocketHandler {
   }
 
   newChat(msg) {
-    let user = this.helper.getCurrentUser(this.socket.id);
+    let user = this.helper.getCurrentUser(msg.id);
+  
     this.socket.emit(
       "message",
-      this.helper.formatMsg(`${user.username}`, msg, "right")
+      this.helper.formatMsg(user, msg.message, "message__right")
     );
     this.socket.broadcast
       .to(user.room)
-      .emit("message", this.helper.formatMsg(`${user.username}`, msg, "left"));
+      .emit("message", this.helper.formatMsg(user, msg.message, "message__left"));
   }
 
   handleDisconnection(connectedUsers) {

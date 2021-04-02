@@ -1,7 +1,12 @@
 <template>
   <div class="new-chat">
     <form class="form">
-      <input class="form__input" type="text" placeholder="Send a chat" />
+      <input
+        v-model="message"
+        class="form__input"
+        type="text"
+        placeholder="Send a chat"
+      />
       <button class="form__btn" @click.prevent="clickButton()">Send</button>
     </form>
   </div>
@@ -11,18 +16,23 @@
 export default {
   name: "NewMessage",
 
-  sockets: {
-    connect: () => {
-      console.log("Hello");
-    },
+  data() {
+    return {
+      message: "",
+    };
   },
 
   methods: {
     clickButton: function () {
-      console.log('clicked');
+      const user = {
+        id: 1,
+        username: "kadet",
+        gender: "male",
+        admin: true,
+      };
 
       // $socket is socket.io-client instance
-      this.$socket.emit('joinRoom', {username: 'kadet', room: 'southpark'});
+      this.$socket.emit("chatMessage", {...user, message: this.message});
     },
   },
 };
