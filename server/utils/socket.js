@@ -30,12 +30,11 @@ class SocketHandler {
     this.io.to(user.room).emit("roomUsers", {
       room: user.room,
       users: this.helper.getRoomUsers(user.room),
-    }); 
+      }); 
   }
 
   newChat(msg) {
     let user = this.helper.getCurrentUser(msg.id);
-    console.log(msg);
 
     this.socket.emit(
       "message",

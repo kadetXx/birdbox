@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       boxName: this.$route.params.space,
-      currentUser: null
+      currentUser: null,
     };
   },
 
@@ -25,6 +25,18 @@ export default {
     if (!isRegistered) {
       this.$router.push("register");
     }
+
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    const user = {
+      ...storedUser,
+      admin: false,
+    };
+
+    const room = this.boxName;
+
+    // emit joinRoom event to server
+    this.$socket.emit("joinRoom", { ...user, room });
   },
 };
 </script>

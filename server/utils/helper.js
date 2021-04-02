@@ -1,4 +1,8 @@
 let users = [];
+let rooms = {}
+
+const val = rooms['what'];
+console.log(val);
 
 class game {
   constructor() {
@@ -20,7 +24,32 @@ class game {
       return user;
     } else {
       users.push(user);
+      
+      if (!rooms[`${user.room}`]) {
+        rooms = {
+          ...rooms,
+          [user.room]: [
+            user,
+          ]
+        }
+      } 
+      else {
+        rooms = {
+          ...rooms,
+          [user.room]: [
+            ...rooms[`${user.room}`],
+            user,
+          ]
+        }
+      }
+
+
+      console.log("rooms array");
+      console.log(rooms);
+      
       return user;
+
+      
     }
   }
 
@@ -30,8 +59,6 @@ class game {
         this.currentUser = person;
       }
     });
-
-    console.log(users);
 
     return this.currentUser;
   }
@@ -46,13 +73,6 @@ class game {
 
   static getRoomUsers(room) {
     return users.filter((user) => user.room === room);
-  }
-
-  static changeTurn(feedback, className) {
-    return {
-      feedback,
-      className,
-    };
   }
 }
 

@@ -43,11 +43,12 @@ export default {
   },
 
   created() {
-    console.log('getroomusers');
+
     this.sockets.subscribe("roomUsers", (data) => {
-      console.log(data.users);
+      console.log('hollop');
       this.birds = data.users;
     });
+
   }
 };
 </script>
