@@ -4,7 +4,7 @@ const http = require("http");
 const express = require("express");
 const path = require("path");
 const socketio = require("socket.io");
-const helper = require("./utils/helper");
+const manager = require("./utils/manager");
 const socketHandler = require("./utils/socket");
 
 const app = express();
@@ -28,7 +28,7 @@ const bot = {
 io.on("connection", (socket) => {
   connectedUsers++;
 
-  const handler = new socketHandler(io, socket, helper, bot);
+  const handler = new socketHandler(io, socket, manager, bot);
 
   // join room
   socket.on("joinRoom", (data) => {
