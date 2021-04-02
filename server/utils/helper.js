@@ -45,7 +45,7 @@ class game {
   }
 
   static getRoomUsers(room) {
-    return users.filter((user) => user.room == room);
+    return users.filter((user) => user.room === room);
   }
 
   static changeTurn(feedback, className) {

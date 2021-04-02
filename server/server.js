@@ -35,11 +35,6 @@ io.on("connection", (socket) => {
     handler.joinRoom({...data});
   });
 
-  // // get current user
-  // socket.on("getUser", (id) => {
-  //   handler.getUser(id)
-  // })
-
   // listen for chat message
   socket.on("chatMessage", (msg) => {
     handler.newChat(msg);
