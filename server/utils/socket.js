@@ -19,21 +19,31 @@ class SocketHandler {
     }); 
 
     // check if user joined for the first time
-    if (user.justJoined) {
+    if (user.isNewUser) {
       // send message to single user
-    this.socket.emit(
-      "message",
-      this.manager.formatMsg(this.bot, `Welcome ${user.username}`, "message__left", false)
-    );
-
-    // send message to all other users
-    this.socket.broadcast
-      .to(user.room)
-      .emit(
+      this.socket.emit(
         "message",
-        this.manager.formatMsg(this.bot, `${user.username} has joined`, "left", true)
+        this.manager.formatMsg(this.bot, `Welcome ${user.username}`, "message__left", false)
+      );
+
+      // send message to all other users
+      this.socket.broadcast
+        .to(user.room)
+        .emit(
+          "message",
+          this.manager.formatMsg(this.bot, `${user.username} has joined`, "left", true)
+        );
+    }
+
+    // check if user reconnected
+    if (user.reconnected) {
+      // send message to other users
+      this.socket.broadcast.to(user.room).emit(
+        "message",
+        this.manager.formatMsg(this.bot, `${user.username} is back!`, "message__left", false)
       );
     }
+
   }
 
   newChat(msg) {
@@ -51,23 +61,21 @@ class SocketHandler {
   handleDisconnection() {
     console.log('one disconnected');
 
-    // const user = this.manager.userLeaves(this.socket.id);
+    const user = this.manager.userLeaves(this.socket.handshake.query['id']);
 
-    // if (user) {
-    //   //notify members of leave
-    //   this.io
-    //     .to(user.room)
-    //     .emit(
-    //       "message",
-    //       this.manager.formatMsg(this.bot, `${user.username} just left`, "left")
-    //     );
+    if (user.room && user.room.length !== 0) {
 
-    //   // send room users info
-    //   this.io.to(user.room).emit("roomUsers", {
-    //     room: user.room,
-    //     users: this.manager.getRoomUsers(user.room),
-    //   });
-    // }
+      user.room.forEach(room => {
+        
+        // send message to all other users
+        this.socket.broadcast
+        .to(room)
+        .emit(
+          "message",
+          this.manager.formatMsg(this.bot, `${user.username} left the space`, "left", true)
+        );
+      })
+    }
   }
 }
 

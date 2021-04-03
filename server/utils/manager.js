@@ -21,8 +21,9 @@ class Manager {
           ]
         }
 
-        return {...user, justJoined: true}
-      } 
+        return {...user, isNewUser: true}
+      }
+
       else if (rooms[`${user.room}`].filter(item => item.id === user.id).length === 0) {
         rooms = {
           ...rooms,
@@ -35,7 +36,7 @@ class Manager {
         return user
       }
 
-      return user
+      return {...user, reconnected: true}
   }
 
   static getCurrentUser(msg) {
@@ -43,13 +44,27 @@ class Manager {
     return currentUser[0];
   }
 
-  // static userLeaves(id) {
-  //   const index = users.findIndex((user) => user.id == id);
+  static userLeaves(id) {
 
-  //   if (index !== -1) {
-  //     return users.splice(index, 1)[0];
-  //   }
-  // }
+    let user = {
+      rooms: []
+    }
+
+    Object.values(rooms).forEach(room => {
+      const userInRoom = room.filter(item => item.id === id)
+
+        
+      if (userInRoom.length !== 0) {
+        user = {
+          ...userInRoom[0],
+          room: [...user.rooms, userInRoom[0].room]
+        }
+      }
+      
+    });
+
+    return user
+  }
 
   static getRoomUsers(room) {
     return rooms[room];
