@@ -21,7 +21,7 @@ class Manager {
           ]
         }
 
-        return {...user, isNewUser: true}
+        return user
       }
 
       else if (rooms[`${user.room}`].filter(item => item.id === user.id).length === 0) {
@@ -47,7 +47,7 @@ class Manager {
   static userLeaves(id) {
 
     let user = {
-      rooms: []
+      room: []
     }
 
     Object.values(rooms).forEach(room => {
@@ -57,7 +57,7 @@ class Manager {
       if (userInRoom.length !== 0) {
         user = {
           ...userInRoom[0],
-          room: [...user.rooms, userInRoom[0].room]
+          room: [...user.room, userInRoom[0].room]
         }
       }
       

@@ -19,7 +19,7 @@ class SocketHandler {
     }); 
 
     // check if user joined for the first time
-    if (user.isNewUser) {
+    if (!user.reconnected) {
       // send message to single user
       this.socket.emit(
         "message",
@@ -63,7 +63,7 @@ class SocketHandler {
 
     const user = this.manager.userLeaves(this.socket.handshake.query['id']);
 
-    if (user.room && user.room.length !== 0) {
+    if (user.room.length !== 0) {
 
       user.room.forEach(room => {
         
