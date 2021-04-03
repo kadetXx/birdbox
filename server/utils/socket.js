@@ -10,29 +10,30 @@ class SocketHandler {
 
     const user = this.manager.userJoin(newUser);
 
-    if (user) {
-      this.socket.join(user.room);
-
-      // send message to single user
-      this.socket.emit(
-        "message",
-        this.manager.formatMsg(this.bot, `Welcome ${user.username}`, "message__left", false)
-      );
-
-      // send message to all other users
-      this.socket.broadcast
-        .to(user.room)
-        .emit(
-          "message",
-          this.manager.formatMsg(this.bot, `${user.username} has joined`, "left", true)
-        );
-    }
+    this.socket.join(user.room);
 
     // send room users info
     this.io.to(newUser.room).emit("roomUsers", {
       room: newUser.room,
       users: this.manager.getRoomUsers(newUser.room),
-      }); 
+    }); 
+
+    // check if user joined for the first time
+    if (user.justJoined) {
+      // send message to single user
+    this.socket.emit(
+      "message",
+      this.manager.formatMsg(this.bot, `Welcome ${user.username}`, "message__left", false)
+    );
+
+    // send message to all other users
+    this.socket.broadcast
+      .to(user.room)
+      .emit(
+        "message",
+        this.manager.formatMsg(this.bot, `${user.username} has joined`, "left", true)
+      );
+    }
   }
 
   newChat(msg) {
@@ -50,23 +51,23 @@ class SocketHandler {
   handleDisconnection() {
     console.log('one disconnected');
 
-    const user = this.manager.userLeaves(this.socket.id);
+    // const user = this.manager.userLeaves(this.socket.id);
 
-    if (user) {
-      //notify members of leave
-      this.io
-        .to(user.room)
-        .emit(
-          "message",
-          this.manager.formatMsg(this.bot, `${user.username} just left`, "left")
-        );
+    // if (user) {
+    //   //notify members of leave
+    //   this.io
+    //     .to(user.room)
+    //     .emit(
+    //       "message",
+    //       this.manager.formatMsg(this.bot, `${user.username} just left`, "left")
+    //     );
 
-      // send room users info
-      this.io.to(user.room).emit("roomUsers", {
-        room: user.room,
-        users: this.manager.getRoomUsers(user.room),
-      });
-    }
+    //   // send room users info
+    //   this.io.to(user.room).emit("roomUsers", {
+    //     room: user.room,
+    //     users: this.manager.getRoomUsers(user.room),
+    //   });
+    // }
   }
 }
 

@@ -1,11 +1,7 @@
-let users = [];
+
 let rooms = {};
 
 class Manager {
-  constructor() {
-    this.currentUser = null;
-    this.toPlay = true;
-  }
 
   static formatMsg(user, message, className) {
     return {
@@ -16,8 +12,6 @@ class Manager {
   }
 
   static userJoin(user) {
-
-      users.push(user);
       
       if (!rooms[`${user.room}`]) {
         rooms = {
@@ -27,7 +21,7 @@ class Manager {
           ]
         }
 
-        return user
+        return {...user, justJoined: true}
       } 
       else if (rooms[`${user.room}`].filter(item => item.id === user.id).length === 0) {
         rooms = {
@@ -49,13 +43,13 @@ class Manager {
     return currentUser[0];
   }
 
-  static userLeaves(id) {
-    const index = users.findIndex((user) => user.id == id);
+  // static userLeaves(id) {
+  //   const index = users.findIndex((user) => user.id == id);
 
-    if (index !== -1) {
-      return users.splice(index, 1)[0];
-    }
-  }
+  //   if (index !== -1) {
+  //     return users.splice(index, 1)[0];
+  //   }
+  // }
 
   static getRoomUsers(room) {
     return rooms[room];
