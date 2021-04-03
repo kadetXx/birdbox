@@ -1,7 +1,10 @@
 <template>
   <div class="header">
     <h2 class="header__heading">{{ boxName }}</h2>
-    <p class="header__text"><i class="fas fa-users"></i> 56 birds</p>
+    <p class="header__text">
+      <i class="fas fa-users header__icon"></i> {{ birds.length }}
+      <span class="header__text-inner">online</span>
+    </p>
   </div>
 </template>
 
@@ -10,6 +13,18 @@ export default {
   name: "Header",
   props: {
     boxName: String,
+  },
+
+  data() {
+    return {
+      birds: [],
+    };
+  },
+
+  created() {
+    this.sockets.subscribe("roomUsers", (data) => {
+      this.birds = data.users;
+    });
   },
 };
 </script>
@@ -35,5 +50,10 @@ export default {
   color: #505050;
   margin: 0.5rem 0 0;
   font-size: 0.9rem;
+}
+
+.header__text-inner {
+  color: #71A61C;
+  font-weight: bold;
 }
 </style>

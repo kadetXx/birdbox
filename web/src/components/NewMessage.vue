@@ -24,16 +24,12 @@ export default {
 
   methods: {
     clickButton: function () {
-      const user = {
-        id: 1,
-        username: "kadet",
-        gender: "male",
-        admin: true,
-      };
+
+      const user = JSON.parse(localStorage.getItem('user'));
+      const room = this.$route.params.space;
 
       // $socket is socket.io-client instance
-      this.$socket.emit("chatMessage", {...user, message: this.message});
-
+      this.$socket.emit("chatMessage", {...user, message: this.message, room: room});
       this.message = ""
     },
   },

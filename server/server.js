@@ -4,7 +4,7 @@ const http = require("http");
 const express = require("express");
 const path = require("path");
 const socketio = require("socket.io");
-const helper = require("./utils/helper");
+const manager = require("./utils/manager");
 const socketHandler = require("./utils/socket");
 
 const app = express();
@@ -15,8 +15,6 @@ const io = socketio(server, {
   },
 });
 
-let connectedUsers = 0;
-
 const bot = {
   id: 0,
   username: "Parrot (bot)",
@@ -26,13 +24,12 @@ const bot = {
 
 // run when client connects
 io.on("connection", (socket) => {
-  connectedUsers++;
 
-  const handler = new socketHandler(io, socket, helper, bot);
+  const handler = new socketHandler(io, socket, manager, bot);
 
   // join room
-  socket.on("joinRoom", (user) => {
-    handler.joinRoom(user);
+  socket.on("joinRoom", (data) => {
+    handler.joinRoom({...data});
   });
 
   // listen for chat message
@@ -42,7 +39,7 @@ io.on("connection", (socket) => {
 
   // handle disconnection
   socket.on("disconnect", () => {
-    handler.handleDisconnection(connectedUsers);
+    handler.handleDisconnection();
   });
 });
 

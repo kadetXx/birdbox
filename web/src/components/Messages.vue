@@ -20,30 +20,7 @@ export default {
 
   data() {
     return {
-      messages: [
-        {
-          id: 1,
-          bird: {
-            id: 1,
-            username: "Kadet",
-            gender: "male",
-            admin: true,
-          },
-          message: "Hello world",
-          class: "message__right",
-        },
-        {
-          id: 2,
-          bird: {
-            id: 2,
-            username: "Ethel",
-            gender: "female",
-            admin: false,
-          },
-          message: "Another opportunity to be world class",
-          class: "message__left",
-        },
-      ],
+      messages: [],
     };
   },
 
