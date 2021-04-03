@@ -1,31 +1,6 @@
 let users = [];
 let rooms = {};
 
-sample = {
-  roomOne: [
-    {
-      id: 'c892a8c7-d33f-487e-9bbb-5aa363090658',
-      username: 'Ethel',
-      gender: 'female',
-      admin: false,
-      room: 'kiki'
-    }
-  ],
-  roomTwo: [
-    {
-      id: 'c892a8c7-d33f-487e-9bbb-5aa363090658',
-      username: 'Ethel',
-      gender: 'female',
-      admin: false,
-      room: 'tola'
-    }
-  ]
-}
-
-
-const val = rooms['what'];
-console.log(val);
-
 class Manager {
   constructor() {
     this.currentUser = null;

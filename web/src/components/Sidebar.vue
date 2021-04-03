@@ -43,12 +43,9 @@ export default {
   },
 
   created() {
-    console.log('hollop');
-
     this.sockets.subscribe("roomUsers", (data) => {
       this.birds = data.users;
     });
-
   }
 };
 </script>

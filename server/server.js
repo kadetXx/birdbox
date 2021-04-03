@@ -15,8 +15,6 @@ const io = socketio(server, {
   },
 });
 
-let connectedUsers = 0;
-
 const bot = {
   id: 0,
   username: "Parrot (bot)",
@@ -26,7 +24,6 @@ const bot = {
 
 // run when client connects
 io.on("connection", (socket) => {
-  connectedUsers++;
 
   const handler = new socketHandler(io, socket, manager, bot);
 
@@ -42,7 +39,7 @@ io.on("connection", (socket) => {
 
   // handle disconnection
   socket.on("disconnect", () => {
-    handler.handleDisconnection(connectedUsers);
+    handler.handleDisconnection();
   });
 });
 
