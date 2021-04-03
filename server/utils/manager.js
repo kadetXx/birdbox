@@ -41,12 +41,11 @@ class Manager {
         return user
       }
 
-      return false
+      return user
   }
 
   static getCurrentUser(msg) {
     const currentUser = rooms[`${msg.room}`].filter(item => item.id === msg.id);
-   
     return currentUser[0];
   }
 

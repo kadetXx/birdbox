@@ -43,12 +43,13 @@ class SocketHandler {
       this.manager.formatMsg(user, msg.message, "message__right")
     );
     this.socket.broadcast
-      .to(user.room)
+      .to(msg.room)
       .emit("message", this.manager.formatMsg(user, msg.message, "message__left"));
   }
 
-  handleDisconnection(connectedUsers) {
-    connectedUsers = connectedUsers - 1;
+  handleDisconnection() {
+    console.log('one disconnected');
+
     const user = this.manager.userLeaves(this.socket.id);
 
     if (user) {

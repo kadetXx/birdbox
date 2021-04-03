@@ -23,7 +23,7 @@ export default {
     const isRegistered = !!localStorage.getItem("user");
 
     if (!isRegistered) {
-      this.$router.push("register");
+      this.$router.push("/register");
     } else {
       const storedUser = JSON.parse(localStorage.getItem("user"));
 
