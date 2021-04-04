@@ -6,11 +6,11 @@ class SocketHandler {
     this.bot = bot;
   }
 
-  joinRoom(newUser) {
+  joinSpace(newUser) {
 
     const user = this.manager.userJoin(newUser);
 
-    this.socket.join(user.room); 
+    this.socket.join(user.space); 
 
     // check if user joined for the first time
     if (!user.reconnected) {
@@ -22,7 +22,7 @@ class SocketHandler {
 
       // send message to all other users
       this.socket.broadcast
-        .to(user.room)
+        .to(user.space)
         .emit(
           "message",
           this.manager.formatMsg(this.bot, `${user.username} has joined`, "left", true)
@@ -32,16 +32,16 @@ class SocketHandler {
     // check if user reconnected
     if (user.reconnected) {
       // send message to other users
-      this.socket.broadcast.to(user.room).emit(
+      this.socket.broadcast.to(user.space).emit(
         "message",
         this.manager.formatMsg(this.bot, `${user.username} is back!`, "message__left", false)
       );
     }
 
-    // send room users info
-    this.io.to(newUser.room).emit("roomUsers", {
-      room: newUser.room,
-      users: this.manager.getRoomUsers(newUser.room),
+    // send space users info
+    this.io.to(newUser.space).emit("spaceUsers", {
+      space: newUser.space,
+      users: this.manager.getSpaceUsers(newUser.space),
     });
 
   }
@@ -54,7 +54,7 @@ class SocketHandler {
       this.manager.formatMsg(user, msg.message, "message__right")
     );
     this.socket.broadcast
-      .to(msg.room)
+      .to(msg.space)
       .emit("message", this.manager.formatMsg(user, msg.message, "message__left"));
   }
 
@@ -63,13 +63,13 @@ class SocketHandler {
 
     const user = this.manager.userLeaves(this.socket.handshake.query['id']);
 
-    if (user.room.length !== 0) {
+    if (user.space.length !== 0) {
 
-      user.room.forEach(room => {
+      user.space.forEach(space => {
         
         // send message to all other users
         this.socket.broadcast
-        .to(room)
+        .to(space)
         .emit(
           "message",
           this.manager.formatMsg(this.bot, `${user.username} left the space`, "left", true)

@@ -33,10 +33,10 @@ export default {
         admin: true
       }
 
-      const room = this.space;
+      const space = this.space;
 
-      // emit joinRoom event to server
-      this.$socket.emit("joinRoom", { ...user, room });
+      // emit joinSpace event to server
+      this.$socket.emit("joinSpace", { ...user, space });
       this.$router.push(`/space/${this.space}`)
     },
   },

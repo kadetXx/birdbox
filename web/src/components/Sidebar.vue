@@ -16,10 +16,10 @@
 
     <div class="users">
       <Bird
-        :bird="user"
+        :user="user"
         :withName="true"
         v-bind:key="user.id"
-        v-for="user in users.slice(1)"
+        v-for="user in users.filter(item => item.id !== user.id)"
       />
     </div>
   </aside>
@@ -44,8 +44,7 @@ export default {
   },
 
   created() {
-    this.sockets.subscribe("roomUsers", (data) => {
-      console.log(data.room);
+    this.sockets.subscribe("spaceUsers", (data) => {
       this.users = data.users;
     });
   }

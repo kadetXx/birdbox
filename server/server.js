@@ -27,9 +27,9 @@ io.on("connection", (socket) => {
 
   const handler = new socketHandler(io, socket, manager, bot);
 
-  // join room
-  socket.on("joinRoom", (data) => {
-    handler.joinRoom({...data});
+  // join Space
+  socket.on("joinSpace", (data) => {
+    handler.joinSpace({...data});
   });
 
   // listen for chat message

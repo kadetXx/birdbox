@@ -1,5 +1,5 @@
 
-let rooms = {};
+let spaces = {};
 
 class Manager {
 
@@ -13,10 +13,10 @@ class Manager {
 
   static userJoin(user) {
       
-      if (!rooms[`${user.room}`]) {
-        rooms = {
-          ...rooms,
-          [user.room]: [
+      if (!spaces[`${user.space}`]) {
+        spaces = {
+          ...spaces,
+          [user.space]: [
             user,
           ]
         }
@@ -24,11 +24,11 @@ class Manager {
         return user
       }
 
-      else if (rooms[`${user.room}`].filter(item => item.id === user.id).length === 0) {
-        rooms = {
-          ...rooms,
-          [user.room]: [
-            ...rooms[`${user.room}`],
+      else if (spaces[`${user.space}`].filter(item => item.id === user.id).length === 0) {
+        spaces = {
+          ...spaces,
+          [user.space]: [
+            ...spaces[`${user.space}`],
             user,
           ]
         }
@@ -40,24 +40,24 @@ class Manager {
   }
 
   static getCurrentUser(msg) {
-    const currentUser = rooms[`${msg.room}`].filter(item => item.id === msg.id);
+    const currentUser = spaces[`${msg.space}`].filter(item => item.id === msg.id);
     return currentUser[0];
   }
 
   static userLeaves(id) {
 
     let user = {
-      room: []
+      space: []
     }
 
-    Object.values(rooms).forEach(room => {
-      const userInRoom = room.filter(item => item.id === id)
+    Object.values(spaces).forEach(space => {
+      const userInspace = space.filter(item => item.id === id)
 
         
-      if (userInRoom.length !== 0) {
+      if (userInspace.length !== 0) {
         user = {
-          ...userInRoom[0],
-          room: [...user.room, userInRoom[0].room]
+          ...userInspace[0],
+          space: [...user.space, userInspace[0].space]
         }
       }
       
@@ -66,8 +66,8 @@ class Manager {
     return user
   }
 
-  static getRoomUsers(room) {
-    return rooms[room];
+  static getSpaceUsers(space) {
+    return spaces[space];
   }
 }
 

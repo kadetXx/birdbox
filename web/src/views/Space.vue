@@ -1,5 +1,5 @@
 <template>
-  <div class="main-wrapper">
+  <div v-if="user !== null" class="main-wrapper">
     <Sidebar :boxName="boxName" :user="user" />
     <Box :boxName="boxName" :user="user" />
   </div>
@@ -30,10 +30,10 @@ export default {
         admin: false,
       };
 
-      const room = this.boxName;
+      const space = this.boxName;
 
-      // emit joinRoom event to server
-      this.$socket.emit("joinRoom", { ...user, room });
+      // emit joinSpace event to server
+      this.$socket.emit("joinSpace", { ...user, space });
     }
   },
 };

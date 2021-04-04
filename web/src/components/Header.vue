@@ -2,7 +2,7 @@
   <div class="header">
     <h2 class="header__heading">{{ boxName }}</h2>
     <p class="header__text">
-      <i class="fas fa-users header__icon"></i> {{ birds.length }}
+      <i class="fas fa-users header__icon"></i> {{ users.length }}
       <span class="header__text-inner">online</span>
     </p>
   </div>
@@ -17,13 +17,13 @@ export default {
 
   data() {
     return {
-      birds: [],
+      users: [],
     };
   },
 
   created() {
-    this.sockets.subscribe("roomUsers", (data) => {
-      this.birds = data.users;
+    this.sockets.subscribe("spaceUsers", (data) => {
+      this.users = data.users;
     });
   },
 };

@@ -31,6 +31,10 @@ export default {
     user: Object,
     withName: Boolean,
   },
+
+  created() {
+    console.log(this.user);
+  }
 };
 </script>
 
