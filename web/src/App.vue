@@ -21,12 +21,6 @@ export default {
     },
   },
 
-  watch: {
-    user: function() {
-      localStorage.setItem("user", JSON.stringify(this.user));
-    }
-  },
-
   created() {
 
     auth.onAuthStateChanged(async (userAuth) => {
@@ -51,8 +45,6 @@ export default {
       } else {
         console.log('not signed in');
       }
-
-      localStorage.setItem("user", JSON.stringify(this.user));
     });
   }
 };

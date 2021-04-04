@@ -19,17 +19,16 @@ export default {
   data() {
     return {
       message: "",
+      user: this.$attrs.user
     };
   },
 
   methods: {
     clickButton: function () {
-
-      const user = JSON.parse(localStorage.getItem('user'));
       const room = this.$route.params.space;
 
       // $socket is socket.io-client instance
-      this.$socket.emit("chatMessage", {...user, message: this.message, room: room});
+      this.$socket.emit("chatMessage", {...this.user, message: this.message, room: room});
       this.message = ""
     },
   },

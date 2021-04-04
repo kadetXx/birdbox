@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       boxName: this.$route.params.space,
-      currentUser: this.$attrs.user,
+      user: this.$attrs.user,
     };
   },
 
@@ -27,7 +27,7 @@ export default {
     } else {
 
       const user = {
-        ...this.currentUser,
+        ...this.user,
         admin: false,
       };
 

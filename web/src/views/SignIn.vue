@@ -21,15 +21,16 @@ export default {
     }
   },
 
-  created() {
-    typeof(this.user) === 'object' && this.$router.push('create-space');
-  },
-
-  methods: {
+   methods: {
     signInGoogle() {
       signInWithGoogle();
     },
   },
+
+  created() {
+    typeof(this.user) === 'object' && this.$router.push('create-space');
+  },
+
 };
 </script>
 

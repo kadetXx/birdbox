@@ -21,15 +21,15 @@ export default {
   data() {
     return {
       space: "",
+      user: this.$attrs.user
     };
   },
 
   methods: {
     createSpace() {
-      const storedUser = JSON.parse(localStorage.getItem("user"));
 
       const user = {
-        ...storedUser,
+        ...user,
         admin: true
       }
 
@@ -42,11 +42,11 @@ export default {
   },
 
   created() {
-    const isRegistered = !!localStorage.getItem("user")
-    
-    if (!isRegistered) {
-      this.$router.replace('sign-up')
-    }
+    const isAuthenticated = typeof(this.$attrs.user) === "object";
+
+    if (!isAuthenticated) {
+      this.$router.push("/sign-in");
+    } 
   }
 };
 </script>

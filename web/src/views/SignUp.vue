@@ -4,14 +4,14 @@
 
     <form class="form">
       <input
-        v-model="user.username"
+        v-model="formData.username"
         type="text"
         class="form__input"
         placeholder="Username"
         required
       />
 
-      <select required v-model="user.gender" class="form__input" name="gender">
+      <select required v-model="formData.gender" class="form__input" name="gender">
         <option value="" disabled hidden>Select Gender</option>
         <option value="male">Male</option>
         <option value="Female">Female</option>
@@ -34,31 +34,25 @@ export default {
 
   data() {
     return {
-      user: {
+      formData: {
         username: "",
         gender: "",
       },
+
+      user: this.$attrs.user
     };
   },
 
   methods: {
     async signUp() {
-      const { username, email, gender, password, confirmPassword } = this.user;
-
-      if (password !== confirmPassword) {
-        alert("Passwords do not match");
-        return;
-      }
+      const { username, gender } = this.formData;
 
       try {
-        const { user } = await signInWithGoogle(
-          email,
-          password
-        );
+        const { user } = await signInWithGoogle();
         
         createUserDocument(user, { username, gender });
 
-        this.user = {
+        this.formData = {
           username: "",
           gender: "",
         };
@@ -70,6 +64,10 @@ export default {
         console.log(error);
       }
     },
+  },
+
+  created() {
+    typeof(this.user) === 'object' && this.$router.push('create-space');
   },
 };
 </script>
