@@ -46,7 +46,6 @@ export const createUserDocument = async (authUser, extraData) => {
         ...extraData
       })
     } catch (error) {
-      console.log('error creating user');
       console.log(error.message);
     }
   }

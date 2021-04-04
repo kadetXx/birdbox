@@ -11,14 +11,6 @@
         required
       />
 
-      <!-- <input
-        v-model="user.email"
-        type="text"
-        class="form__input"
-        placeholder="Email Address"
-        required
-      /> -->
-
       <select required v-model="user.gender" class="form__input" name="gender">
         <option value="" disabled hidden>Select Gender</option>
         <option value="male">Male</option>
@@ -26,22 +18,6 @@
         <option value="Non binary">Non binary</option>
         <option value="Prefer not to say">Prefer not to say</option>
       </select>
-
-      <!-- <input
-        v-model="user.password"
-        type="password"
-        class="form__input"
-        placeholder="Password"
-        required
-      />
-
-      <input
-        v-model="user.confirmPassword"
-        type="password"
-        class="form__input"
-        placeholder="Confirm password"
-        required
-      /> -->
 
       <div class="form__btn-wrap">
         <button @click.prevent="signUp()" class="form__btn"><i class="fab fa-google form__btn-icon"></i> Sign Up</button>
@@ -60,10 +36,7 @@ export default {
     return {
       user: {
         username: "",
-        // email: "",
         gender: "",
-        // password: "",
-        // confirmPassword: "",
       },
     };
   },
@@ -87,10 +60,7 @@ export default {
 
         this.user = {
           username: "",
-          // email: "",
           gender: "",
-          // password: "",
-          // confirmPassword: "",
         };
 
         this.$router.replace('sign-in')

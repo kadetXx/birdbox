@@ -3,26 +3,9 @@
     <h1 class="create__header">Welcome Back!</h1>
 
     <form class="form">
-      <input
-        v-model="user.email"
-        type="text"
-        class="form__input"
-        placeholder="Email Address"
-      />
-
-      <input
-        v-model="user.password"
-        type="text"
-        class="form__input"
-        placeholder="Password"
-      />
-
-      <div class="form__btn-wrap">
-        <button @click.prevent="signIn()" class="form__btn">Sign In</button>
-        <button @click.prevent="signInGoogle()" class="form__btn">
-          <i class="fab fa-google form__btn-icon"></i> Google
-        </button>
-      </div>
+      <button @click.prevent="signInGoogle()" class="form__btn">
+        <i class="fab fa-google form__btn-icon"></i> Sign in
+      </button>
     </form>
   </div>
 </template>
@@ -43,10 +26,6 @@ export default {
   },
 
   methods: {
-    signIn() {
-      console.log("nothing");
-    },
-
     signInGoogle() {
       signInWithGoogle();
     },
@@ -107,12 +86,6 @@ export default {
     }
   }
 
-  .form__btn-wrap {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-  }
-
   .form__btn {
     padding: 0 5rem;
     margin-bottom: 0.5rem;
@@ -123,20 +96,12 @@ export default {
     font-weight: 600;
     border-radius: 30px;
     height: 3.5rem;
-    width: 49%;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
 
     &-icon {
       margin-right: 0.5rem;
     }
 
-    &:first-child {
-      background-color: #61d258;
-      border-color: #61d258;
-    }
   }
 }
 </style>
