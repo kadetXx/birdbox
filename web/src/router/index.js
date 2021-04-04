@@ -16,11 +16,18 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/register",
-    name: "Register",
+    path: "/sign-in",
+    name: "SignIn",
    
     component: () =>
-      import(/* webpackChunkName: "create-birdbox" */ "../views/Register.vue"),
+      import(/* webpackChunkName: "sign-in" */ "../views/SignIn.vue"),
+  },
+  {
+    path: "/sign-up",
+    name: "SignUp",
+   
+    component: () =>
+      import(/* webpackChunkName: "sign-up" */ "../views/SignUp.vue"),
   },
   {
     path: "/create-space",

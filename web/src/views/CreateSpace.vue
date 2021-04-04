@@ -45,7 +45,7 @@ export default {
     const isRegistered = !!localStorage.getItem("user")
     
     if (!isRegistered) {
-      this.$router.push('register')
+      this.$router.replace('sign-up')
     }
   }
 };

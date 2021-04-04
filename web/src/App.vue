@@ -4,6 +4,46 @@
   </div>
 </template>
 
+<script>
+import { auth, checkIfUserExists } from "./firebase/firebase";
+
+export default {
+  data() {
+    return {
+      user: null,
+    };
+  },
+
+  methods: {
+    setState(state) {
+      this.user = state;
+      console.log(this.user);
+    },
+  },
+
+  created() {
+    auth.onAuthStateChanged(async (userAuth) => {
+      // check if there's an authenticated user
+      if (userAuth) {
+        // create user document and get back the user ref from firebase
+        const userRef = await checkIfUserExists(userAuth);
+
+        // proceed to set user state if they exist
+        console.log(userRef);
+        userRef.onSnapshot((snapShot) => {
+          const user = {
+            id: snapShot.id,
+            ...snapShot.data(),
+          };
+
+          this.setState(user);
+        });
+      }
+    });
+  },
+};
+</script>
+
 <style lang="scss">
 * {
   box-sizing: border-box;
@@ -13,6 +53,7 @@ html,
 body {
   height: 100%;
   margin: 0;
+  background-color: #272b34;
 }
 
 #app {

@@ -12,10 +12,52 @@ const config = {
   measurementId: "G-FGGNB6P2JM",
 };
 
+// write function to store newly authenticated users to db
+
+export const checkIfUserExists = async (authUser) => {
+  if (!authUser) return;
+
+  const userRef = firestore.doc(`users/${authUser.uid}`);
+  const snapshot = await userRef.get();
+
+  if(!snapshot.exists) {
+    return null
+  } else {
+    return userRef
+  }
+}
+
+export const createUserDocument = async (authUser, extraData) => {
+  if(!authUser) return;
+
+  const userRef = firestore.doc(`users/${authUser.uid}`)
+  const snapshot = await userRef.get();
+
+  if (!snapshot.exists) {
+    const { displayName, email } = authUser
+    const createdAt = new Date();
+
+    try {
+      console.log(authUser);
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...extraData
+      })
+    } catch (error) {
+      console.log('error creating user');
+      console.log(error.message);
+    }
+  }
+
+  return userRef
+}
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
-export const firerstore = firebase.firestore();
+export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
