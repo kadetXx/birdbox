@@ -44,6 +44,7 @@ export default {
 
   created() {
     this.sockets.subscribe("roomUsers", (data) => {
+      console.log(data.room);
       this.birds = data.users;
     });
   }

@@ -15,6 +15,7 @@ import { signInWithGoogle } from "../firebase/firebase";
 
 export default {
   name: "SignIn",
+
   data() {
     return {
       user: this.$attrs.user
@@ -28,7 +29,7 @@ export default {
   },
 
   created() {
-    this.user !== null && this.user !== false && this.$router.push('create-space');
+    this.user !== null && this.user !== undefined && this.$router.push('general');
   },
 
 };

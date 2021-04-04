@@ -10,13 +10,7 @@ class SocketHandler {
 
     const user = this.manager.userJoin(newUser);
 
-    this.socket.join(user.room);
-
-    // send room users info
-    this.io.to(newUser.room).emit("roomUsers", {
-      room: newUser.room,
-      users: this.manager.getRoomUsers(newUser.room),
-    }); 
+    this.socket.join(user.room); 
 
     // check if user joined for the first time
     if (!user.reconnected) {
@@ -43,6 +37,12 @@ class SocketHandler {
         this.manager.formatMsg(this.bot, `${user.username} is back!`, "message__left", false)
       );
     }
+
+    // send room users info
+    this.io.to(newUser.room).emit("roomUsers", {
+      room: newUser.room,
+      users: this.manager.getRoomUsers(newUser.room),
+    });
 
   }
 

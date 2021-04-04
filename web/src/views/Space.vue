@@ -20,9 +20,8 @@ export default {
   },
 
   created() {
-    const isAuthenticated = this.user;
-    console.log(`user authentiocated is ${isAuthenticated}`);
-
+    const isAuthenticated = this.user !== null && this.user !== undefined;
+  
     if (!isAuthenticated) {
       this.$router.push("/sign-in");
     } else {

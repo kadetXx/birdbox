@@ -30,7 +30,6 @@ export default {
     clickButton: function () {
       const room = this.$route.params.space;
 
-      console.log(this.message);
 
       // $socket is socket.io-client instance
       this.$socket.emit("chatMessage", {...this.user, message: this.message, room: room});

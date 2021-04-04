@@ -28,6 +28,7 @@ export const checkIfUserExists = async (authUser) => {
 }
 
 export const createUserDocument = async (authUser, extraData) => {
+
   if(!authUser) return;
 
   const userRef = firestore.doc(`users/${authUser.uid}`)
@@ -38,12 +39,13 @@ export const createUserDocument = async (authUser, extraData) => {
     const createdAt = new Date();
 
     try {
-      console.log(authUser);
       await userRef.set({
         displayName,
         email,
         createdAt,
         ...extraData
+      }).then(() => {
+        window.location = '/create-space'
       })
     } catch (error) {
       console.log(error.message);

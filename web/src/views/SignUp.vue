@@ -1,6 +1,6 @@
 <template>
   <div class="create">
-    <h1 class="create__header">Create An Account</h1>
+    <h1 class="create__header">Finish Setting Up Your Account</h1>
 
     <form class="form">
       <input
@@ -27,10 +27,14 @@
 </template>
 
 <script>
-import { signInWithGoogle, createUserDocument } from "../firebase/firebase";
+import { createUserDocument } from "../firebase/firebase";
 
 export default {
   name: "SignIn",
+
+  props: {
+    userData: Object
+  },
 
   data() {
     return {
@@ -39,7 +43,7 @@ export default {
         gender: "",
       },
 
-      user: this.$attrs.user
+      // user: this.$attrs.user
     };
   },
 
@@ -48,7 +52,7 @@ export default {
       const { username, gender } = this.formData;
 
       try {
-        const { user } = await signInWithGoogle();
+        const user = this.userData
         
         createUserDocument(user, { username, gender });
 
@@ -57,7 +61,7 @@ export default {
           gender: "",
         };
 
-        this.$router.replace('sign-in')
+        // window.location = 'sign-in'
         
       } catch (error) {
         alert('an error occured')
@@ -66,9 +70,10 @@ export default {
     },
   },
 
-  created() {
-    this.user !== null && this.user !== false && this.$router.push('create-space');
-  },
+  // created() {
+  //   console.log(this.userData.uid);
+  //   // this.user !== null && this.$router.push('create-space');
+  // },
 };
 </script>
 

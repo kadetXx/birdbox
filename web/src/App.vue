@@ -1,17 +1,26 @@
 <template>
   <div id="app">
-    <router-view v-if="user === null" :user="false" />
+    <div v-if="user === false" class="loader">
+      <p>Loading...</p>
+    </div>
+    <SignUp v-else-if="pendingAccount !== false" :userData="pendingAccount" />
     <router-view v-else :user="user" />
   </div>
 </template>
 
 <script>
 import { auth, checkIfUserExists } from "./firebase/firebase";
+import SignUp from './views/SignUp'
 
 export default {
+  components: {
+    SignUp
+  },
+
   data() {
     return {
-      user: null,
+      user: false,
+      pendingAccount: false 
     };
   },
 
@@ -30,8 +39,11 @@ export default {
         const userRef = await checkIfUserExists(userAuth);
 
         if (userRef === false) {
-          alert('user does not exist');
+          this.setState(null);
+          this.pendingAccount = userAuth;
         } else {
+          this.pendingAccount = false;
+
           // proceed to set user state if they exist
           userRef.onSnapshot((snapShot) => {
             const user = {
@@ -43,7 +55,8 @@ export default {
           });
         }
       } else {
-        console.log('not signed in');
+        console.log('no user');
+        this.setState(null)
       }
     });
   }
