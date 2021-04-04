@@ -45,7 +45,7 @@ export const createUserDocument = async (authUser, extraData) => {
         createdAt,
         ...extraData
       }).then(() => {
-        window.location = '/create-space'
+        window.location = '/'
       })
     } catch (error) {
       console.log(error.message);

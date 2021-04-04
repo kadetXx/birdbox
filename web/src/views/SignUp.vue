@@ -60,8 +60,6 @@ export default {
           username: "",
           gender: "",
         };
-
-        // window.location = 'sign-in'
         
       } catch (error) {
         alert('an error occured')
@@ -69,11 +67,6 @@ export default {
       }
     },
   },
-
-  // created() {
-  //   console.log(this.userData.uid);
-  //   // this.user !== null && this.$router.push('create-space');
-  // },
 };
 </script>
 

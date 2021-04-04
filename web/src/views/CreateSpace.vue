@@ -29,7 +29,7 @@ export default {
     createSpace() {
 
       const user = {
-        ...user,
+        ...this.user,
         admin: true
       }
 

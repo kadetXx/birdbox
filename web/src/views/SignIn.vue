@@ -29,7 +29,7 @@ export default {
   },
 
   created() {
-    this.user !== null && this.user !== undefined && this.$router.push('general');
+    this.user !== null && this.user !== undefined && this.$router.push('/space/general');
   },
 
 };
