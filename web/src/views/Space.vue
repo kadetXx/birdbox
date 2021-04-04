@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrapper">
-    <Sidebar :boxName="boxName" />
+    <Sidebar :boxName="boxName" :user="user" />
     <Box :boxName="boxName" :user="user" />
   </div>
 </template>

@@ -1,11 +1,11 @@
 <template>
   <div :class="`${message.class} message`">
-    <Bird :bird="message.bird" :withName="false" />
+    <Bird :user="message.user" :withName="false" />
 
     <div class="message__content-wrapper">
       <p class="message__username">
-        {{ message.bird.username }}
-        <span v-if="message.bird.admin" class="message__isadmin">(admin)</span>
+        {{ message.user.username }}
+        <span v-if="message.user.admin" class="message__isadmin">(admin)</span>
       </p>
       <p class="message__content">
         {{ message.message }}
@@ -24,10 +24,6 @@ export default {
   props: {
     message: Object,
   },
-
-  created() {
-    console.log(this.message.bird);
-  }
 };
 </script>
 

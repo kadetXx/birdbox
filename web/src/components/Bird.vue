@@ -1,41 +1,41 @@
 <template>
-  <div class="bird">
+  <div class="user">
     <div
       :class="
-        bird.gender === 'male'
-          ? 'bird__avatar bird__avatar--male'
-          : bird.gender === 'female' ? 'bird__avatar bird__avatar--female'
-          : 'bird__avatar bird__avatar--bot'
+        user.gender === 'male'
+          ? 'user__avatar user__avatar--male'
+          : user.gender === 'female' ? 'user__avatar user__avatar--female'
+          : 'user__avatar user__avatar--bot'
       "
     >
-      <span v-if="bird.gender !== 'bot' " class="bird__avatar-text">{{ bird.username.slice(0, 1) }}</span>
-      <span v-else class="bird__avatar-text"><i  class="fas fa-robot"></i></span>
+      <span v-if="user.gender !== 'bot' " class="user__avatar-text">{{ user.username.slice(0, 1) }}</span>
+      <span v-else class="user__avatar-text"><i  class="fas fa-robot"></i></span>
 
-      <span class="bird__avatar-icon">
-        <i v-if="bird.gender === 'male'" class="fas fa-mars"></i>
-        <i v-else-if="bird.gender === 'female'" class="fas fa-venus"></i>
+      <span class="user__avatar-icon">
+        <i v-if="user.gender === 'male'" class="fas fa-mars"></i>
+        <i v-else-if="user.gender === 'female'" class="fas fa-venus"></i>
         <i v-else class="far fa-smile-beam"></i>
       </span>
     </div>
-    <p v-if="withName" class="bird__username">
-      {{ bird.username }}
-      <span v-if="bird.admin" class="bird__isadmin">(admin)</span>
+    <p v-if="withName" class="user__username">
+      {{ user.username }}
+      <span v-if="user.admin" class="user__isadmin">(admin)</span>
     </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Bird",
+  name: "user",
   props: {
-    bird: Object,
+    user: Object,
     withName: Boolean,
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.bird {
+.user {
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
@@ -68,7 +68,7 @@ export default {
     // border: 2px solid #3e76b6;
     background-color: #3e76b6;
 
-    .bird__avatar-icon {
+    .user__avatar-icon {
       color: #3e76b6;
     }
   }
@@ -77,7 +77,7 @@ export default {
     // border: 2px solid rosybrown;
     background-color: rosybrown;
 
-    .bird__avatar-icon {
+    .user__avatar-icon {
       color: rosybrown;
     }
   }
@@ -85,7 +85,7 @@ export default {
   &__avatar--bot {
     background-color: grey;
 
-    .bird__avatar-icon {
+    .user__avatar-icon {
       color: grey;
     }
   }

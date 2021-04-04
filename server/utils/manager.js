@@ -5,7 +5,7 @@ class Manager {
 
   static formatMsg(user, message, className) {
     return {
-      bird: {...user},
+      user: {...user},
       message,
       class: className,
     };

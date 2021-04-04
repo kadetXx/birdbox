@@ -2,24 +2,24 @@
   <aside class="sidebar">
     <div class="header">
       <div to="/" class="header__link">
-        <Bird v-if="birds.length !== 0" :bird="birds[0]" :withName="true" />
+        <Bird :user="user" :withName="true" />
       </div>
       <form class="header__search">
         <i class="fa fa-search header__search-icon"></i>
         <input
           type="search"
           class="header__search-input"
-          placeholder="Search birds"
+          placeholder="Search users"
         />
       </form>
     </div>
 
-    <div class="birds">
+    <div class="users">
       <Bird
-        :bird="bird"
+        :bird="user"
         :withName="true"
-        v-bind:key="bird.id"
-        v-for="bird in birds.slice(1)"
+        v-bind:key="user.id"
+        v-for="user in users.slice(1)"
       />
     </div>
   </aside>
@@ -34,18 +34,19 @@ export default {
   },
   props: {
     boxName: String,
+    user: Object
   },
 
   data() {
     return {
-      birds: []
+      users: []
     }
   },
 
   created() {
     this.sockets.subscribe("roomUsers", (data) => {
       console.log(data.room);
-      this.birds = data.users;
+      this.users = data.users;
     });
   }
 };
@@ -104,7 +105,7 @@ export default {
   }
 }
 
-.birds {
+.users {
   padding: 1rem;
 }
 </style>
