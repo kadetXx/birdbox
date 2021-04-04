@@ -63,7 +63,7 @@ export default {
         
       } catch (error) {
         alert('an error occured')
-        console.log(error);
+        console.log(error.message);
       }
     },
   },

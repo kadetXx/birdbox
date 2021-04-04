@@ -43,7 +43,6 @@ export default {
     logOut() {
       this.leaveSpace();
 
-      console.log('logging out');
       auth.signOut().then(function () {
         console.log('signed out');
       }).catch(function (err) {

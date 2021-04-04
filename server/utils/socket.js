@@ -65,7 +65,6 @@ class SocketHandler {
     if (user.space.length !== 0) {
 
       user.space.forEach((space) => {
-        console.log('setting');
 
         const newSpaceData = this.manager.setOffline(user, space);
         
