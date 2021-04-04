@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { auth, checkIfUserExists } from "./firebase/firebase";
+import { auth, checkIfUserExists } from "./firebase/firebase.js";
 import SignUp from './components/SetupAccount.vue'
 
 export default {
@@ -55,7 +55,6 @@ export default {
           });
         }
       } else {
-        console.log('no user');
         this.setState(null)
       }
     });

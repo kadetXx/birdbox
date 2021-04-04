@@ -1,14 +1,27 @@
 <template>
   <div class="header">
-    <h2 class="header__heading">{{ boxName }}</h2>
-    <p class="header__text">
-      <i class="fas fa-users header__icon"></i> {{ users.length }}
-      <span class="header__text-inner">online</span>
-    </p>
+    <div>
+      <h2 class="header__heading">{{ boxName }}</h2>
+      <p class="header__text">
+        <i class="fas fa-users header__icon"></i> {{ users.length }}
+        <span class="header__text-inner">online</span>
+      </p>
+    </div>
+
+    <div class="header__btns">
+      <router-link to="/">
+        <button>Exit Space</button>
+      </router-link>
+      <router-link to='/'>
+        <button @click="logOut">Logout</button>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
+import {auth} from '../firebase/firebase.js'
+
 export default {
   name: "Header",
   props: {
@@ -21,6 +34,23 @@ export default {
     };
   },
 
+  methods: {
+    leaveSpace() {
+      this.$socket.emit("leaveSpace", {...this.user, space: this.boxName});
+    },
+
+    logOut() {
+      this.leaveSpace();
+
+      console.log('logging out');
+      auth.signOut().then(function () {
+        console.log('signed out');
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  },
+
   created() {
     this.sockets.subscribe("spaceUsers", (data) => {
       this.users = data.users;
@@ -31,9 +61,9 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  // position: absolute;
-  top: 0;
-  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   border-bottom: 1px solid #d4d4d4;
   padding: 1rem 2rem;
@@ -53,7 +83,7 @@ export default {
 }
 
 .header__text-inner {
-  color: #71A61C;
+  color: #71a61c;
   font-weight: bold;
 }
 </style>
