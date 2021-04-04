@@ -30,7 +30,8 @@ export default {
 
       const user = {
         ...this.user,
-        admin: true
+        admin: true,
+        online: true
       }
 
       const space = this.space;

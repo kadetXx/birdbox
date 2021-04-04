@@ -28,6 +28,7 @@ export default {
       const user = {
         ...this.user,
         admin: false,
+        online: true
       };
 
       const space = this.boxName;

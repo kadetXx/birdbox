@@ -43,7 +43,7 @@ export default {
           this.pendingAccount = userAuth;
         } else {
           this.pendingAccount = false;
-
+          
           // proceed to set user state if they exist
           userRef.onSnapshot((snapShot) => {
             const user = {

@@ -41,6 +41,11 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     handler.handleDisconnection();
   });
+
+  // handle leave space
+  socket.on("leaveSpace", (user) => {
+    handler.handleLeave(user)
+  })
 });
 
 // set static folder

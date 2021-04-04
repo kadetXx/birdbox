@@ -10,7 +10,7 @@
 
     <div class="header__btns">
       <router-link to="/">
-        <button>Exit Space</button>
+        <button @click="leaveSpace">Exit Space</button>
       </router-link>
       <router-link to='/'>
         <button @click="logOut">Logout</button>
@@ -26,6 +26,7 @@ export default {
   name: "Header",
   props: {
     boxName: String,
+    user: Object
   },
 
   data() {

@@ -59,7 +59,6 @@ class SocketHandler {
   }
 
   handleDisconnection() {
-    console.log('one disconnected');
 
     const user = this.manager.userLeaves(this.socket.handshake.query['id']);
 
@@ -74,8 +73,22 @@ class SocketHandler {
           "message",
           this.manager.formatMsg(this.bot, `${user.username} left the space`, "left", true)
         );
+
+        // change user status to offline and broadcast room users
       })
     }
+  }
+
+  handleLeave(user) {
+    const userWhoLeft = this.manager.removeUserFromSpace(user);
+
+    // send message to all other users
+    this.socket.broadcast
+    .to(userWhoLeft.space)
+    .emit(
+      "message",
+      this.manager.formatMsg(this.bot, `${userWhoLeft.username} left the space`, "left", true)
+    );
   }
 }
 

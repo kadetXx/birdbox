@@ -50,10 +50,13 @@ class Manager {
       space: []
     }
 
+    // iterate through all spaces
     Object.values(spaces).forEach(space => {
+
+      // check if user object is present in the space
       const userInspace = space.filter(item => item.id === id)
 
-        
+      // return new user object containing user's current spaces array if user is present
       if (userInspace.length !== 0) {
         user = {
           ...userInspace[0],
@@ -68,6 +71,14 @@ class Manager {
 
   static getSpaceUsers(space) {
     return spaces[space];
+  }
+
+  static removeUserFromSpace(user) {
+    const index = spaces[`${user.space}`].findIndex(item => item.id == user.id);
+
+    if (index !== -1) {
+      return spaces[`${user.space}`].splice(index, 1)[0];
+    }
   }
 }
 

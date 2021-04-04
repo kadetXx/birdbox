@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <Header :boxName="boxName" />
+    <Header :boxName="boxName" :user="user" />
     <Messages />
     <NewMessage :user="user" />
   </div>
