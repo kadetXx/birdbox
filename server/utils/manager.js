@@ -54,8 +54,7 @@ class Manager {
     Object.values(spaces).forEach(space => {
 
       // check if user object is present in the space
-      const userInspace = space.filter(item => item.id === id)
-
+      const userInspace = space.filter(item => item.id === id);
       // return new user object containing user's current spaces array if user is present
       if (userInspace.length !== 0) {
         user = {
@@ -71,6 +70,15 @@ class Manager {
 
   static getSpaceUsers(space) {
     return spaces[space];
+  }
+
+  static setOffline(user, space) {
+
+    const index = spaces[`${space}`].findIndex(item => item.id == user.id);
+
+    spaces[`${space}`][index].online = false
+
+    return spaces[`${space}`]
   }
 
   static removeUserFromSpace(user) {

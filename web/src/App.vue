@@ -30,6 +30,14 @@ export default {
     },
   },
 
+  watch: {
+    user() {
+      if (this.user.id) {
+        sessionStorage.setItem('userId', this.user.id)
+      }
+    }
+  },
+
   created() {
 
     auth.onAuthStateChanged(async (userAuth) => {

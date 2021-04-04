@@ -64,15 +64,16 @@ class SocketHandler {
 
     if (user.space.length !== 0) {
 
-      user.space.forEach(space => {
+      user.space.forEach((space) => {
+        console.log('setting');
+
+        const newSpaceData = this.manager.setOffline(user, space);
         
-        // send message to all other users
-        this.socket.broadcast
-        .to(space)
-        .emit(
-          "message",
-          this.manager.formatMsg(this.bot, `${user.username} left the space`, "left", true)
-        );
+        // resend space data to each space the user is in
+        this.io.to(space).emit("spaceUsers", {
+          space: space,
+          users: newSpaceData,
+        });
 
         // change user status to offline and broadcast room users
       })
