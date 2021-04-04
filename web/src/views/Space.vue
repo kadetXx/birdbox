@@ -15,20 +15,19 @@ export default {
   data() {
     return {
       boxName: this.$route.params.space,
-      currentUser: null,
+      currentUser: this.$attrs.user,
     };
   },
 
   created() {
-    const isRegistered = !!localStorage.getItem("user");
+    const isAuthenticated = typeof(this.$attrs.user) === "object";
 
-    if (!isRegistered) {
-      this.$router.push("/register");
+    if (!isAuthenticated) {
+      this.$router.push("/sign-in");
     } else {
-      const storedUser = JSON.parse(localStorage.getItem("user"));
 
       const user = {
-        ...storedUser,
+        ...this.currentUser,
         admin: false,
       };
 

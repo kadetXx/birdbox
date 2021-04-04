@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view v-if="user === null" :user="user" />
+    <router-view v-else :user="user" />
   </div>
 </template>
 
@@ -17,11 +18,17 @@ export default {
   methods: {
     setState(state) {
       this.user = state;
-      console.log(this.user);
     },
   },
 
+  watch: {
+    user: function() {
+      localStorage.setItem("user", JSON.stringify(this.user));
+    }
+  },
+
   created() {
+
     auth.onAuthStateChanged(async (userAuth) => {
       // check if there's an authenticated user
       if (userAuth) {
@@ -41,9 +48,13 @@ export default {
             this.setState(user);
           });
         }
+      } else {
+        console.log('not signed in');
       }
+
+      localStorage.setItem("user", JSON.stringify(this.user));
     });
-  },
+  }
 };
 </script>
 
@@ -57,6 +68,7 @@ body {
   height: 100%;
   margin: 0;
   background-color: #272b34;
+  color: #FFFFFF;
 }
 
 #app {
@@ -65,14 +77,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   height: 100%;
-}
-
-#nav {
-  padding: 30px;
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #FFFFFF;
 
     &.router-link-exact-active {
       color: #42b983;

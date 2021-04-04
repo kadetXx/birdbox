@@ -15,14 +15,14 @@ import { signInWithGoogle } from "../firebase/firebase";
 
 export default {
   name: "SignIn",
-
   data() {
     return {
-      user: {
-        email: "",
-        password: "",
-      },
-    };
+      user: this.$attrs.user
+    }
+  },
+
+  created() {
+    typeof(this.user) === 'object' && this.$router.push('create-space');
   },
 
   methods: {
@@ -101,7 +101,6 @@ export default {
     &-icon {
       margin-right: 0.5rem;
     }
-
   }
 }
 </style>
