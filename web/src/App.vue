@@ -10,7 +10,7 @@
 
 <script>
 import { auth, checkIfUserExists } from "./firebase/firebase";
-import SignUp from './views/SignUp'
+import SignUp from './components/SetupAccount.vue'
 
 export default {
   components: {
