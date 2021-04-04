@@ -10,7 +10,7 @@ const user = JSON.parse(localStorage.getItem('user'))
 
 const vSocket = new VueSocketIO({
   debug: true,
-  connection: SocketIO("http://localhost:4000", { query: `id=${user !== null ? user.id : 'null'}` }),
+  connection: SocketIO(process.env.VUE_APP_SERVER_URL, { query: `id=${user !== null ? user.id : 'null'}` }),
 });
 
 createApp(App).use(router).use(vSocket).mount("#app");
