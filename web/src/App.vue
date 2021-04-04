@@ -28,16 +28,19 @@ export default {
         // create user document and get back the user ref from firebase
         const userRef = await checkIfUserExists(userAuth);
 
-        // proceed to set user state if they exist
-        console.log(userRef);
-        userRef.onSnapshot((snapShot) => {
-          const user = {
-            id: snapShot.id,
-            ...snapShot.data(),
-          };
+        if (userRef === false) {
+          alert('user does not exist');
+        } else {
+          // proceed to set user state if they exist
+          userRef.onSnapshot((snapShot) => {
+            const user = {
+              id: snapShot.id,
+              ...snapShot.data(),
+            };
 
-          this.setState(user);
-        });
+            this.setState(user);
+          });
+        }
       }
     });
   },

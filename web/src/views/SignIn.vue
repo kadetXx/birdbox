@@ -16,17 +16,19 @@
         class="form__input"
         placeholder="Password"
       />
-      
+
       <div class="form__btn-wrap">
-        <button @click.prevent="signIn()" class="form__btn">Register</button>
-      <button @click.prevent="signInGoogle()" class="form__btn">Sign In WIth Google</button>
+        <button @click.prevent="signIn()" class="form__btn">Sign In</button>
+        <button @click.prevent="signInGoogle()" class="form__btn">
+          <i class="fab fa-google form__btn-icon"></i> Google
+        </button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import { signInWithGoogle } from '../firebase/firebase'
+import { signInWithGoogle } from "../firebase/firebase";
 
 export default {
   name: "SignIn",
@@ -42,12 +44,12 @@ export default {
 
   methods: {
     signIn() {
-      console.log('nothing');
+      console.log("nothing");
     },
 
     signInGoogle() {
-      signInWithGoogle()
-    }
+      signInWithGoogle();
+    },
   },
 };
 </script>
@@ -79,14 +81,13 @@ export default {
     width: 100%;
     outline: none;
     margin-bottom: 0.5rem;
-    background-color: #373D49;
+    background-color: #373d49;
     color: #ffffff;
     border-radius: 30px;
     height: 3.5rem;
-    
 
     &::placeholder {
-      color: #7E8596;
+      color: #7e8596;
       font-weight: bold;
     }
   }
@@ -115,14 +116,27 @@ export default {
   .form__btn {
     padding: 0 5rem;
     margin-bottom: 0.5rem;
-    background-color: #557ADE;
+    background-color: #557ade;
     color: #fff;
-    border: 1px solid #557ADE;
+    border: 1px solid #557ade;
     text-transform: uppercase;
     font-weight: 600;
     border-radius: 30px;
     height: 3.5rem;
     width: 49%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+
+    &-icon {
+      margin-right: 0.5rem;
+    }
+
+    &:first-child {
+      background-color: #61d258;
+      border-color: #61d258;
+    }
   }
 }
 </style>

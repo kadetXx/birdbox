@@ -11,13 +11,13 @@
         required
       />
 
-      <input
+      <!-- <input
         v-model="user.email"
         type="text"
         class="form__input"
         placeholder="Email Address"
         required
-      />
+      /> -->
 
       <select required v-model="user.gender" class="form__input" name="gender">
         <option value="" disabled hidden>Select Gender</option>
@@ -27,7 +27,7 @@
         <option value="Prefer not to say">Prefer not to say</option>
       </select>
 
-      <input
+      <!-- <input
         v-model="user.password"
         type="password"
         class="form__input"
@@ -41,17 +41,17 @@
         class="form__input"
         placeholder="Confirm password"
         required
-      />
+      /> -->
 
       <div class="form__btn-wrap">
-        <button @click.prevent="signUp()" class="form__btn">Sign Up</button>
+        <button @click.prevent="signUp()" class="form__btn"><i class="fab fa-google form__btn-icon"></i> Sign Up</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import { auth, createUserDocument } from "../firebase/firebase";
+import { signInWithGoogle, createUserDocument } from "../firebase/firebase";
 
 export default {
   name: "SignIn",
@@ -60,10 +60,10 @@ export default {
     return {
       user: {
         username: "",
-        email: "",
+        // email: "",
         gender: "",
-        password: "",
-        confirmPassword: "",
+        // password: "",
+        // confirmPassword: "",
       },
     };
   },
@@ -78,7 +78,7 @@ export default {
       }
 
       try {
-        const { user } = await auth.createUserWithEmailAndPassword(
+        const { user } = await signInWithGoogle(
           email,
           password
         );
@@ -87,10 +87,10 @@ export default {
 
         this.user = {
           username: "",
-          email: "",
+          // email: "",
           gender: "",
-          password: "",
-          confirmPassword: "",
+          // password: "",
+          // confirmPassword: "",
         };
 
         this.$router.replace('sign-in')
@@ -177,6 +177,10 @@ export default {
     border-radius: 30px;
     height: 3.5rem;
     width: 100%;
+
+    &-icon {
+      margin-right: 0.5rem;
+    }
   }
 }
 </style>

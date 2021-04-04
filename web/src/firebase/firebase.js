@@ -21,7 +21,7 @@ export const checkIfUserExists = async (authUser) => {
   const snapshot = await userRef.get();
 
   if(!snapshot.exists) {
-    return null
+    return false
   } else {
     return userRef
   }
