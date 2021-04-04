@@ -1,5 +1,5 @@
 <template>
-  <div :class="`${message.class} message`">
+  <div ref="message" :class="`${message.class} message`">
     <Bird :user="message.user" :withName="false" />
 
     <div class="message__content-wrapper">
@@ -23,6 +23,12 @@ export default {
   },
   props: {
     message: Object,
+
+  },
+
+  mounted() {
+    console.log(this.$refs.message);
+    this.$refs.message.scrollIntoView({behavior: 'smooth'});
   },
 };
 </script>
