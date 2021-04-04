@@ -67,7 +67,7 @@ export default {
   },
 
   created() {
-    typeof(this.user) === 'object' && this.$router.push('create-space');
+    this.user !== null && this.user !== false && this.$router.push('create-space');
   },
 };
 </script>

@@ -2,7 +2,7 @@
   <div class="box">
     <Header :boxName="boxName" />
     <Messages />
-    <NewMessage />
+    <NewMessage :user="user" />
   </div>
 </template>
 
@@ -16,6 +16,7 @@ export default {
   components: { Header, NewMessage, Messages },
   props: {
     boxName: String,
+    user: Object
   },
 };
 </script>

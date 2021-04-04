@@ -26,6 +26,8 @@ export default {
 
   created() {
     this.sockets.subscribe("message", (data) => {
+      console.log('my nmessage');
+      
       this.messages.push(data);
     });
   },

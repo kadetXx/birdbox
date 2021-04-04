@@ -42,7 +42,7 @@ export default {
   },
 
   created() {
-    const isAuthenticated = typeof(this.$attrs.user) === "object";
+    const isAuthenticated = this.user;
 
     if (!isAuthenticated) {
       this.$router.push("/sign-in");

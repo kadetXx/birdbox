@@ -24,6 +24,10 @@ export default {
   props: {
     message: Object,
   },
+
+  created() {
+    console.log(this.message.bird);
+  }
 };
 </script>
 

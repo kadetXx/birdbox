@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrapper">
     <Sidebar :boxName="boxName" />
-    <Box v-bind:boxName="boxName" />
+    <Box :boxName="boxName" :user="user" />
   </div>
 </template>
 
@@ -20,12 +20,12 @@ export default {
   },
 
   created() {
-    const isAuthenticated = typeof(this.$attrs.user) === "object";
+    const isAuthenticated = this.user;
+    console.log(`user authentiocated is ${isAuthenticated}`);
 
     if (!isAuthenticated) {
       this.$router.push("/sign-in");
     } else {
-
       const user = {
         ...this.user,
         admin: false,
