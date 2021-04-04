@@ -14,7 +14,7 @@ class SocketHandler {
 
     // check if user joined for the first time
     if (!user.reconnected) {
-      // send message to single user
+      // send welcome message to single user
       this.socket.emit(
         "message",
         this.manager.formatMsg(this.bot, `Welcome ${user.username}`, "message__left", false)
@@ -31,11 +31,15 @@ class SocketHandler {
 
     // check if user reconnected
     if (user.reconnected) {
-      // send message to other users
-      this.socket.broadcast.to(user.space).emit(
-        "message",
-        this.manager.formatMsg(this.bot, `${user.username} is back!`, "message__left", false)
-      );
+
+      // change user status to online
+      const newSpaceData = this.manager.setOnline(user, user.space, true);
+
+      // resend space data to each space the user is in
+      this.io.to(user.space).emit("spaceUsers", {
+        space: user.space,
+        users: newSpaceData,
+      });
     }
 
     // send space users info
@@ -66,7 +70,8 @@ class SocketHandler {
 
       user.space.forEach((space) => {
 
-        const newSpaceData = this.manager.setOffline(user, space);
+        // change user status to offline
+        const newSpaceData = this.manager.setOnline(user, space, false);
         
         // resend space data to each space the user is in
         this.io.to(space).emit("spaceUsers", {

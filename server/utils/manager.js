@@ -72,11 +72,11 @@ class Manager {
     return spaces[space];
   }
 
-  static setOffline(user, space) {
+  static setOnline(user, space, status) {
 
     const index = spaces[`${space}`].findIndex(item => item.id == user.id);
 
-    spaces[`${space}`][index].online = false
+    spaces[`${space}`][index].online = status
 
     return spaces[`${space}`]
   }
