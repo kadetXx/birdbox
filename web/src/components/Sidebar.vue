@@ -7,6 +7,7 @@
       <form class="header__search">
         <i class="fa fa-search header__search-icon"></i>
         <input
+          v-model="findUser"
           type="search"
           class="header__search-input"
           placeholder="Search users"
@@ -19,7 +20,7 @@
         :user="user"
         :withName="true"
         v-bind:key="user.id"
-        v-for="user in users.filter(item => item.id !== user.id)"
+        v-for="user in filteredUsers"
       />
     </div>
   </aside>
@@ -34,20 +35,34 @@ export default {
   },
   props: {
     boxName: String,
-    user: Object
+    user: Object,
   },
 
   data() {
     return {
-      users: []
-    }
+      users: [],
+      findUser: "",
+    };
+  },
+
+  computed: {
+    filteredUsers: function () {
+      let filter = new RegExp(this.findUser, "i");
+      const usersWithoutCurrentUser = this.users.filter(
+        (item) => item.id !== this.user.id
+      );
+
+      return usersWithoutCurrentUser.filter((user) =>
+        user.username.match(filter)
+      );
+    },
   },
 
   created() {
     this.sockets.subscribe("spaceUsers", (data) => {
       this.users = data.users;
     });
-  }
+  },
 };
 </script>
 
