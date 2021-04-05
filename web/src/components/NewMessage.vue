@@ -58,7 +58,7 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 30px;
   background-color: #373d49;
   padding: 0;
 }
@@ -69,7 +69,7 @@ export default {
   border: none;
   outline: none;
   color: #c5c5c5;
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 1.5rem;
   // border-right: 1px solid #2e333d;
 
   &::placeholder {
@@ -92,7 +92,7 @@ export default {
     border: none;
     color: #373d49;
     outline: none;
-    border-radius: 10px;
+    border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;

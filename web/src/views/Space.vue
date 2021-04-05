@@ -47,6 +47,6 @@ export default {
   display: flex;
   justify-content: space-between;
   height: 100%;
-  padding: 1.2rem;
+  padding: 1.5rem;
 }
 </style>
