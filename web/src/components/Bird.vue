@@ -183,8 +183,6 @@ export default {
 .user--withname {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #363c48;
-  border-radius: 5px;
 }
 
 .user--current {

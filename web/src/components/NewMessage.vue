@@ -80,7 +80,7 @@ export default {
 }
 
 .form__btn-container {
-  width: 10rem;
+  width: 7rem;
   padding: 0.4rem;
   display: flex;
   align-items: stretch;
