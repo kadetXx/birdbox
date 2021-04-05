@@ -14,10 +14,35 @@
             message.user.username.charAt(0).toUpperCase() +
             message.user.username.slice(1)
           }}
-        <span v-if="message.user.gender === 'bot'" class="message__isbot">•  bot</span>
-        <span v-if="message.user.admin" class="material-icons message__isadmin">verified</span>
+          <span v-if="message.user.gender === 'bot'" class="message__isbot"
+            >• bot</span
+          >
+          <span
+            v-if="message.user.admin"
+            class="material-icons message__isadmin"
+            >verified</span
+          >
         </small>
-        {{ message.message }}
+
+        <span
+          v-if="
+            message.message.includes(
+              'https://' ||
+                'http://' ||
+                '.com' ||
+                '.dev' ||
+                '.org' ||
+                '.net' ||
+                '.co.uk'
+            )
+          "
+          v-html="
+            `<a href='${message.message}'> 
+          ${message.message} </a>`
+          "
+        ></span>
+
+        <span v-else>{{ message.message }} </span>
       </p>
       <p class="message__timestamp">
         {{ timeStamp }}
@@ -72,7 +97,7 @@ export default {
       } else {
         this.hasSibling = false;
       }
-    } 
+    }
 
     // scroll to last message
     this.$refs.message.scrollIntoView({ behavior: "smooth" });
@@ -87,6 +112,7 @@ export default {
   align-items: flex-end;
   width: 100%;
   margin-bottom: 22.5px;
+  overflow-wrap: anywhere;
 
   &__right {
     flex-direction: row-reverse;
@@ -141,11 +167,11 @@ export default {
       }
 
       &.Non {
-        color: #353B47;
+        color: #353b47;
       }
 
       &.bot {
-        color: #FFFFFF;
+        color: #ffffff;
       }
     }
   }

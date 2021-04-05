@@ -26,35 +26,22 @@
       />
     </div>
 
-    <div class="toolbar">
-      <router-link to="/"
-        ><span class="material-icons-outlined"> sms </span></router-link
-      >
-      <router-link to="/"
-        ><span class="material-icons-outlined"> sms </span></router-link
-      >
-      <router-link to="/"
-        ><span class="material-icons-outlined"> sms </span></router-link
-      >
-      <router-link to="/"
-        ><span class="material-icons-outlined"> tune </span></router-link
-      >
-      <router-link to="/"
-        ><span class="material-icons-outlined"> sms </span></router-link
-      >
-    </div>
+    <Toolbar />
   </aside>
 </template>
 
 <script>
 import Bird from "./Bird";
+import Toolbar from './Toolbar';
+
 export default {
   name: "Sidebar",
   components: {
     Bird,
+    Toolbar
   },
   props: {
-    boxName: String,
+    space: String,
     user: Object,
   },
 
@@ -157,15 +144,5 @@ export default {
     margin-right: 0.1rem;
     margin-left: 0.1rem;
   }
-}
-
-.toolbar {
-  padding: 1rem;
-  margin: 1rem 2rem;
-  background-color: #2e333d;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 </style>

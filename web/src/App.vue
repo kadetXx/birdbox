@@ -107,7 +107,7 @@ body {
   height: 100%;
 
   a {
-    font-weight: bold;
+    font-weight: 500;
     color: #FFFFFF;
 
     &.router-link-exact-active {

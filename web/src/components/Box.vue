@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <Header :boxName="boxName" :user="user" />
+    <Header :space="space" :user="user" />
     <Messages />
     <NewMessage :user="user" />
   </div>
@@ -15,7 +15,7 @@ export default {
   name: "BoxContainer",
   components: { Header, NewMessage, Messages },
   props: {
-    boxName: String,
+    space: String,
     user: Object
   },
 };
@@ -23,7 +23,7 @@ export default {
 
 <style lang="scss" scoped>
 .box {
-  flex-grow: 1;
+  width: 60%;
   display: flex;
   box-sizing: border-box;
   flex-direction: column;

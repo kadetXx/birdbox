@@ -6,7 +6,7 @@
       </div>
       <div class="header__text-wrap">
         <h2 class="header__heading">
-          {{ boxName.charAt(0).toUpperCase() + boxName.slice(1) }}
+          {{ space.charAt(0).toUpperCase() + space.slice(1) }}
         </h2>
         <p class="header__text">
           <!-- <i class="fas fa-users header__text-icon"></i> -->
@@ -34,7 +34,7 @@ import { auth } from "../firebase/firebase.js";
 export default {
   name: "Header",
   props: {
-    boxName: String,
+    space: String,
     user: Object,
   },
 
@@ -52,7 +52,7 @@ export default {
 
   methods: {
     leaveSpace() {
-      this.$socket.emit("leaveSpace", { ...this.user, space: this.boxName });
+      this.$socket.emit("leaveSpace", { ...this.user, space: this.space });
     },
 
     logOut() {

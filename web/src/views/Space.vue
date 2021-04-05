@@ -1,7 +1,7 @@
 <template>
   <div v-if="user !== null" class="main-wrapper">
-    <Sidebar :boxName="boxName" :user="user" />
-    <Box :boxName="boxName" :user="user" />
+    <Sidebar :space="space" :user="user" />
+    <Box :space="space" :user="user" />
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
 
   data() {
     return {
-      boxName: this.$route.params.space,
+      space: this.$route.params.space,
       user: this.$attrs.user,
     };
   },
@@ -40,7 +40,7 @@ export default {
 
       this.user = user;
 
-      const space = this.boxName;
+      const space = this.space;
 
       // emit joinSpace event to server
       this.$socket.emit("joinSpace", { ...user, space });
