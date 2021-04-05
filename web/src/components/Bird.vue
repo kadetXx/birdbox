@@ -40,12 +40,12 @@
       <i
         :class="
           user.gender === 'Male'
-            ? 'fas fa-mars'
+            ? 'fas fa-mars user__gender'
             : user.gender === 'Female'
-            ? 'fas fa-venus'
+            ? 'fas fa-venus user__gender'
             : user.gender === 'Non Binary'
-            ? 'fas fa-mecury'
-            : 'fas fa-genderless'
+            ? 'fas fa-mecury user__gender'
+            : 'fas fa-genderless user__gender'
         "
       >
       </i>
@@ -147,6 +147,11 @@ export default {
     text-transform: lowercase;
     margin-right: 0.5rem;
     font-weight: normal;
+  }
+
+  &__gender {
+    position: relative;
+    top: -0.1rem;
   }
 
   &__isadmin {

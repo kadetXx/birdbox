@@ -67,13 +67,13 @@ export default {
       const previousTime = `${previousMsg.classList[0]} ${previousMsg.classList[1]} ${previousMsg.classList[2]}`;
 
       // add spacing to message accordingly
-      if (previousTime === `${this.timeStamp} ${previousMsg.classList[2]}`) {
+      if (previousTime === `${this.timeStamp} ${this.message.class}`) {
         previousMsg.classList.add("no-space");
         this.hasSibling = true;
+      } else {
+        this.hasSibling = false;
       }
-    } else {
-      this.hasSibling = false;
-    }
+    } 
 
     // scroll to last message
     this.$refs.message.scrollIntoView({ behavior: "smooth" });

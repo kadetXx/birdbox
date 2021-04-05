@@ -1,13 +1,18 @@
 <template>
   <div class="header">
     <div class="header__main">
-      <h2 class="header__heading">
-        {{ boxName.charAt(0).toUpperCase() + boxName.slice(1) }}
-      </h2>
-      <p class="header__text">
-        <i class="fas fa-users header__text-icon"></i>
-        {{ users.length }} members, {{ online.length }} online
-      </p>
+      <div class="header__icon-wrap">
+        <span class="material-icons"> forum </span>
+      </div>
+      <div class="header__text-wrap">
+        <h2 class="header__heading">
+          {{ boxName.charAt(0).toUpperCase() + boxName.slice(1) }}
+        </h2>
+        <p class="header__text">
+          <!-- <i class="fas fa-users header__text-icon"></i> -->
+          {{ users.length }} members, {{ online.length }} online
+        </p>
+      </div>
     </div>
 
     <div class="header__btns">
@@ -86,7 +91,22 @@ export default {
 .header__main {
   flex-grow: 1;
   display: flex;
-  flex-wrap: wrap;
+}
+
+.header__icon-wrap {
+  display: none;
+  margin-right: 0.8rem;
+  background-color: #61d258;
+  // display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5rem;
+  border-radius: 10px;
+
+  span {
+    font-size: 3rem;
+    color: #ffffff;
+  }
 }
 
 .header__heading {
