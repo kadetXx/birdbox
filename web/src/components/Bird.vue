@@ -61,10 +61,6 @@ export default {
     withName: Boolean,
     current: Boolean,
   },
-
-  mounted() {
-    console.log(this.user);
-  },
 };
 </script>
 

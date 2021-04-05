@@ -1,8 +1,8 @@
 <template>
   <div
     ref="message"
-    :class="`${timeStamp} ${hasSibling === true ? 'tweak-border' : ''} ${
-      message.class
+    :class="`${timeStamp} ${message.class} ${
+      hasSibling === true ? 'tweak-border' : ''
     } message`"
   >
     <Bird :user="message.user" :withName="false" />
@@ -64,10 +64,10 @@ export default {
 
     // check if timestamp from previous message is the same with current timestamp
     if (previousMsg.classList !== undefined) {
-      const previousTime = `${previousMsg.classList[0]} ${previousMsg.classList[1]}`;
+      const previousTime = `${previousMsg.classList[0]} ${previousMsg.classList[1]} ${previousMsg.classList[2]}`;
 
       // add spacing to message accordingly
-      if (previousTime === this.timeStamp) {
+      if (previousTime === `${this.timeStamp} ${previousMsg.classList[2]}`) {
         previousMsg.classList.add("no-space");
         this.hasSibling = true;
       }
@@ -178,10 +178,6 @@ export default {
 .message__right.no-space {
   margin-bottom: 0.2rem;
 
-  // .message__content {
-  //   // border-radius: 15px 0 0 15px;
-  // }
-
   .message__timestamp {
     display: none;
   }
@@ -190,6 +186,24 @@ export default {
 .message__right.tweak-border {
   .message__content {
     border-radius: 15px 0 0 15px;
+  }
+}
+
+.message__left.no-space {
+  margin-bottom: 0.2rem;
+
+  .message__timestamp {
+    display: none;
+  }
+
+  .user {
+    visibility: hidden;
+  }
+}
+
+.message__left.tweak-border {
+  .message__content {
+    border-radius: 0 15px 15px 0;
   }
 }
 </style>
