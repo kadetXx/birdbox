@@ -36,7 +36,9 @@
         <span v-if="user.admin" class="user__isadmin">(admin)</span>
       </p>
 
-      <span class="user__displayname"> {{ user.displayName }} </span>
+      <span v-if="current === true" class="user__displayname"> {{ user.displayName }} </span>
+      <span v-else class="user__displayname"> {{ user.online ? 'active now' : 'unavailable' }} </span>
+      
       <i
         :class="
           user.gender === 'Male'
