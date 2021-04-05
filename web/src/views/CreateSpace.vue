@@ -30,7 +30,6 @@ export default {
 
       const user = {
         ...this.user,
-        admin: true,
         online: true
       }
 

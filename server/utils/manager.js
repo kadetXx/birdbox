@@ -17,11 +17,11 @@ class Manager {
         spaces = {
           ...spaces,
           [user.space]: [
-            user,
+            {...user, admin: true},
           ]
         }
 
-        return user
+        return {...user, admin: true}
       }
 
       else if (spaces[`${user.space}`].filter(item => item.id === user.id).length === 0) {
@@ -29,7 +29,7 @@ class Manager {
           ...spaces,
           [user.space]: [
             ...spaces[`${user.space}`],
-            user,
+            {...user, admin: false},
           ]
         }
 

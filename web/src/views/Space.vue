@@ -34,7 +34,6 @@ export default {
     } else {
       const user = {
         ...this.user,
-        admin: false,
         online: true
       };
 
