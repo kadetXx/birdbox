@@ -1,6 +1,6 @@
 <template>
-  <div class="create">
-    <h1 class="create__header">Finish Setting Up Your Account</h1>
+  <div class="authpage">
+    <h1 class="authpage__header">Finish Setting Up Your Account</h1>
 
     <form class="form">
       <input
@@ -16,11 +16,10 @@
         <option value="male">Male</option>
         <option value="Female">Female</option>
         <option value="Non binary">Non binary</option>
-        <option value="Prefer not to say">Prefer not to say</option>
       </select>
 
       <div class="form__btn-wrap">
-        <button @click.prevent="signUp()" class="form__btn"><i class="fab fa-google form__btn-icon"></i> Sign Up</button>
+        <button @click.prevent="signUp()" class="form__btn"> Continue </button>
       </div>
     </form>
   </div>
@@ -62,7 +61,7 @@ export default {
         };
         
       } catch (error) {
-        alert('an error occured')
+        console.log('error'); // add alert here
         console.log(error);
       }
     },
@@ -71,7 +70,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.create {
+.authpage {
   display: flex;
   flex-direction: column;
   width: 100%;

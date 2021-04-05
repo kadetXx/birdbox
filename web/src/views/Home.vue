@@ -2,7 +2,7 @@
   <div class="home">
     <nav>
       <ul>
-        <li><router-link to="/register">Register</router-link></li>
+        <li><router-link to="/sign-in">Sign In</router-link></li>
         <li><router-link to="/create-space">Create Space</router-link></li>
       </ul>
     </nav>

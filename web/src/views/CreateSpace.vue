@@ -62,7 +62,8 @@ export default {
 
   &__header {
     margin-bottom: 2rem;
-    text-transform: uppercase;
+    // text-transform: uppercase;
+    color: #fff;
   }
 
   .form {
@@ -72,11 +73,20 @@ export default {
   }
 
   .form__input {
-    padding: 1rem;
-    border: 1px solid grey;
+    padding: 0 1.5rem;
+    border: none;
     width: 100%;
     outline: none;
     margin-bottom: 0.5rem;
+    background-color: #373d49;
+    color: #ffffff;
+    border-radius: 30px;
+    height: 3.5rem;
+
+    &::placeholder {
+      color: #7e8596;
+      font-weight: bold;
+    }
   }
 
   .form__checkbox-wrapper {
@@ -95,13 +105,20 @@ export default {
   }
 
   .form__btn {
-    padding: 1rem 5rem;
+    padding: 0 5rem;
     margin-bottom: 0.5rem;
-    background-color: crimson;
+    background-color: #557ade;
     color: #fff;
-    border: 1px solid crimson;
+    border: 1px solid #557ade;
     text-transform: uppercase;
     font-weight: 600;
+    border-radius: 30px;
+    height: 3.5rem;
+    width: 100%;
+
+    &-icon {
+      margin-right: 0.5rem;
+    }
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="create">
-    <h1 class="create__header">Welcome Back!</h1>
+  <div class="authpage">
+    <h1 class="authpage__header">Welcome Back!</h1>
 
     <form class="form">
       <button @click.prevent="signInGoogle()" class="form__btn">
@@ -29,14 +29,14 @@ export default {
   },
 
   created() {
-    this.user !== null && this.user !== undefined && this.$router.push('/space/general');
+    this.user !== null && this.user !== undefined && this.$router.push('/');
   },
 
 };
 </script>
 
 <style lang="scss" scoped>
-.create {
+.authpage {
   display: flex;
   flex-direction: column;
   width: 100%;
