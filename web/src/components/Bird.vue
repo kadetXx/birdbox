@@ -1,26 +1,55 @@
 <template>
-  <div class="user">
+  <div
+    :class="
+      current === true
+        ? 'user user--current'
+        : withName === true
+        ? 'user user--withname'
+        : 'user'
+    "
+  >
     <div
       :class="
-        user.gender === 'male'
+        user.gender === 'Male'
           ? 'user__avatar user__avatar--male'
-          : user.gender === 'female' ? 'user__avatar user__avatar--female'
+          : user.gender === 'Female'
+          ? 'user__avatar user__avatar--female'
           : 'user__avatar user__avatar--bot'
       "
     >
-      <span v-if="user.gender !== 'bot' " class="user__avatar-text">{{ user.username.slice(0, 1) }}</span>
-      <span v-else class="user__avatar-text"><i  class="fas fa-robot"></i></span>
+      <span v-if="user.gender !== 'bot'" class="user__avatar-text">{{
+        user.username.slice(0, 1)
+      }}</span>
+      <span v-else class="user__avatar-text"><i class="fas fa-robot"></i></span>
 
-      <span class="user__avatar-icon">
-        <i v-if="user.gender === 'male'" class="fas fa-mars"></i>
-        <i v-else-if="user.gender === 'female'" class="fas fa-venus"></i>
-        <i v-else class="far fa-smile-beam"></i>
+      <span
+      v-if="withName === true"
+        :class="
+          user.online ? 'user__avatar-icon online' : 'user__avatar-icon offline'
+        "
+      >
       </span>
     </div>
-    <p v-if="withName" class="user__username">
-      {{ user.username }}
-      <span v-if="user.admin" class="user__isadmin">(admin)</span>
-    </p>
+    <div v-if="withName" class="user__details">
+      <p class="user__username">
+        {{ user.username.charAt(0).toUpperCase() + user.username.slice(1) }}
+        <span v-if="user.admin" class="user__isadmin">(admin)</span>
+      </p>
+
+      <span class="user__displayname"> {{ user.displayName }} </span>
+      <i
+        :class="
+          user.gender === 'Male'
+            ? 'fas fa-mars'
+            : user.gender === 'Female'
+            ? 'fas fa-venus'
+            : user.gender === 'Non Binary'
+            ? 'fas fa-mecury'
+            : 'fas fa-genderless'
+        "
+      >
+      </i>
+    </div>
   </div>
 </template>
 
@@ -30,6 +59,11 @@ export default {
   props: {
     user: Object,
     withName: Boolean,
+    current: Boolean,
+  },
+
+  mounted() {
+    console.log(this.user);
   },
 };
 </script>
@@ -38,63 +72,85 @@ export default {
 .user {
   display: flex;
   align-items: center;
-  margin-bottom: 0.5rem;
 
   &__avatar {
-    width: 45px;
-    height: 45px;
+    width: 3rem;
+    height: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 100%;
-    margin: 0 0.5rem;
+    border-radius: 15px;
+    margin: 0;
     position: relative;
     color: #fff;
 
+    &-text {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
     &-icon {
       position: absolute;
-      bottom: -10px;
-      width: 20px;
-      height: 20px;
+      bottom: 0rem;
+      right: 0rem;
+      width: 0.6rem;
+      height: 0.6rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #eff4f5;
+      border: 1.5px solid #272b34;
       border-radius: 100%;
+
+      font-size: 0.7rem;
+
+      &.online {
+        background-color: #61d258;
+      }
+
+      &.offline {
+        background-color: #f3a238;
+      }
     }
   }
 
   &__avatar--male {
-    // border: 2px solid #3e76b6;
-    background-color: #3e76b6;
-
-    .user__avatar-icon {
-      color: #3e76b6;
-    }
+    background-color: #557ade;
   }
 
   &__avatar--female {
-    // border: 2px solid rosybrown;
-    background-color: rosybrown;
-
-    .user__avatar-icon {
-      color: rosybrown;
-    }
+    background-color: #f2507b;
   }
 
   &__avatar--bot {
-    background-color: grey;
+    background-color: #5b5e65;
+  }
 
-    .user__avatar-icon {
-      color: grey;
+  &__details {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 1rem;
+
+    i {
+      margin-top: 0.2rem;
+      color: #6a7488;
     }
   }
 
   &__username {
     font-size: 1.1rem;
-    color: #505050;
+    color: #ffffff;
     display: flex;
     align-items: center;
+    margin: 0;
+    width: 100%;
+  }
+
+  &__displayname {
+    color: #919398;
+    text-transform: lowercase;
+    margin-right: 0.5rem;
+    font-weight: normal;
   }
 
   &__isadmin {
@@ -103,6 +159,24 @@ export default {
     text-transform: lowercase;
     margin-left: 0.5rem;
     font-weight: normal;
+  }
+}
+
+.user--withname {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #363c48;
+  border-radius: 5px;
+}
+
+.user--current {
+  border-bottom: none;
+
+  margin-bottom: 1rem;
+  padding-bottom: 0;
+
+  .user__username {
+    font-size: 1.2rem;
   }
 }
 </style>

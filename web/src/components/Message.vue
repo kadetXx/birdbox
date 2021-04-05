@@ -3,12 +3,15 @@
     <Bird :user="message.user" :withName="false" />
 
     <div class="message__content-wrapper">
-      <p class="message__username">
-        {{ message.user.username }}
-        <span v-if="message.user.admin" class="message__isadmin">(admin)</span>
-      </p>
       <p class="message__content">
         {{ message.message }}
+      </p>
+      <p :class="`message__username ${message.user.gender}`">
+        {{
+          message.user.username.charAt(0).toUpperCase() +
+          message.user.username.slice(1)
+        }}
+        <span v-if="message.user.admin" class="message__isadmin">(admin)</span>
       </p>
     </div>
   </div>
@@ -23,12 +26,11 @@ export default {
   },
   props: {
     message: Object,
-
   },
 
   mounted() {
     console.log(this.$refs.message);
-    this.$refs.message.scrollIntoView({behavior: 'smooth'});
+    this.$refs.message.scrollIntoView({ behavior: "smooth" });
   },
 };
 </script>
@@ -39,14 +41,22 @@ export default {
   justify-content: flex-start;
   align-items: flex-end;
   width: 100%;
+  margin-bottom: 22.5px;
 
   &__right {
     flex-direction: row-reverse;
     text-align: right;
     padding-left: 20%;
 
-    .message__content-wrapper {
+    .message__content {
       border-radius: 15px 15px 0 15px;
+      background-color: #60cf57;
+      background-color: #557ade;
+      color: #ffffff;
+    }
+
+    .user {
+      display: none;
     }
   }
 
@@ -54,8 +64,25 @@ export default {
     justify-content: flex-start;
     padding-right: 20%;
 
-    .message__content-wrapper {
+    .message__content {
       border-radius: 15px 15px 15px 0;
+      background-color: #343943;
+      color: #a6a7b2;
+    }
+
+    .user {
+      margin-right: 0.5rem;
+    }
+
+    .message__username {
+
+      &.Male {
+        color: #557ade;
+      }
+
+      &.Female {
+        color: #f2507b;
+      }
     }
   }
 }
@@ -63,16 +90,19 @@ export default {
 .message__content-wrapper {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 1rem;
-  background-color: #eff4f5;
-  border-radius: 10px;
-  width: fit-content;
-  margin-bottom: 22.5px;
+  justify-content: flex-end;
 
   .message__username {
-    margin: 0;
+    margin: 0.1rem 0;
     font-size: 0.8rem;
     color: grey;
+  }
+
+  .message__content {
+    padding: 0.7rem 1.2rem;
+    width: fit-content;
+    margin: 0;
+    font-size: 0.9rem;
   }
 
   .message__isadmin {

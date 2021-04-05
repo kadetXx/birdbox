@@ -31,6 +31,8 @@ export default {
         online: true
       };
 
+      this.user = user;
+
       const space = this.boxName;
 
       // emit joinSpace event to server
@@ -45,5 +47,6 @@ export default {
   display: flex;
   justify-content: space-between;
   height: 100%;
+  padding: 1.2rem;
 }
 </style>

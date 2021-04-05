@@ -1,12 +1,12 @@
 <template>
   <div class="header">
-    <div>
-      <h2 class="header__heading">{{ boxName }}</h2>
+    <div class="header__main">
+      <h2 class="header__heading">{{ boxName.charAt(0).toUpperCase() + boxName.slice(1) }}</h2>
       <p class="header__text">
-        <i class="fas fa-users header__icon"></i> {{ users.length }}
-        <span class="header__text-inner">online</span>
+        <i class="fas fa-users header__text-icon"></i> {{ users.length }} members, {{ online.length }} online
       </p>
-    </div>
+
+    </div> 
 
     <div class="header__btns">
       <router-link to="/">
@@ -33,6 +33,12 @@ export default {
     return {
       users: [],
     };
+  },
+
+  computed: {
+    online: function () {
+      return this.users.filter(item => item.online === true);
+    },
   },
 
   methods: {
@@ -64,26 +70,41 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  border-bottom: 1px solid #d4d4d4;
-  padding: 1rem 2rem;
+  border-bottom: 1px solid #363C48;
+  padding: 0 0 1.2rem;
+  margin-right: 3rem;
+  box-sizing: border-box;
+}
+
+.header__main {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .header__heading {
   margin: 0;
-  text-transform: uppercase;
-  color: #505050;
-  font-size: 1.3rem;
+  width: 100%;
+  color: #FFFFFF;
+  font-size: 1.8rem;
 }
 
 .header__text {
-  color: #505050;
-  margin: 0.5rem 0 0;
+  color: #919398;
+  margin: 0.5rem 1rem 0 0;
   font-size: 0.9rem;
 }
 
-.header__text-inner {
-  color: #71a61c;
-  font-weight: bold;
+.header__text-icon {
+  color: #61D158;
+  margin-right: 0.1rem;
+
+  // &.online {
+  //   color: #61D158;
+  // }
+
+  // &.offline {
+  //   color: #f3a238;
+  // }
 }
 </style>

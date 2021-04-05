@@ -32,7 +32,7 @@ export default {
 
   watch: {
     user() {
-      if (this.user.id) {
+      if (this.user) {
         sessionStorage.setItem('userId', this.user.id)
       }
     }
@@ -73,6 +73,22 @@ export default {
 <style lang="scss">
 * {
   box-sizing: border-box;
+
+  ::-webkit-scrollbar {
+		width: 7.5px;
+		border: none;
+	}
+
+	::-webkit-scrollbar-track {
+		border-radius: 0px;
+		background-color: #272b34;
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 0px;
+		background-color: #5B5E65;
+    border-radius: 8rem;
+	}
 }
 
 html,

@@ -2,16 +2,18 @@
   <aside class="sidebar">
     <div class="header">
       <div to="/" class="header__link">
-        <Bird :user="user" :withName="true" />
+        <Bird :user="user" :withName="true" :current="true" />
       </div>
       <form class="header__search">
-        <i class="fa fa-search header__search-icon"></i>
+        
         <input
           v-model="findUser"
-          type="search"
+          type="text"
           class="header__search-input"
           placeholder="Search users"
         />
+
+        <i class="fa fa-search header__search-icon"></i>
       </form>
     </div>
 
@@ -68,20 +70,26 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar {
-  width: 25%;
-  background-color: #eff4f5;
-  border-right: 1px solid #d4d4d4;
+  width: 40%;
+  padding: 2rem 2rem 0;
+  // background-color: #eff4f5;
+  
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  overflow: hidden;
 }
 
 .header {
   width: 100%;
-  padding: 1rem 0.5rem;
-  border-bottom: 1px solid #d4d4d4;
+  padding: 1rem 2rem;
 
   .header__link {
-    font-size: 1.2rem;
     font-weight: bold;
     text-decoration: none;
+    height: fit-content;
 
     display: flex;
     align-items: flex-start;
@@ -95,31 +103,42 @@ export default {
     width: 100%;
     display: flex;
     align-items: center;
-    margin: 0.5rem 0 0;
-    border: 1px solid #d4d4d4;
-    border-radius: 5px;
-    background-color: #ffffff;
-    padding: 0.5rem;
+    margin: 1rem 0 0;
+    border: none;
+    border-radius: 30px;
+    background-color: #373D49;
+    padding: 1rem;
   }
 
   .header__search-input {
     flex-grow: 1;
     border: none;
     outline: none;
+    background-color: transparent;
+    color: #c5c5c5;
 
     &::placeholder {
-      color: #bdbdbd;
+      color: #919398;
+      font-size: 0.9rem;
+      font-weight: 500;
     }
   }
 
   .header__search-icon {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     margin-right: 0.5rem;
-    color: #868686;
+    color: #FFFFFF;
   }
 }
 
 .users {
-  padding: 1rem;
+  padding: 2rem 3rem 0 2rem;
+  flex-grow: 1;
+  overflow: auto;
+
+  .user {
+    margin-right: 0.1rem;
+    margin-left: 0.1rem;
+  }
 }
 </style>

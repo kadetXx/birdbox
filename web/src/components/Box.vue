@@ -25,7 +25,11 @@ export default {
 .box {
   flex-grow: 1;
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 50px;
+  padding: 3rem 0.3rem 2rem 3rem;
+  background-color: #2E333D;
 }
 </style>

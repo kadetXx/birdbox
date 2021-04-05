@@ -20,6 +20,7 @@ const bot = {
   username: "Parrot (bot)",
   gender: "bot",
   admin: false,
+  online: true
 };
 
 // run when client connects
