@@ -1,9 +1,9 @@
 <template>
   <div
     ref="message"
-    :class="`${timeStamp} ${message.class} message ${
-      giveSpace ? 'with-space' : 'no-space'
-    } `"
+    :class="`${timeStamp} ${hasSibling === true ? 'tweak-border' : ''} ${
+      message.class
+    } message`"
   >
     <Bird :user="message.user" :withName="false" />
 
@@ -36,13 +36,12 @@ export default {
   },
   props: {
     message: Object,
-    prevousTimeStamp: String,
   },
 
   data() {
     return {
       timeStamp: null,
-      giveSpace: true,
+      hasSibling: false,
     };
   },
 
@@ -68,9 +67,12 @@ export default {
       const previousTime = `${previousMsg.classList[0]} ${previousMsg.classList[1]}`;
 
       // add spacing to message accordingly
-      previousTime === this.timeStamp
-        ? (this.giveSpace = false)
-        : (this.giveSpace = true);
+      if (previousTime === this.timeStamp) {
+        previousMsg.classList.add("no-space");
+        this.hasSibling = true;
+      }
+    } else {
+      this.hasSibling = false;
     }
 
     // scroll to last message
@@ -85,7 +87,7 @@ export default {
   justify-content: flex-start;
   align-items: flex-end;
   width: 100%;
-  margin-top: 22.5px;
+  margin-bottom: 22.5px;
 
   &__right {
     flex-direction: row-reverse;
@@ -174,14 +176,20 @@ export default {
 }
 
 .message__right.no-space {
-  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
 
-  .message__content {
-    border-radius: 15px 0 0 15px;
-  }
+  // .message__content {
+  //   // border-radius: 15px 0 0 15px;
+  // }
 
   .message__timestamp {
     display: none;
+  }
+}
+
+.message__right.tweak-border {
+  .message__content {
+    border-radius: 15px 0 0 15px;
   }
 }
 </style>
