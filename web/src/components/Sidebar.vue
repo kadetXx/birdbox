@@ -5,7 +5,6 @@
         <Bird :user="user" :withName="true" :current="true" />
       </div>
       <form class="header__search">
-        
         <input
           v-model="findUser"
           type="text"
@@ -13,7 +12,8 @@
           placeholder="Search users"
         />
 
-        <i class="fa fa-search header__search-icon"></i>
+        <span class="material-icons-outlined header__search-icon">search</span>
+
       </form>
     </div>
 
@@ -24,6 +24,24 @@
         v-bind:key="user.id"
         v-for="user in filteredUsers"
       />
+    </div>
+
+    <div class="toolbar">
+      <router-link to="/"
+        ><span class="material-icons-outlined"> sms </span></router-link
+      >
+      <router-link to="/"
+        ><span class="material-icons-outlined"> sms </span></router-link
+      >
+      <router-link to="/"
+        ><span class="material-icons-outlined"> sms </span></router-link
+      >
+      <router-link to="/"
+        ><span class="material-icons-outlined"> tune </span></router-link
+      >
+      <router-link to="/"
+        ><span class="material-icons-outlined"> sms </span></router-link
+      >
     </div>
   </aside>
 </template>
@@ -73,11 +91,10 @@ export default {
   width: 40%;
   padding: 2rem 2rem 0;
   // background-color: #eff4f5;
-  
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   height: 100%;
   overflow: hidden;
 }
@@ -106,7 +123,7 @@ export default {
     margin: 1rem 0 0;
     border: none;
     border-radius: 30px;
-    background-color: #373D49;
+    background-color: #373d49;
     padding: 1rem;
   }
 
@@ -125,9 +142,9 @@ export default {
   }
 
   .header__search-icon {
-    font-size: 0.9rem;
+    font-size: 1.3rem;
     margin-right: 0.5rem;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 }
 
@@ -140,5 +157,15 @@ export default {
     margin-right: 0.1rem;
     margin-left: 0.1rem;
   }
+}
+
+.toolbar {
+  padding: 1rem;
+  margin: 1rem 2rem;
+  background-color: #2e333d;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>

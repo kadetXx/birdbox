@@ -14,6 +14,8 @@
           ? 'user__avatar user__avatar--male'
           : user.gender === 'Female'
           ? 'user__avatar user__avatar--female'
+          : user.gender === 'Non binary'
+          ? 'user__avatar--non'
           : 'user__avatar user__avatar--bot'
       "
     >
@@ -23,7 +25,7 @@
       <span v-else class="user__avatar-text"><i class="fas fa-robot"></i></span>
 
       <span
-      v-if="withName === true"
+        v-if="withName === true"
         :class="
           user.online ? 'user__avatar-icon online' : 'user__avatar-icon offline'
         "
@@ -33,24 +35,32 @@
     <div v-if="withName" class="user__details">
       <p class="user__username">
         {{ user.username.charAt(0).toUpperCase() + user.username.slice(1) }}
-        <span v-if="user.admin" class="user__isadmin">(admin)</span>
+        <span v-if="user.admin" class="material-icons user__isadmin"
+          >verified</span
+        >
       </p>
 
-      <span v-if="current === true" class="user__displayname"> {{ user.displayName }} </span>
-      <span v-else class="user__displayname"> {{ user.online ? 'active now' : 'disconnected' }} </span>
-      
+      <span v-if="current === true" class="user__displayname">
+        {{ user.displayName }}
+      </span>
+      <span v-else class="user__displayname">
+        {{ user.online ? "active now" : "disconnected" }}
+      </span>
+
       <i
-        :class="
-          user.gender === 'Male'
-            ? 'fas fa-mars user__gender'
-            : user.gender === 'Female'
-            ? 'fas fa-venus user__gender'
-            : user.gender === 'Non Binary'
-            ? 'fas fa-mecury user__gender'
-            : 'fas fa-genderless user__gender'
-        "
+        v-if="user.gender === 'Male'"
+        class="material-icons-outlined user__gender"
+        >male</i
       >
-      </i>
+      <i
+        v-else-if="user.gender === 'Female'"
+        class="material-icons-outlined user__gender"
+        >female</i
+      >
+
+      <i v-else class="material-icons-outlined user__gender"
+        >panorama_fish_eye</i
+      >
     </div>
   </div>
 </template>
@@ -123,6 +133,10 @@ export default {
     background-color: #5b5e65;
   }
 
+  &__avatar--non {
+    background-color: #353b47;
+  }
+
   &__details {
     display: flex;
     align-items: center;
@@ -154,11 +168,12 @@ export default {
   &__gender {
     position: relative;
     top: -0.1rem;
+    font-size: 1.1rem;
   }
 
   &__isadmin {
     font-size: 0.8rem;
-    color: #71a61c;
+    color: #919398;
     text-transform: lowercase;
     margin-left: 0.5rem;
     font-weight: normal;

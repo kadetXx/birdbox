@@ -15,9 +15,15 @@ const io = socketio(server, {
   },
 });
 
+const bots = [
+  'Parrot',
+  'Raven',
+  'Sparrow',
+]
+
 const bot = {
   id: 0,
-  username: "Parrot (bot)",
+  username: bots[Math.floor(Math.random()*bots.length)],
   gender: "bot",
   admin: false,
   online: true

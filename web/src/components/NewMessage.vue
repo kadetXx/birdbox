@@ -9,7 +9,7 @@
       />
       <div class="form__btn-container">
         <button class="form__btn" @click.prevent="clickButton()">
-          <i class="fas fa-paper-plane"></i>
+          <span class="material-icons-round"> send </span>
         </button>
       </div>
     </form>
@@ -81,11 +81,11 @@ export default {
 
 .form__btn-container {
   width: 10rem;
-  padding: 0.4rem ;
+  padding: 0.4rem;
   display: flex;
   align-items: stretch;
   justify-content: stretch;
-  
+
   .form__btn {
     flex-grow: 1;
     background-color: #ffffff;
@@ -98,12 +98,9 @@ export default {
     align-items: center;
     font-size: 1.2rem;
     padding: 0.7rem 0;
-    
 
-    i {
-      position: relative;
-      left: -0.1rem;
-      top: -0.05rem;
+    span {
+      font-size: 1.5rem;
     }
   }
 }

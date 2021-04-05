@@ -14,9 +14,8 @@
             message.user.username.charAt(0).toUpperCase() +
             message.user.username.slice(1)
           }}
-          <span v-if="message.user.admin" class="message__isadmin"
-            >(admin)</span
-          >
+        <span v-if="message.user.gender === 'bot'" class="message__isbot">•  bot</span>
+        <span v-if="message.user.admin" class="material-icons message__isadmin">verified</span>
         </small>
         {{ message.message }}
       </p>
@@ -130,12 +129,23 @@ export default {
     }
 
     .message__username {
+      display: flex;
+      align-items: center;
+
       &.Male {
         color: #557ade;
       }
 
       &.Female {
         color: #f2507b;
+      }
+
+      &.Non {
+        color: #353B47;
+      }
+
+      &.bot {
+        color: #FFFFFF;
       }
     }
   }
@@ -170,8 +180,14 @@ export default {
   }
 
   .message__isadmin {
-    color: red;
+    color: grey;
+    margin-left: 0.3rem;
     font-size: 0.7rem;
+  }
+
+  .message__isbot {
+    color: grey;
+    margin-left: 0.2rem;
   }
 }
 

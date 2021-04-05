@@ -19,6 +19,13 @@ export default {
     };
   },
 
+  mounted() {
+    this.sockets.subscribe("spaceUsers", (data) => {
+      const user = data.users.filter(item => item.id === this.user.id);
+      this.user = user[0];
+    });
+  },
+
   created() {
     const isAuthenticated = this.user !== null && this.user !== undefined;
   

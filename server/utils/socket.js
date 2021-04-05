@@ -17,7 +17,7 @@ class SocketHandler {
       // send welcome message to single user
       this.socket.emit(
         "message",
-        this.manager.formatMsg(this.bot, `Welcome ${user.username}`, "message__left", false)
+        this.manager.formatMsg(this.bot, `Hello ${user.username}`, "message__left", false)
       );
 
       // send message to all other users
@@ -25,7 +25,7 @@ class SocketHandler {
         .to(user.space)
         .emit(
           "message",
-          this.manager.formatMsg(this.bot, `${user.username} has joined`, "left", true)
+          this.manager.formatMsg(this.bot, `${user.username} joined the space`, "message__left", true)
         );
     }
 
@@ -92,7 +92,7 @@ class SocketHandler {
     .to(userWhoLeft.space)
     .emit(
       "message",
-      this.manager.formatMsg(this.bot, `${userWhoLeft.username} left the space`, "left", true)
+      this.manager.formatMsg(this.bot, `${userWhoLeft.username} left the space`, "message__left", true)
     );
   }
 }

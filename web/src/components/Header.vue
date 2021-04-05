@@ -18,7 +18,7 @@
     <div class="header__btns">
       <router-link to="/">
         <button title="Exit This Space" class="header__btn" @click="leaveSpace">
-          <i class="fas fa-sign-out-alt"></i>
+          <span class="material-icons-outlined"> logout </span>
         </button>
       </router-link>
       <!-- <router-link to='/'>
@@ -130,7 +130,7 @@ export default {
 .header__btn {
   color: #aeb0b4;
   background-color: #343943;
-  padding: 1rem 1.1rem;
+  padding: 0.8rem 0.8rem;
   border: none;
   border-radius: 10px;
   display: flex;
