@@ -26,7 +26,7 @@
       />
     </div>
 
-    <Toolbar />
+    <Toolbar :active="'space'" :space="space" :nextSpace="'/sports'" /> 
   </aside>
 </template>
 

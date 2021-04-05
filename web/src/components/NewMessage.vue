@@ -81,7 +81,7 @@ export default {
 
 .form__btn-container {
   width: 7rem;
-  padding: 0.4rem;
+  padding: 0.5rem;
   display: flex;
   align-items: stretch;
   justify-content: stretch;
