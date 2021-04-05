@@ -1,5 +1,10 @@
 <template>
-  <div ref="message" :class="`${message.class} message`">
+  <div
+    ref="message"
+    :class="`${timeStamp} ${message.class} message ${
+      giveSpace ? 'with-space' : 'no-space'
+    } `"
+  >
     <Bird :user="message.user" :withName="false" />
 
     <div class="message__content-wrapper">
@@ -16,9 +21,7 @@
         {{ message.message }}
       </p>
       <p class="message__timestamp">
-        {{
-          timeStamp
-        }}
+        {{ timeStamp }}
       </p>
     </div>
   </div>
@@ -33,21 +36,44 @@ export default {
   },
   props: {
     message: Object,
+    prevousTimeStamp: String,
   },
 
   data() {
     return {
-      timeStamp: null
-    }
+      timeStamp: null,
+      giveSpace: true,
+    };
   },
 
   mounted() {
+    // fetch message timestamp is created
     const date = new Date();
-
     const hours = date.getHours();
-    const mins = date.getMinutes();
+    const mins = String(date.getMinutes());
 
-    this.timeStamp = `${hours}:${mins} ${hours < 12 ? 'AM' : 'PM'}`
+    // create timestamp string
+    const time = `${hours}:${mins.length < 2 ? "0" + mins : mins} ${
+      hours < 12 ? "AM" : "PM"
+    }`;
+
+    // set message timestamp to timestamp string
+    this.timeStamp = time;
+
+    // get previous message from dom
+    const previousMsg = this.$refs.message.previousSibling;
+
+    // check if timestamp from previous message is the same with current timestamp
+    if (previousMsg.classList !== undefined) {
+      const previousTime = `${previousMsg.classList[0]} ${previousMsg.classList[1]}`;
+
+      // add spacing to message accordingly
+      previousTime === this.timeStamp
+        ? (this.giveSpace = false)
+        : (this.giveSpace = true);
+    }
+
+    // scroll to last message
     this.$refs.message.scrollIntoView({ behavior: "smooth" });
   },
 };
@@ -59,12 +85,11 @@ export default {
   justify-content: flex-start;
   align-items: flex-end;
   width: 100%;
-  margin-bottom: 22.5px;
+  margin-top: 22.5px;
 
   &__right {
     flex-direction: row-reverse;
-    text-align: right;
-    padding-left: 20%;
+    padding-left: 40%;
 
     .message__content {
       padding: 0.7rem 1.2rem 0.8rem;
@@ -81,11 +106,15 @@ export default {
     .message__username {
       display: none;
     }
+
+    .message__timestamp {
+      text-align: right;
+    }
   }
 
   &__left {
     justify-content: flex-start;
-    padding-right: 20%;
+    padding-right: 40%;
 
     .message__content {
       padding: 0.7rem 1.2rem 0.9rem;
@@ -125,6 +154,7 @@ export default {
     width: fit-content;
     margin: 0;
     font-size: 0.9rem;
+    line-height: 1.5;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -140,6 +170,18 @@ export default {
   .message__isadmin {
     color: red;
     font-size: 0.7rem;
+  }
+}
+
+.message__right.no-space {
+  margin-top: 0.2rem;
+
+  .message__content {
+    border-radius: 15px 0 0 15px;
+  }
+
+  .message__timestamp {
+    display: none;
   }
 }
 </style>
