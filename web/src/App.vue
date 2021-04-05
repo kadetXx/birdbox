@@ -75,7 +75,7 @@ export default {
   box-sizing: border-box;
 
   ::-webkit-scrollbar {
-		width: 7.5px;
+		width: 5.5px;
 		border: none;
 	}
 

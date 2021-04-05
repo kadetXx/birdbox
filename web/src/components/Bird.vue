@@ -37,7 +37,7 @@
       </p>
 
       <span v-if="current === true" class="user__displayname"> {{ user.displayName }} </span>
-      <span v-else class="user__displayname"> {{ user.online ? 'active now' : 'unavailable' }} </span>
+      <span v-else class="user__displayname"> {{ user.online ? 'active now' : 'disconnected' }} </span>
       
       <i
         :class="
