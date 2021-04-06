@@ -40,8 +40,10 @@ class Manager {
   }
 
   static getCurrentUser(msg) {
-    const currentUser = spaces[`${msg.space}`].filter(item => item.id === msg.id);
-    return currentUser[0];
+    if (spaces[`${msg.space}`] !== undefined) {
+      const currentUser = spaces[`${msg.space}`].filter(item => item.id === msg.id);
+      return currentUser[0];
+    }
   }
 
   static userLeaves(id) {

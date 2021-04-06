@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="message.user.id !== undefined"
     ref="message"
     :class="`${timeStamp} ${message.class} ${
       hasSibling === true ? 'tweak-border' : ''
@@ -121,9 +122,20 @@ export default {
     .message__content {
       padding: 0.7rem 1.2rem 0.8rem;
       border-radius: 15px 15px 0 15px;
-      background-color: #60cf57;
       background-color: #557ade;
       color: #ffffff;
+
+      &.Male {
+        background-color: #557ade;
+      }
+
+      &.Female {
+        background-color: #f2507b;
+      }
+
+      &.Non {
+        background-color: #9764C9;
+      }
     }
 
     .user {
