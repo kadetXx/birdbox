@@ -84,24 +84,26 @@ export default {
     // set message timestamp to timestamp string
     this.timeStamp = time;
 
-    // get previous message from dom
-    const previousMsg = this.$refs.message.previousSibling;
+    if (this.$refs.message !== undefined) {
+      // get previous message from dom
+      const previousMsg = this.$refs.message.previousSibling;
 
-    // check if timestamp from previous message is the same with current timestamp
-    if (previousMsg.classList !== undefined) {
-      const previousTime = `${previousMsg.classList[0]} ${previousMsg.classList[1]} ${previousMsg.classList[2]}`;
+      // check if timestamp from previous message is the same with current timestamp
+      if (previousMsg.classList !== undefined) {
+        const previousTime = `${previousMsg.classList[0]} ${previousMsg.classList[1]} ${previousMsg.classList[2]}`;
 
-      // add spacing to message accordingly
-      if (previousTime === `${this.timeStamp} ${this.message.class}`) {
-        previousMsg.classList.add("no-space");
-        this.hasSibling = true;
-      } else {
-        this.hasSibling = false;
+        // add spacing to message accordingly
+        if (previousTime === `${this.timeStamp} ${this.message.class}`) {
+          previousMsg.classList.add("no-space");
+          this.hasSibling = true;
+        } else {
+          this.hasSibling = false;
+        }
       }
-    }
 
-    // scroll to last message
-    this.$refs.message.scrollIntoView({ behavior: "smooth" });
+      // scroll to last message
+      this.$refs.message.scrollIntoView({ behavior: "smooth" });
+    }
   },
 };
 </script>
@@ -134,7 +136,7 @@ export default {
       }
 
       &.Non {
-        background-color: #9764C9;
+        background-color: #9764c9;
       }
     }
 
@@ -179,7 +181,7 @@ export default {
       }
 
       &.Non {
-        color: #9764C9;
+        color: #9764c9;
       }
 
       &.bot {

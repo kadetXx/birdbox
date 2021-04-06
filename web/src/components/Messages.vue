@@ -1,6 +1,6 @@
 <template>
-  <div v-if="messages[messages.length - 1] !== undefined" class="messages">
-    <div v-if="messages[messages.length - 1].user.id !== undefined" class="messages__container">
+  <div  class="messages">
+    <div  class="messages__container">
       <Message
         v-bind:key="message.id"
         v-for="message in messages"
