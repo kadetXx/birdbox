@@ -34,6 +34,11 @@ io.on("connection", (socket) => {
 
   const handler = new socketHandler(io, socket, manager, bot);
 
+  socket.on("connected",() => {
+    const spaces = manager.getSpaces();
+    io.emit("allSpaces", spaces);
+  });
+
   // join Space
   socket.on("joinSpace", (data) => {
     handler.joinSpace({...data});

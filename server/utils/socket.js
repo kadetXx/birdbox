@@ -47,7 +47,6 @@ class SocketHandler {
       space: newUser.space,
       users: this.manager.getSpaceUsers(newUser.space),
     });
-
   }
 
   newChat(msg) {

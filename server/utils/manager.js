@@ -1,10 +1,10 @@
 
 let spaces = {
-  general: [],
-  sports: [],
-  tech: [],
-  lagos: [],
-  singles: [],
+  "general": [],
+  "sports": [],
+  "tech": [],
+  "lagos": [],
+  "singles": [],
 };
 
 class Manager {
@@ -19,30 +19,30 @@ class Manager {
 
   static userJoin(user) {
       
-      if (!spaces[`${user.space}`]) {
-        spaces = {
-          ...spaces,
-          [user.space]: [
-            {...user, admin: true},
-          ]
-        }
-
-        return {...user, admin: true}
+    if (!spaces[`${user.space}`]) {
+      spaces = {
+        ...spaces,
+        [user.space]: [
+          {...user, admin: true},
+        ]
       }
 
-      else if (spaces[`${user.space}`].filter(item => item.id === user.id).length === 0) {
-        spaces = {
-          ...spaces,
-          [user.space]: [
-            ...spaces[`${user.space}`],
-            {...user, admin: false},
-          ]
-        }
+      return {...user, admin: true}
+    }
 
-        return user
+    else if (spaces[`${user.space}`].filter(item => item.id === user.id).length === 0) {
+      spaces = {
+        ...spaces,
+        [user.space]: [
+          ...spaces[`${user.space}`],
+          {...user, admin: false},
+        ]
       }
 
-      return {...user, reconnected: true}
+      return user
+    }
+
+    return {...user, reconnected: true}
   }
 
   static getCurrentUser(msg) {
@@ -63,6 +63,7 @@ class Manager {
 
       // check if user object is present in the space
       const userInspace = space.filter(item => item.id === id);
+      
       // return new user object containing user's current spaces array if user is present
       if (userInspace.length !== 0) {
         user = {
@@ -78,6 +79,25 @@ class Manager {
 
   static getSpaceUsers(space) {
     return spaces[space];
+  }
+
+  static getSpaces() {
+    const allSpaces = []
+
+    for (const space in spaces) {
+     
+      const newSpace = {
+        space: space,
+        users: spaces[space],
+        total: spaces[space].length,
+        online: spaces[space].filter(item => item.online).length,
+        offline: spaces[space].filter(item => !item.online).length
+      }
+
+      allSpaces.push(newSpace)
+    }
+   
+    return allSpaces
   }
 
   static setOnline(user, space, status) {
