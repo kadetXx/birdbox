@@ -1,6 +1,6 @@
 <template>
   <div class="setup-account">
-    <Template>
+    <Template :pageType="'auth'" :gender="formData.gender">
       <h1 class="header">One more step</h1>
 
       <form class="form">
@@ -25,7 +25,7 @@
         </select>
 
         <div class="form__btn-wrap">
-          <button @click.prevent="signUp()" class="form__btn">Continue</button>
+          <button @click.prevent="signUp()" :class="`form__btn ${formData.gender}`">Continue</button>
         </div>
       </form>
     </Template>

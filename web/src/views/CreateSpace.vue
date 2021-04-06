@@ -1,6 +1,6 @@
 <template>
   <div class="create">
-    <Template>
+    <Template :pageType="'create'" :gender="user.gender">
       <h1 class="header">Create Space</h1>
       <form class="form">
         <input
@@ -10,7 +10,7 @@
           placeholder="Name your space"
         />
 
-        <button @click.prevent="createSpace()" class="form__btn">Create</button>
+        <button @click.prevent="createSpace()" :class="`form__btn ${user.gender}`">Create</button>
       </form>
     </Template>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="sign-in">
-    <Template>
+    <Template :pageType="'auth'" :gender="'unknown'">
       <h1 class="header">
         <span class="close__icon material-icons-outlined">https</span>
       </h1>
