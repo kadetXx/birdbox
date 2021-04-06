@@ -47,8 +47,8 @@ export default {
       showAlert: false,
       alertData: {
         icon: "lock_open",
-        color: "#61d258",
-        title: "Oporr 🚀",
+        color: "#a6a7b2",
+        title: "Oporrrr",
         text: "Authentication was successful",
         state: this.setAlert,
         links: [
