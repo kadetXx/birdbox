@@ -35,7 +35,7 @@
 
 <script>
 import { createUserDocument } from "../firebase/firebase";
-import Template from "./FormPageTemplate";
+import Template from "./FormpageTemplate";
 export default {
   name: "SignIn",
   components: {

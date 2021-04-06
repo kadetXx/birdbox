@@ -18,7 +18,7 @@
 
 <script>
 import { signInWithGoogle } from "../firebase/firebase";
-import Template from "../components/FormPageTemplate";
+import Template from "../components/FormpageTemplate";
 import Alert from "../components/Alert";
 
 export default {

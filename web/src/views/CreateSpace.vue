@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Template from "../components/FormPageTemplate";
+import Template from "../components/FormpageTemplate";
 export default {
   name: "SignIn",
   components: {
