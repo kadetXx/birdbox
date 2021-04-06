@@ -9,7 +9,7 @@
     <Bird :user="message.user" :withName="false" />
 
     <div class="message__content-wrapper">
-      <p class="message__content">
+      <p :class="`message__content ${message.user.gender}`">
         <small :class="`message__username ${message.user.gender}`">
           {{
             message.user.username.charAt(0).toUpperCase() +

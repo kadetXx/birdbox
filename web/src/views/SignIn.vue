@@ -31,15 +31,15 @@ export default {
       alertData: {
         icon: "lock_open",
         color: "#61d258",
-        title: "Oporr",
+        title: "Oporr 🚀",
         text: "Authentication was successful",
         state: this.setAlert,
         links: [
           {
-            text: "Proceed",
-            url: "/",
+            text: "Go To Spaces",
+            url: "#",
             action: () => {
-              return;
+              window.location = '/'
             },
           },
         ],
