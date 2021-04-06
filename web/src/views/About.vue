@@ -1,5 +1,17 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <Template>
+      <h1>This is an about page</h1>
+    </Template>
   </div>
 </template>
+
+<script>
+import Template from '../components/FormPageTemplate'
+export default {
+  name: 'About',
+  components: {
+    Template
+  }
+}
+</script>
