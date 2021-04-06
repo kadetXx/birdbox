@@ -39,7 +39,7 @@ export default {
 
       this.user = user;
 
-      const space = this.space;
+      const space = this.space.toLowerCase();
 
       // emit joinSpace event to server
       this.$socket.emit("joinSpace", { ...user, space });

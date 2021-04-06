@@ -1,7 +1,10 @@
 <template>
   <div class="create">
     <Template :pageType="'create'" :gender="user.gender">
-      <h1 class="header">Create Space</h1>
+      <div class="title">
+        <h1 class="title__heading">Create Space</h1>
+        <p class="title__subheading">Just a topic for your space and zoom</p>
+      </div>
       <form class="form">
         <input
           v-model="space"
@@ -37,11 +40,11 @@ export default {
         online: true,
       };
 
-      const space = this.space;
+      const space = this.space.toLowerCase();
 
       // emit joinSpace event to server
       this.$socket.emit("joinSpace", { ...user, space });
-      this.$router.push(`/space/${this.space}`);
+      this.$router.push(`/space/${this.space.toLowerCase()}`);
     },
   },
 

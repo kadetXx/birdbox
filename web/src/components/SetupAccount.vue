@@ -1,7 +1,10 @@
 <template>
   <div class="setup-account">
     <Template :pageType="'auth'" :gender="formData.gender">
-      <h1 class="header">One more step</h1>
+      <div class="title">
+        <h1 class="title__heading">One more step</h1>
+        <p class="title__subheading">Finish setting up your account.</p>
+      </div>
 
       <form class="form">
         <input

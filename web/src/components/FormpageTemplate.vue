@@ -34,10 +34,15 @@ export default {
   align-items: center;
   padding: 0 4%;
 
-  .header {
-    margin-bottom: 2rem;
-    // text-transform: uppercase;
+  .title {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
     color: #fff;
+  }
+
+  .title__heading {
+    font-size: 1.8rem;
   }
 
   .form {
