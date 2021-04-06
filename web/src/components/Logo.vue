@@ -22,7 +22,7 @@ export default {
   top: 2rem;
   display: flex;
   align-items: center;
-  width: 50%;
+  width: fit-content;
 
   .logo__wrap {
     position: relative;

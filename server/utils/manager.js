@@ -1,5 +1,11 @@
 
-let spaces = {};
+let spaces = {
+  general: [],
+  sports: [],
+  tech: [],
+  lagos: [],
+  singles: [],
+};
 
 class Manager {
 
