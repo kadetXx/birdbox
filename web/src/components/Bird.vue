@@ -44,7 +44,7 @@
         {{ user.displayName }}
       </span>
       <span v-else class="user__displayname">
-        {{ user.online ? "active now" : "disconnected" }}
+        {{ user.online ? "active now" : "offline" }}
       </span>
 
       <i v-if="user.gender === 'Male'" class="fas fa-mars user__gender"></i>
@@ -105,7 +105,7 @@ export default {
       }
 
       &.offline {
-        background-color: #f3a238;
+        background-color: #6a7488;
       }
     }
   }
@@ -123,7 +123,6 @@ export default {
   }
 
   &__avatar--non {
-    background-color: #353b47;
     background-color: #9764C9;
   }
 
@@ -150,8 +149,7 @@ export default {
 
   &__displayname {
     color: #919398;
-    text-transform: lowercase;
-    margin-right: 0.5rem;
+    margin: 0.2rem 0.5rem 0 0;
     font-weight: normal;
   }
 

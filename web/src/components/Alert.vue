@@ -133,7 +133,7 @@ export default {
   padding: 1rem 0;
   border: none;
   outline: none;
-  background-color: #557ade;
+  background-color: #EB7A4F;
   color: #FFFFFF;
   display: flex;
   align-items: center;
