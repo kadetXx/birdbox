@@ -15,7 +15,7 @@
           : user.gender === 'Female'
           ? 'user__avatar user__avatar--female'
           : user.gender === 'Non binary'
-          ? 'user__avatar--non'
+          ? 'user__avatar user__avatar--non'
           : 'user__avatar user__avatar--bot'
       "
     >
@@ -47,20 +47,9 @@
         {{ user.online ? "active now" : "disconnected" }}
       </span>
 
-      <i
-        v-if="user.gender === 'Male'"
-        class="material-icons-outlined user__gender"
-        >male</i
-      >
-      <i
-        v-else-if="user.gender === 'Female'"
-        class="material-icons-outlined user__gender"
-        >female</i
-      >
-
-      <i v-else class="material-icons-outlined user__gender"
-        >panorama_fish_eye</i
-      >
+      <i v-if="user.gender === 'Male'" class="fas fa-mars user__gender"></i>
+      <i v-else-if="user.gender === 'Female'" class="fas fa-venus user__gender"></i>
+      <i v-else class="fas fa-venus-mars user__gender"></i>
     </div>
   </div>
 </template>
@@ -135,6 +124,7 @@ export default {
 
   &__avatar--non {
     background-color: #353b47;
+    background-color: #9764C9;
   }
 
   &__details {

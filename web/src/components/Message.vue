@@ -167,7 +167,7 @@ export default {
       }
 
       &.Non {
-        color: #353b47;
+        color: #9764C9;
       }
 
       &.bot {

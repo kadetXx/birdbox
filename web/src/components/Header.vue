@@ -16,20 +16,20 @@
     </div>
 
     <div class="header__btns">
-      <router-link to="/">
-        <button title="Exit This Space" class="header__btn" @click="leaveSpace">
-          <span class="material-icons-outlined"> logout </span>
-        </button>
-      </router-link>
-      <!-- <router-link to='/'>
-        <button @click="logOut">Logout</button>
-      </router-link> -->
+      <button
+        title="Exit This Space"
+        class="header__btn"
+        @click="setAlert(true)"
+      >
+        <span class="material-icons-outlined"> logout </span>
+      </button>
     </div>
+    <Alert v-if="showAlert === true" v-bind:alertData="alertData" />
   </div>
 </template>
 
 <script>
-import { auth } from "../firebase/firebase.js";
+import Alert from "./Alert";
 
 export default {
   name: "Header",
@@ -37,10 +37,30 @@ export default {
     space: String,
     user: Object,
   },
+  components: {
+    Alert,
+  },
 
   data() {
     return {
       users: [],
+      showAlert: false,
+      alertData: {
+        icon: "logout",
+        color: "#FFCA48",
+        title: "Exit Space",
+        text: "You're about to leave this space",
+        state: this.setAlert,
+        links: [
+          {
+            text: "Proceed",
+            url: "/",
+            action: () => {
+              this.leaveSpace();
+            },
+          },
+        ],
+      },
     };
   },
 
@@ -55,17 +75,8 @@ export default {
       this.$socket.emit("leaveSpace", { ...this.user, space: this.space });
     },
 
-    logOut() {
-      this.leaveSpace();
-
-      auth
-        .signOut()
-        .then(function () {
-          console.log("signed out");
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
+    setAlert: function (condition) {
+      this.showAlert = condition;
     },
   },
 
@@ -140,9 +151,5 @@ export default {
   i {
     transform: scale(1.3);
   }
-}
-
-a {
-  text-decoration: none;
 }
 </style>

@@ -1,37 +1,93 @@
 <template>
   <div class="authpage">
-    <h1 class="authpage__header">Welcome Back!</h1>
+    <h1 class="authpage__header">
+      <span class="close__icon material-icons-outlined">https</span>
+    </h1>
 
     <form class="form">
       <button @click.prevent="signInGoogle()" class="form__btn">
         <i class="fab fa-google form__btn-icon"></i> Sign in
       </button>
     </form>
+
+    <Alert v-if="showAlert === true" v-bind:alertData="alertData" />
   </div>
 </template>
 
 <script>
 import { signInWithGoogle } from "../firebase/firebase";
+import Alert from "../components/Alert";
 
 export default {
   name: "SignIn",
+  components: {
+    Alert,
+  },
 
   data() {
     return {
-      user: this.$attrs.user
-    }
+      user: this.$attrs.user,
+      showAlert: false,
+      alertData: {
+        icon: "lock_open",
+        color: "#61d258",
+        title: "Oporr",
+        text: "Authentication was successful",
+        state: this.setAlert,
+        links: [
+          {
+            text: "Proceed",
+            url: "/",
+            action: () => {
+              return;
+            },
+          },
+        ],
+      },
+    };
   },
 
-   methods: {
+  methods: {
     signInGoogle() {
-      signInWithGoogle();
+      signInWithGoogle()
+        .then((res) => {
+          !res.additionalUserInfo.isNewUser && this.setAlert(true)
+        })
+        .catch((err) => {
+          console.log(err);
+          this.showError();
+        });
+    },
+
+    showError() {
+      (this.alertData = {
+        icon: "info",
+        color: "#FFCA48",
+        title: "Opps!",
+        text: "Something went wrong, please try again",
+        state: this.setAlert,
+        links: [
+          {
+            text: "Proceed",
+            url: "/sign-in",
+            action: () => {
+              this.setAlert(false)
+            },
+          },
+        ],
+      }),
+      
+      this.setAlert(true);
+    },
+
+    setAlert: function (condition) {
+      this.showAlert = condition;
     },
   },
 
   created() {
-    this.user !== null && this.user !== undefined && this.$router.push('/');
+    this.user !== null && this.user !== undefined && this.$router.push("/");
   },
-
 };
 </script>
 
