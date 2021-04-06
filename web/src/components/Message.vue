@@ -61,6 +61,7 @@ export default {
   },
   props: {
     message: Object,
+    triggerAlert: Function
   },
 
   data() {
@@ -103,6 +104,9 @@ export default {
 
       // scroll to last message
       this.$refs.message.scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.log('reload');
+      this.triggerAlert(true)
     }
   },
 };

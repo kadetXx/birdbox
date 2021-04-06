@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <Header :space="space" :user="user" />
-    <Messages />
+    <Messages :space="space" />
     <NewMessage :user="user" />
   </div>
 </template>
