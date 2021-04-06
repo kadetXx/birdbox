@@ -75,8 +75,8 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar {
-  width: 40%;
-  padding: 2rem 2rem 0;
+  width: 45%;
+  padding: 2rem 3rem 0;
   // background-color: #eff4f5;
 
   display: flex;

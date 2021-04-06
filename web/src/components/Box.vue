@@ -23,7 +23,7 @@ export default {
 
 <style lang="scss" scoped>
 .box {
-  width: 60%;
+  width: 55%;
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
