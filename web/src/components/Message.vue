@@ -2,7 +2,7 @@
   <div
     v-if="message.user.id !== undefined"
     ref="message"
-    :class="`${timeStamp} ${message.class} ${
+    :class="`${timeStamp} ${message.class} ${message.user.id} ${
       hasSibling === true ? 'tweak-border' : ''
     } message`"
   >
@@ -61,7 +61,7 @@ export default {
   },
   props: {
     message: Object,
-    triggerAlert: Function
+    triggerAlert: Function,
   },
 
   data() {
@@ -91,10 +91,10 @@ export default {
 
       // check if timestamp from previous message is the same with current timestamp
       if (previousMsg.classList !== undefined) {
-        const previousTime = `${previousMsg.classList[0]} ${previousMsg.classList[1]} ${previousMsg.classList[2]}`;
+        const previousTime = `${previousMsg.classList[0]} ${previousMsg.classList[1]} ${previousMsg.classList[2]} ${previousMsg.classList[3]}`;
 
         // add spacing to message accordingly
-        if (previousTime === `${this.timeStamp} ${this.message.class}`) {
+        if (previousTime === `${this.timeStamp} ${this.message.class} ${this.message.user.id}`) {
           previousMsg.classList.add("no-space");
           this.hasSibling = true;
         } else {
@@ -105,8 +105,8 @@ export default {
       // scroll to last message
       this.$refs.message.scrollIntoView({ behavior: "smooth" });
     } else {
-      console.log('reload');
-      this.triggerAlert(true)
+      console.log("reload");
+      this.triggerAlert(true);
     }
   },
 };
