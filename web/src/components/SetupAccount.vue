@@ -22,7 +22,6 @@
           <option value="male">Male</option>
           <option value="Female">Female</option>
           <option value="Non binary">Non binary</option>
-          <option value="Prefer not to say">Prefer not to say</option>
         </select>
 
         <div class="form__btn-wrap">
