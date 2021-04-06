@@ -27,14 +27,17 @@ export default {
   .logo__wrap {
     position: relative;
     font-size: 2.5rem;
-    color: #557ADE;
     width: 4rem;
     height: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #557ADE;
+    background-color: #EB7A4F;
     border-radius: 15px;
+
+    &.Male {
+      background-color:#557ADE;;
+    }
 
     &.Female {
       background-color: #f2507b;
