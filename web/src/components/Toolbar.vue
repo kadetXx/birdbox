@@ -146,7 +146,6 @@ export default {
 <style lang="scss" scoped>
 .toolbar {
   padding: 0.5rem;
-  margin: 1rem 3rem;
   background-color: #2e333d;
   border-radius: 30px;
   display: flex;

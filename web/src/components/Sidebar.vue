@@ -26,7 +26,9 @@
       />
     </div>
 
-    <Toolbar :active="'space'" :space="space" :nextSpace="'/sports'" /> 
+    <div class="toolbar__container">
+      <Toolbar :active="'space'" :space="space" :nextSpace="'/sports'" /> 
+    </div>
   </aside>
 </template>
 
@@ -76,7 +78,7 @@ export default {
 <style lang="scss" scoped>
 .sidebar {
   width: 45%;
-  padding: 2rem 3rem 0;
+  padding: 2rem 1rem 0 3rem;
   // background-color: #eff4f5;
 
   display: flex;
@@ -88,7 +90,7 @@ export default {
 
 .header {
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem 5rem 1rem 2rem;
 
   .header__link {
     font-weight: bold;
@@ -136,7 +138,7 @@ export default {
 }
 
 .users {
-  padding: 2rem 3rem 0 2rem;
+  padding: 2rem 5rem 0 2rem;
   flex-grow: 1;
   overflow: auto;
 
@@ -144,5 +146,9 @@ export default {
     margin-right: 0.1rem;
     margin-left: 0.1rem;
   }
+}
+
+.toolbar__container {
+  padding: 1rem 6rem 1rem 3rem;
 }
 </style>

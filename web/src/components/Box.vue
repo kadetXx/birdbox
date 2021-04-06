@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Header from "./Header.vue";
+import Header from "./BoxHeader.vue";
 import NewMessage from "./NewMessage";
 import Messages from "./Messages";
 
