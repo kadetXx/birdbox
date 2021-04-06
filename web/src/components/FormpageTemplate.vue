@@ -1,6 +1,12 @@
 <template>
   <div class="formpage-template">
     <div class="content">
+      <div class="logo">
+        <div class="logo__wrap">
+          <i class="fab fa-earlybirds logo__icon"></i>
+          <span class="logo__fake-eye"></span>
+        </div>
+      </div>
       <slot></slot>
     </div>
 
@@ -25,24 +31,97 @@ export default {
   justify-content: space-between;
 }
 
+.logo {
+  position: absolute;
+  left: 4%;
+  top: 2rem;
+  display: flex;
+  align-items: center;
+  width: 50%;
+
+  .logo__wrap {
+    position: relative;
+    font-size: 2.5rem;
+    color: #557ADE;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #557ADE;
+    border-radius: 15px;
+  }
+
+  .logo__icon {
+    z-index: 5;
+    color: #272B34;
+  }
+
+  .logo__fake-eye {
+    width: 1.6rem;
+    height: 0.9rem;
+    background-color: #FFF;
+    opacity: 0.8;
+    position: absolute;
+    margin-bottom: 0.6rem;
+  }
+}
+
 .content {
   display: flex;
   flex-direction: column;
   width: 40%;
-  height: 100%;
+  height: calc(100% - 5rem);
   justify-content: center;
   align-items: center;
   padding: 0 4%;
+  margin-top: auto;
 
   .title {
     width: 100%;
-    padding: 0.8rem;
+    padding: 0.8rem 0.3rem;
     margin-bottom: 1rem;
     color: #fff;
   }
 
   .title__heading {
-    font-size: 1.8rem;
+    font-size: 2rem;
+    margin: 0;
+
+    span {
+      color: #7e8596;
+    }
+  }
+
+  .title__subheading {
+    opacity: 0.7;
+    font-weight: normal;
+    margin: 0.8rem 0;
+  }
+
+  .title--icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    // margin-bottom: ;
+
+    .title__icon {
+      width: 8rem;
+      height: 8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #557ade21;
+      border-radius: 100%;
+      padding: 2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .title__icon span {
+      font-size: 4rem;
+      color: #557ade;
+    }
   }
 
   .form {
@@ -67,7 +146,7 @@ export default {
 
     &::placeholder {
       color: #7e8596;
-      font-weight: bold;
+      font-weight: normal;
     }
   }
 
@@ -108,6 +187,21 @@ export default {
 
     &.Non {
       background-color: #9764c9;
+    }
+
+    &--extra-pad {
+      width: 80%;
+      margin: auto;
+    }
+  }
+
+  .form__footer {
+    text-align: center;
+    margin-top: 0.8rem;
+    color: #7e8596;
+
+    a {
+      text-decoration: none;
     }
   }
 }

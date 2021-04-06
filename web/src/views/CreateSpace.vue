@@ -2,7 +2,7 @@
   <div class="create">
     <Template :pageType="'create'" :gender="user.gender">
       <div class="title">
-        <h1 class="title__heading">Create Space</h1>
+        <h1 class="title__heading">Create Space 🐣 </h1>
         <p class="title__subheading">Just a topic for your space and zoom</p>
       </div>
       <form class="form">

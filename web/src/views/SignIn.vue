@@ -1,14 +1,27 @@
 <template>
   <div class="sign-in">
     <Template :pageType="'auth'" :gender="'unknown'">
-      <h1 class="header">
-        <span class="close__icon material-icons-outlined">https</span>
-      </h1>
+      <div class="title title--icon">
+        <div class="title__icon">
+          <span class="material-icons-outlined"> https </span>
+        </div>
+        <h2 class="title__heading">Heloooo 👋🏼</h2>
+        <p class="title__subheading">Sign in to your birdbox account</p>
+      </div>
 
       <form class="form">
-        <button @click.prevent="signInGoogle()" class="form__btn">
-          <i class="fab fa-google form__btn-icon"></i> Sign in
+        <button
+          @click.prevent="signInGoogle()"
+          class="form__btn form__btn--extra-pad"
+        >
+          Sign in
         </button>
+        <small class="form__footer"
+          >Powered By
+          <a href="https://firebase.google.com/products/auth" target="_blank" rel="noreferrer noopener"
+            >Google</a
+          ></small
+        >
       </form>
 
       <Alert v-if="showAlert === true" v-bind:alertData="alertData" />
