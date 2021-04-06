@@ -26,21 +26,8 @@
         </small>
 
         <span
-          v-if="
-            message.message.includes(
-              'https://' ||
-                'http://' ||
-                '.com' ||
-                '.dev' ||
-                '.org' ||
-                '.net' ||
-                '.co.uk'
-            )
-          "
-          v-html="
-            `<a href='${message.message}'> 
-          ${message.message} </a>`
-          "
+          v-if="isLink"
+          v-html="url"
         ></span>
 
         <span v-else>{{ message.message }} </span>
@@ -71,6 +58,45 @@ export default {
     };
   },
 
+  computed: {
+    isLink: function () {
+
+      let isLink = false
+
+      const urlMatchers = [
+        "https://",
+        "http://",
+        ".com",
+        ".dev",
+        ".org",
+        ".edu",
+        ".net",
+        ".co",
+      ];
+
+      urlMatchers.forEach((matcher) => {
+        if (this.message.message.includes(matcher)) {
+          isLink = true
+        }
+      });
+
+      return isLink
+    },
+
+    url: function () {
+      let html = `<a href='${this.message.message}' target='_blank'> ${this.message.message} </a>`
+
+      const includesHttpProtocol = this.message.message.includes('http://');
+      const includesHttpsProtocol = this.message.message.includes('https://');
+
+      if (!includesHttpProtocol && !includesHttpsProtocol) {
+        html = `<a href='http://${this.message.message}' target='_blank'> ${this.message.message} </a>`
+      }
+
+      return html
+    }
+  },
+
   mounted() {
     // fetch message timestamp is created
     const date = new Date();
@@ -94,7 +120,10 @@ export default {
         const previousTime = `${previousMsg.classList[0]} ${previousMsg.classList[1]} ${previousMsg.classList[2]} ${previousMsg.classList[3]}`;
 
         // add spacing to message accordingly
-        if (previousTime === `${this.timeStamp} ${this.message.class} ${this.message.user.id}`) {
+        if (
+          previousTime ===
+          `${this.timeStamp} ${this.message.class} ${this.message.user.id}`
+        ) {
           previousMsg.classList.add("no-space");
           this.hasSibling = true;
         } else {
