@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <div v-if="user === false" class="loader">
-      <p>Loading...</p>
-    </div>
+    <Preloader v-if="user === false" />
     <SignUp v-else-if="pendingAccount !== false" :userData="pendingAccount" />
     <router-view v-else :user="user" />
   </div>
@@ -11,10 +9,12 @@
 <script>
 import { auth, checkIfUserExists } from "./firebase/firebase.js";
 import SignUp from "./components/SetupAccount.vue";
+import Preloader from "./components/Preloader";
 
 export default {
   components: {
     SignUp,
+    Preloader,
   },
 
   data() {
@@ -74,21 +74,21 @@ export default {
   box-sizing: border-box;
 
   // @media screen and (min-width: 900px) {
-    ::-webkit-scrollbar {
-      width: 5.5px;
-      border: none;
-    }
+  ::-webkit-scrollbar {
+    width: 5.5px;
+    border: none;
+  }
 
-    ::-webkit-scrollbar-track {
-      border-radius: 0px;
-      background-color: #272b34;
-    }
+  ::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #272b34;
+  }
 
-    ::-webkit-scrollbar-thumb {
-      border-radius: 0px;
-      background-color: #5b5e65;
-      border-radius: 8rem;
-    }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #5b5e65;
+    border-radius: 8rem;
+  }
   // }
 }
 
