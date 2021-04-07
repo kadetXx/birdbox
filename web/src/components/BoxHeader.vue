@@ -29,7 +29,7 @@
       <button
         title="Space Info"
         class="header__btn header__btn--mobile"
-        @click="setAlert(true)"
+        @click="setSidebar(true)"
       >
         <span class="material-icons-outlined"> info </span>
       </button>
@@ -46,6 +46,8 @@ export default {
   props: {
     space: String,
     user: Object,
+    sidebar: Boolean,
+    setSidebar: Function
   },
   components: {
     Alert,
@@ -87,7 +89,7 @@ export default {
 
     setAlert: function (condition) {
       this.showAlert = condition;
-    },
+    }
   },
 
   created() {

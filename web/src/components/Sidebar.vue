@@ -1,8 +1,17 @@
 <template>
-  <aside class="sidebar">
+  <aside
+    :class="`sidebar ${
+      sidebar
+        ? 'sidebar--show'
+        : 'sidebar--hide'
+    }`"
+  >
     <div class="header">
-      <div to="/" class="header__link">
+      <div class="header__main">
         <Bird :user="user" :withName="true" :current="true" />
+        <button @click="setSidebar(false)" class="header__icon--mobile">
+          <span class="material-icons-outlined"> expand_more </span>
+        </button>
       </div>
       <form class="header__search">
         <input
@@ -50,7 +59,7 @@ export default {
     space: String,
     user: Object,
     sidebar: Boolean,
-    setSidebar: Function
+    setSidebar: Function,
   },
 
   data() {
@@ -85,7 +94,6 @@ export default {
 .sidebar {
   width: 45%;
   padding: 2rem 1rem 0 3rem;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -102,8 +110,24 @@ export default {
 
   @media screen and (max-width: 900px) {
     width: 100%;
-    position: absolute;
-    transform: translateX(100vh);
+    background-color: #272b34;
+    transition: transform 0.4s ease-out;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+     z-index: 1000;
+
+    &--hide {
+      transform: translateY(100vh);
+      
+    }
+
+    &--show {
+      transform: translateY(0);
+     
+    }
   }
 }
 
@@ -119,16 +143,46 @@ export default {
     padding: 1rem 2rem 1rem 0;
   }
 
-  .header__link {
+  @media screen and (max-width: 900px) {
+    padding: 1rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 1rem 0;
+  }
+
+  .header__main {
     font-weight: bold;
     text-decoration: none;
     height: fit-content;
 
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
 
-    span {
-      font-size: 0.8rem;
+    .header__icon--mobile {
+      color: #aeb0b4;
+      background-color: #343943;
+      padding: 0.8rem 0.8rem;
+      border: none;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 0.5rem;
+      outline: none;
+
+      @media screen and (max-width: 900px) {
+        padding: 0.6rem;
+      }
+
+      &--mobile {
+        display: none;
+
+        @media screen and (max-width: 900px) {
+          display: inline-block;
+        }
+      }
     }
   }
 
@@ -184,6 +238,14 @@ export default {
 
   @media screen and (max-width: 999px) {
     padding: 1rem 2rem 1rem 0;
+  }
+
+  @media screen and (max-width: 900px) {
+    padding: 1rem 2rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 1rem 0;
   }
 }
 </style>

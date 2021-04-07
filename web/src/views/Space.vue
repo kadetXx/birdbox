@@ -1,7 +1,7 @@
 <template>
   <div v-if="user !== null" class="main-wrapper">
-    <Sidebar :space="space" :user="user" :sidebar="sidebar" :setSidebar="setSidebar" />
-    <Box :space="space" :user="user" :sidebar="sidebar" :setSidebar="setSidebar" />
+    <Sidebar :space="space" :user="user" :sidebar="sidebar" :setSidebar="showSidebar" />
+    <Box :space="space" :user="user" :sidebar="sidebar" :setSidebar="showSidebar" />
   </div>
 </template>
 
@@ -17,7 +17,6 @@ export default {
       space: this.$route.params.space,
       user: this.$attrs.user,
       sidebar: false,
-      setSidebar: (value) => this.showSidebar(value)
     };
   },
 

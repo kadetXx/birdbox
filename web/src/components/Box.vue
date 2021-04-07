@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <Header :space="space" :user="user" />
+    <Header :space="space" :user="user" :sidebar="sidebar" :setSidebar="setSidebar" />
     <Messages :space="space" />
     <NewMessage :user="user" />
   </div>
