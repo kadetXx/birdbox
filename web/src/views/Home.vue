@@ -58,6 +58,11 @@
           </router-link>
         </div>
       </div>
+      <div v-else class="empty-state">
+        <span class="material-icons-outlined"> forum </span>
+        <p>Spaces you join will appear here</p>
+      </div>
+
       <div class="toolbar-container">
         <Toolbar :active="'home'" :user="user" />
       </div>
@@ -152,7 +157,7 @@ export default {
           }
         });
       } else {
-        otherSpaces = this.spaces
+        otherSpaces = this.spaces;
       }
 
       return otherSpaces;
@@ -191,6 +196,45 @@ export default {
 
   @media screen and (max-width: 900px) {
     flex-wrap: wrap;
+  }
+}
+
+.empty-state {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 3.8rem 3rem 0;
+  opacity: 0.5;
+
+  @media screen and (max-width: 900px) {
+    padding: 2rem 1rem;
+    background-color: #373d4963;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    border: 1px solid #eb7b4f1a;
+    margin-top: 2rem;
+  }
+
+  span {
+    font-size: 3.5rem;
+
+    @media screen and (max-width: 900px) {
+      font-size: 3rem;
+    }
+  }
+
+  p {
+    font-size: 1.2rem;
+    padding: 0 10%;
+
+    @media screen and (max-width: 900px) {
+      // margin-bottom: 0;
+      font-size: 0.8rem;
+      text-align: center;
+    }
   }
 }
 
