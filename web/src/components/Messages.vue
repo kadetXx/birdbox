@@ -81,5 +81,9 @@ export default {
   height: 100%;
   overflow: auto;
   padding: 1rem 2.6rem 0 0;
+
+  @media screen and (max-width: 600px){
+    padding: 1rem 0.5rem 0 0;
+  }
 }
 </style>

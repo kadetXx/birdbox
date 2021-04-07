@@ -10,17 +10,17 @@
 
 <script>
 import { auth, checkIfUserExists } from "./firebase/firebase.js";
-import SignUp from './components/SetupAccount.vue'
+import SignUp from "./components/SetupAccount.vue";
 
 export default {
   components: {
-    SignUp
+    SignUp,
   },
 
   data() {
     return {
       user: false,
-      pendingAccount: false 
+      pendingAccount: false,
     };
   },
 
@@ -33,13 +33,12 @@ export default {
   watch: {
     user() {
       if (this.user) {
-        sessionStorage.setItem('userId', this.user.id)
+        sessionStorage.setItem("userId", this.user.id);
       }
-    }
+    },
   },
 
   created() {
-
     auth.onAuthStateChanged(async (userAuth) => {
       // check if there's an authenticated user
       if (userAuth) {
@@ -51,7 +50,7 @@ export default {
           this.pendingAccount = userAuth;
         } else {
           this.pendingAccount = false;
-          
+
           // proceed to set user state if they exist
           userRef.onSnapshot((snapShot) => {
             const user = {
@@ -63,10 +62,10 @@ export default {
           });
         }
       } else {
-        this.setState(null)
+        this.setState(null);
       }
     });
-  }
+  },
 };
 </script>
 
@@ -74,21 +73,23 @@ export default {
 * {
   box-sizing: border-box;
 
-  ::-webkit-scrollbar {
-		width: 5.5px;
-		border: none;
-	}
+  // @media screen and (min-width: 900px) {
+    ::-webkit-scrollbar {
+      width: 5.5px;
+      border: none;
+    }
 
-	::-webkit-scrollbar-track {
-		border-radius: 0px;
-		background-color: #272b34;
-	}
+    ::-webkit-scrollbar-track {
+      border-radius: 0px;
+      background-color: #272b34;
+    }
 
-	::-webkit-scrollbar-thumb {
-		border-radius: 0px;
-		background-color: #5B5E65;
-    border-radius: 8rem;
-	}
+    ::-webkit-scrollbar-thumb {
+      border-radius: 0px;
+      background-color: #5b5e65;
+      border-radius: 8rem;
+    }
+  // }
 }
 
 html,
@@ -96,7 +97,7 @@ body {
   height: 100%;
   margin: 0;
   background-color: #272b34;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 #app {
@@ -107,11 +108,11 @@ body {
 
   a {
     font-weight: 500;
-    color: #FFFFFF;
+    color: #ffffff;
     text-decoration: none;
 
     &.router-link-exact-active {
-      color: #557ADE;
+      color: #557ade;
     }
   }
 
@@ -119,13 +120,13 @@ body {
     padding: 0;
     list-style: none;
   }
-  
+
   .orange {
-    color: #EB7A4F;
+    color: #eb7a4f;
   }
 
   .blue {
-    color: #557ADE;
+    color: #557ade;
   }
 
   .pink {
@@ -141,7 +142,7 @@ body {
   }
 
   .lightblue {
-    color: #A6A7B2;
+    color: #a6a7b2;
   }
 }
 </style>

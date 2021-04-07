@@ -16,7 +16,7 @@ export default {
   components: { Header, NewMessage, Messages },
   props: {
     space: String,
-    user: Object
+    user: Object,
   },
 };
 </script>
@@ -30,6 +30,27 @@ export default {
   justify-content: space-between;
   border-radius: 50px;
   padding: 2rem 0.3rem 1rem 3rem;
-  background-color: #2E333D;
+  background-color: #2e333d;
+
+  @media screen and (max-width: 999px) {
+    width: 60%;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding-top: 1.5rem;
+    padding-left: calc(0.8rem + 5.5px);
+  }
 }
 </style>

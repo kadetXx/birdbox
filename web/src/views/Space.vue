@@ -57,5 +57,12 @@ export default {
   justify-content: space-between;
   height: 100%;
   padding: 1.5rem;
+
+   @media screen and (max-width: 900px) {
+    flex-wrap: wrap;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+  }
 }
 </style>

@@ -1,16 +1,19 @@
 <template>
   <div class="header">
     <div class="header__main">
-      <div class="header__icon-wrap">
-        <span class="material-icons"> forum </span>
-      </div>
+      <router-link to="/">
+        <button>
+          <span class="material-icons-outlined"> keyboard_backspace </span>
+        </button>
+      </router-link>
       <div class="header__text-wrap">
         <h2 class="header__heading">
           {{ space.charAt(0).toUpperCase() + space.slice(1) }}
         </h2>
         <p class="header__text">
           <!-- <i class="fas fa-users header__text-icon"></i> -->
-          {{ users.length }} {{ users.length === 1 ? 'member' : 'members' }}, {{ online.length }} online
+          {{ users.length }} {{ users.length === 1 ? "member" : "members" }},
+          {{ online.length }} online
         </p>
       </div>
     </div>
@@ -22,6 +25,13 @@
         @click="setAlert(true)"
       >
         <span class="material-icons-outlined"> logout </span>
+      </button>
+      <button
+        title="Space Info"
+        class="header__btn header__btn--mobile"
+        @click="setAlert(true)"
+      >
+        <span class="material-icons-outlined"> info </span>
       </button>
     </div>
     <Alert v-if="showAlert === true" v-bind:alertData="alertData" />
@@ -97,11 +107,33 @@ export default {
   padding: 0 0 1.2rem;
   margin-right: 3rem;
   box-sizing: border-box;
+
+  @media screen and (max-width: 600px) {
+    margin-right: calc(0.5rem + 5.5px);
+  }
 }
 
 .header__main {
   flex-grow: 1;
   display: flex;
+  align-items: stretch;
+
+  button {
+    display: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+
+    @media screen and (max-width: 900px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.8rem;
+      background-color: transparent;
+      border: none;
+      color: #fff;
+    }
+  }
 }
 
 .header__icon-wrap {
@@ -125,17 +157,31 @@ export default {
   width: 100%;
   color: #ffffff;
   font-size: 1.8rem;
+
+  @media screen and (max-width: 600px) {
+    font-size: 1.2rem;
+  }
 }
 
 .header__text {
   color: #919398;
   margin: 0.5rem 1rem 0 0;
   font-size: 0.9rem;
+
+  @media screen and (max-width: 600px) {
+    margin: 0.3rem 1rem 0 0;
+    font-size: 0.7rem;
+  }
 }
 
 .header__text-icon {
   color: #61d158;
   margin-right: 0.1rem;
+}
+
+.header__btns {
+  display: flex;
+  align-items: center;
 }
 
 .header__btn {
@@ -147,9 +193,25 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 0.5rem;
+  outline: none;
 
-  i {
-    transform: scale(1.3);
+  @media screen and (max-width: 900px) {
+    padding: 0.6rem;
+  }
+
+  &--mobile {
+    display: none;
+
+    @media screen and (max-width: 900px) {
+      display: inline-block;
+    }
+  }
+
+  span {
+    @media screen and (max-width: 900px) {
+      transform: scale(0.85);
+    }
   }
 }
 </style>

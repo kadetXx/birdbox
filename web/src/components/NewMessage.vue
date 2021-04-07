@@ -52,6 +52,15 @@ export default {
   align-items: center;
   padding: 1rem 0rem;
   margin-right: 3rem;
+
+  @media screen and (max-width: 900px) {
+    padding-bottom: 0;
+  }
+
+  @media screen and (max-width: 600px) {
+    margin-right: calc(0.5rem + 5.5px);
+    padding: 0.5rem 0;
+  }
 }
 
 .form {
@@ -86,6 +95,10 @@ export default {
   align-items: stretch;
   justify-content: stretch;
 
+   @media screen and (max-width: 600px) {
+    width: 5rem;
+  }
+
   .form__btn {
     flex-grow: 1;
     background-color: #ffffff;
@@ -98,6 +111,10 @@ export default {
     align-items: center;
     font-size: 1.2rem;
     padding: 0.7rem 0;
+
+    @media screen and (max-width: 600px) {
+      padding: 0.3rem 0;
+    }
 
     span {
       font-size: 1.5rem;

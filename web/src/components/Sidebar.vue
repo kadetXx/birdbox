@@ -13,7 +13,6 @@
         />
 
         <span class="material-icons-outlined header__search-icon">search</span>
-
       </form>
     </div>
 
@@ -27,20 +26,25 @@
     </div>
 
     <div class="toolbar__container">
-      <Toolbar :active="'space'" :space="space" :nextSpace="'/sports'" :user="user" /> 
+      <Toolbar
+        :active="'space'"
+        :space="space"
+        :nextSpace="'/sports'"
+        :user="user"
+      />
     </div>
   </aside>
 </template>
 
 <script>
 import Bird from "./Bird";
-import Toolbar from './Toolbar';
+import Toolbar from "./Toolbar";
 
 export default {
   name: "Sidebar",
   components: {
     Bird,
-    Toolbar
+    Toolbar,
   },
   props: {
     space: String,
@@ -79,18 +83,39 @@ export default {
 .sidebar {
   width: 45%;
   padding: 2rem 1rem 0 3rem;
-  // background-color: #eff4f5;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
   overflow: hidden;
+
+  @media screen and (max-width: 1061px) {
+    padding: 1rem 1rem 0;
+  }
+
+  @media screen and (max-width: 999px) {
+    width: 40%;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    position: absolute;
+    transform: translateX(-100vw);
+  }
 }
 
 .header {
   width: 100%;
   padding: 1rem 5rem 1rem 2rem;
+
+  @media screen and (max-width: 1061px) {
+    padding: 1rem 2rem;
+  }
+
+  @media screen and (max-width: 999px) {
+    padding: 1rem 2rem 1rem 0;
+  }
 
   .header__link {
     font-weight: bold;
@@ -150,5 +175,13 @@ export default {
 
 .toolbar__container {
   padding: 1rem 6rem 1rem 3rem;
+
+  @media screen and (max-width: 1061px) {
+    padding: 1rem 3rem;
+  }
+
+  @media screen and (max-width: 999px) {
+    padding: 1rem 2rem 1rem 0;
+  }
 }
 </style>
