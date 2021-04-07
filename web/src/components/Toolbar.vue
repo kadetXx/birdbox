@@ -144,7 +144,7 @@ export default {
 
     logout: function () {
       auth.signOut();
-      this.showAlert(false)
+      this.setAlert(false)
     },
   },
 };

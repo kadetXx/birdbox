@@ -209,6 +209,22 @@ export default {
   flex-grow: 1;
   overflow: auto;
 
+  @media screen and (max-width: 1061px) {
+    padding: 1rem 2rem;
+  }
+
+  @media screen and (max-width: 999px) {
+    padding: 1rem 2rem 1rem 0;
+  }
+
+  @media screen and (max-width: 900px) {
+    padding: 1rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 1rem 0;
+  }
+
   .user {
     margin-right: 0.1rem;
     margin-left: 0.1rem;
