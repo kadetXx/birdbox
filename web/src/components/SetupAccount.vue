@@ -72,7 +72,6 @@ export default {
           gender: "",
         };
       } catch (error) {
-        alert("an error occured");
         console.log(error.message);
       }
     },

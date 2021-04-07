@@ -71,7 +71,7 @@ export default {
           !res.additionalUserInfo.isNewUser && this.setAlert(true);
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.message);
           this.showError();
         });
     },
