@@ -11,18 +11,39 @@
               {{ space.space.charAt(0).toUpperCase() + space.space.slice(1) }}
             </h3>
 
+            <ul class="space__users">
+              <li :key="user.id + index" v-for="(user, index) in space.users" class="space__user">
+                {{ user.username }}
+                <span v-if="user.admin" class="material-icons user__isadmin">verified</span> 
+                <span v-if="index + 1 !== space.users.length">,</span>
+              </li>
+            </ul>
+
             <div class="space__details">
               <p class="space__info">
                 <span class="material-icons-outlined space__infoicon orange">
                   people
                 </span>
-                <span class="space__infotext"> {{ space.total }} </span>
+                <span class="space__infotext"> {{ space.total }} members</span>
               </p>
+
               <p class="space__info">
-                <span class="material-icons-outlined space__infoicon green">
-                  people
+                <span class="material-icons space__infoicon-lg blue">
+                  male
                 </span>
-                <span class="space__infotext"> {{ space.online }} </span>
+                <span class="space__infotext"> {{ space.males }} </span>
+              </p>
+
+              <p class="space__info">
+                <span class="material-icons space__infoicon-lg pink">
+                  female
+                </span>
+                <span class="space__infotext"> {{ space.females }} </span>
+              </p>
+
+              <p class="space__info">
+                <i class="fas fa-venus-mars space__infoicon purple"></i>
+                <span class="space__infotext"> {{ space.nonBinary }} </span>
               </p>
             </div>
           </router-link>
@@ -36,33 +57,18 @@
     <main class="main">
       <h2 class="title">Spaces</h2>
       <div class="spaces">
-        <div :key="space.space" v-for="space in spaces" class="space">
+        <div :key="space.space" v-for="space in otherSpaces" class="space">
           <router-link :to="`/space/${space.space}`">
             <h3 class="space__title">
               {{ space.space.charAt(0).toUpperCase() + space.space.slice(1) }}
             </h3>
 
             <ul class="space__users">
-              <li class="space__user">
-                Kadet
-                <span class="material-icons user__isadmin">verified</span> ,
+              <li :key="user.id + index" v-for="(user, index) in space.users" class="space__user">
+                {{ user.username }}
+                <span v-if="user.admin" class="material-icons user__isadmin">verified</span> 
+                <span v-if="index + 1 !== space.users.length">,</span>
               </li>
-
-              <li class="space__user">Tolu ,</li>
-
-              <li class="space__user">Katherine ,</li>
-
-              <li class="space__user">Omoba ,</li>
-
-              <li class="space__user">Ghost ,</li>
-
-              <li class="space__user">Alice ,</li>
-
-              <li class="space__user">Jocelyn</li>
-
-              <!-- <li class="space__user">
-                
-              </li> -->
             </ul>
 
             <div class="space__details">
@@ -116,6 +122,20 @@ export default {
   },
 
   computed: {
+    otherSpaces: function () {
+      const otherSpaces = [];
+
+      this.spaces.forEach((space) => {
+        const userInSpace =
+          space.users.filter((item) => item.id === this.user.id).length === 0;
+        if (userInSpace) {
+          otherSpaces.push(space);
+        }
+      });
+
+      return otherSpaces;
+    },
+
     mySpaces: function () {
       const mySpaces = [];
 
