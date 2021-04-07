@@ -2,7 +2,9 @@
   <div class="formpage-template">
     <div class="content">
       <Logo :gender="gender" />
-      <slot></slot>
+      <div class="slot">
+        <slot></slot>
+      </div>
     </div>
 
     <div :class="`hero ${pageType} ${gender}`"></div>
@@ -10,11 +12,11 @@
 </template>
 
 <script>
-import Logo from './Logo'
+import Logo from "./Logo";
 export default {
   name: "Template",
   components: {
-    Logo
+    Logo,
   },
   props: {
     pageType: String,
@@ -34,11 +36,20 @@ export default {
   display: flex;
   flex-direction: column;
   width: 40%;
-  height: calc(100% - 5rem);
-  justify-content: center;
-  align-items: center;
-  padding: 0 4%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2rem 4%;
   margin-top: auto;
+
+  .slot {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
 
   .title {
     width: 100%;
@@ -83,7 +94,7 @@ export default {
 
     .title__icon span {
       font-size: 4rem;
-      color: #EB7A4F;
+      color: #eb7a4f;
     }
   }
 
@@ -131,7 +142,7 @@ export default {
   .form__btn {
     padding: 0 5rem;
     margin-bottom: 0.5rem;
-    background-color: #EB7A4F;
+    background-color: #eb7a4f;
     color: #fff;
     border: none;
     text-transform: uppercase;
@@ -145,10 +156,10 @@ export default {
     }
 
     &.Male {
-      background-color: #557ADE;
+      background-color: #557ade;
     }
 
-    &.Female { 
+    &.Female {
       background-color: #f2507b;
     }
 

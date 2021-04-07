@@ -17,9 +17,6 @@ export default {
 
 <style lang="scss" scoped>
 .logo {
-  position: absolute;
-  left: 4%;
-  top: 2rem;
   display: flex;
   align-items: center;
   width: fit-content;

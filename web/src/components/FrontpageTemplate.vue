@@ -18,7 +18,8 @@ export default {
 <style lang="scss" scoped>
 .frontpage-template {
   // margin-top: 6rem;
-  padding: 8rem 4% 2rem;
+  padding: 2rem 4% 2rem;
   position: relative;
+  height: 100%;
 }
 </style>
