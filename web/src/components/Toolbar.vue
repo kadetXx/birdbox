@@ -48,13 +48,13 @@ export default {
   props: {
     active: String,
     space: String,
-    user: Object
+    user: Object,
   },
 
   data() {
     return {
       showAlert: false,
-      lastSpace: sessionStorage.getItem('lastSpace'),
+      lastSpace: sessionStorage.getItem("lastSpace"),
       alertData: {
         icon: "info",
         color: "#FFCA48",
@@ -80,14 +80,35 @@ export default {
         icon: "monetization_on",
         color: "#A6A7B2",
         title: "Send Funds 🤲🏽",
-        text: "Support Birdbox On NFT",
+        text: "Abeg tag: @kadet",
         state: this.setAlert,
         links: [
           {
-            text: "Proceed",
+            text: "Copy",
             url: "#0",
             action: () => {
-              return;
+              navigator.clipboard.writeText("@kadet").then(() => {
+                this.alertData = {
+                  icon: "done_outline",
+                  color: "#61d258",
+                  title: "Tag Copied",
+                  text: `${
+                    this.user !== null
+                      ? this.user.username
+                      : "Omo ologo"
+                  } wire wire 🙌🏽`,
+                  state: this.setAlert,
+                  links: [
+                    {
+                      text: "Thanksss!",
+                      url: "#0",
+                      action: () => {
+                        return;
+                      },
+                    },
+                  ],
+                };
+              });
             },
           },
         ],
@@ -106,7 +127,7 @@ export default {
         links: [
           {
             text: "Proceed",
-            url: '/create-space',
+            url: "/create-space",
             action: () => {
               return;
             },
@@ -144,7 +165,7 @@ export default {
 
     logout: function () {
       auth.signOut();
-      this.setAlert(false)
+      this.setAlert(false);
     },
   },
 };
