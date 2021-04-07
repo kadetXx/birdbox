@@ -42,6 +42,15 @@ export default {
   padding: 2rem 4%;
   margin-top: auto;
 
+  @media screen and (max-width: 985px) {
+    width: 60%;
+  }
+
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+
   .slot {
     flex-grow: 1;
     display: flex;
@@ -187,6 +196,14 @@ export default {
 .hero {
   width: 60%;
   background-color: transparent;
+
+  @media screen and (max-width: 985px) {
+    width: 40%;
+  }
+
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 }
 
 .hero.create {

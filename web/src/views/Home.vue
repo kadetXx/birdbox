@@ -141,15 +141,19 @@ export default {
 
   computed: {
     otherSpaces: function () {
-      const otherSpaces = [];
+      let otherSpaces = [];
 
-      this.spaces.forEach((space) => {
-        const userInSpace =
-          space.users.filter((item) => item.id === this.user.id).length === 0;
-        if (userInSpace) {
-          otherSpaces.push(space);
-        }
-      });
+      if (this.user !== null && this.user !== undefined) {
+        this.spaces.forEach((space) => {
+          const userInSpace =
+            space.users.filter((item) => item.id === this.user.id).length === 0;
+          if (userInSpace) {
+            otherSpaces.push(space);
+          }
+        });
+      } else {
+        otherSpaces = this.spaces
+      }
 
       return otherSpaces;
     },
