@@ -4,17 +4,23 @@
       <Logo />
       <h2 class="title">Joined</h2>
 
-      <div v-if="user !== null & user !== undefined"  class="spaces">
+      <div v-if="(user !== null) & (user !== undefined)" class="spaces">
         <div :key="space.space" v-for="space in mySpaces" class="space">
           <router-link :to="`/space/${space.space}`">
             <h3 class="space__title">
               {{ space.space.charAt(0).toUpperCase() + space.space.slice(1) }}
             </h3>
 
-            <ul class="space__users">
-              <li :key="user.id + index" v-for="(user, index) in space.users" class="space__user">
+            <ul v-if="space.total !== 0" class="space__users">
+              <li
+                :key="user.id + index"
+                v-for="(user, index) in space.users"
+                class="space__user"
+              >
                 {{ user.username }}
-                <span v-if="user.admin" class="material-icons user__isadmin">verified</span> 
+                <span v-if="user.admin" class="material-icons user__isadmin"
+                  >verified</span
+                >
                 <span v-if="index + 1 !== space.users.length">,</span>
               </li>
             </ul>
@@ -24,7 +30,7 @@
                 <span class="material-icons-outlined space__infoicon orange">
                   people
                 </span>
-                <span class="space__infotext"> {{ space.total }} members</span>
+                <span class="space__infotext"> {{ space.total }} {{ space.total === 1 ? 'member' : 'members' }}</span>
               </p>
 
               <p class="space__info">
@@ -63,10 +69,16 @@
               {{ space.space.charAt(0).toUpperCase() + space.space.slice(1) }}
             </h3>
 
-            <ul class="space__users">
-              <li :key="user.id + index" v-for="(user, index) in space.users" class="space__user">
+            <ul v-if="space.total !== 0" class="space__users">
+              <li
+                :key="user.id + index"
+                v-for="(user, index) in space.users"
+                class="space__user"
+              >
                 {{ user.username }}
-                <span v-if="user.admin" class="material-icons user__isadmin">verified</span> 
+                <span v-if="user.admin" class="material-icons user__isadmin"
+                  >verified</span
+                >
                 <span v-if="index + 1 !== space.users.length">,</span>
               </li>
             </ul>
@@ -76,7 +88,7 @@
                 <span class="material-icons-outlined space__infoicon orange">
                   people
                 </span>
-                <span class="space__infotext"> {{ space.total }} members</span>
+                <span class="space__infotext"> {{ space.total }} {{ space.total === 1 ? 'member' : 'members' }}</span>
               </p>
 
               <p class="space__info">
@@ -169,9 +181,9 @@ export default {
 }
 
 .sidebar {
-  width: 35%;
+  width: 40%;
   padding: 2rem 0.2rem 2rem 4rem;
-  border-right: 2px solid rgba(255, 255, 255, 0.041);
+
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -185,35 +197,20 @@ export default {
   .toolbar-container {
     margin-right: 3.8rem;
   }
-
-  .space {
-    .space__details {
-      .space__info:nth-child(2) {
-        margin-left: none;
-      }
-    }
-  }
 }
 
 .main {
-  width: 65%;
+  width: 60%;
   padding: 2rem;
   overflow: hidden;
-  margin-bottom: 1rem;
-
-  .space {
-    .space__details {
-      .space__info:nth-child(2) {
-        margin-left: auto;
-      }
-    }
-  }
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 
 .spaces {
   height: 100%;
   overflow: auto;
-  padding: 1rem 3.8rem 1rem 0;
+  padding: 1rem 3.8rem 3rem 0;
   margin-bottom: 1rem;
 }
 
@@ -277,6 +274,10 @@ export default {
     display: flex;
     align-items: center;
     opacity: 0.8;
+
+    .space__info:nth-child(2) {
+      margin-left: auto;
+    }
 
     .space__info {
       margin: 0 0.7rem 0 0;

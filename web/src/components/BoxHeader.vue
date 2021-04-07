@@ -10,7 +10,7 @@
         </h2>
         <p class="header__text">
           <!-- <i class="fas fa-users header__text-icon"></i> -->
-          {{ users.length }} members, {{ online.length }} online
+          {{ users.length }} {{ users.length === 1 ? 'member' : 'members' }}, {{ online.length }} online
         </p>
       </div>
     </div>

@@ -1,10 +1,9 @@
 
 let spaces = {
   "general": [],
-  "sports": [],
-  "tech": [],
-  "lagos": [],
-  "singles": [],
+  "single pringles": [],
+  "rich tech bros": [],
+  "violence fc": [],
 };
 
 class Manager {
