@@ -207,6 +207,10 @@ export default {
     padding: 2rem 2rem 0;
   }
 
+  @media screen and (max-width: 600px) {
+    padding: 2rem 1rem 0;
+  }
+
   .title {
     margin-top: 2rem;
     font-size: 1.2rem;
@@ -226,7 +230,7 @@ export default {
       right: 0;
       bottom: 0;
       background-color: #272b34;
-      padding: 1rem 2rem;
+      padding: 1rem 3rem;
       z-index: 100;
     }
   }
@@ -251,6 +255,10 @@ export default {
     .spaces {
       padding-bottom: 5rem;
     }
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 2rem 1rem;
   }
 }
 

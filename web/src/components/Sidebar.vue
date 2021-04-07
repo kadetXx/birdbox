@@ -1,11 +1,5 @@
 <template>
-  <aside
-    :class="`sidebar ${
-      sidebar
-        ? 'sidebar--show'
-        : 'sidebar--hide'
-    }`"
-  >
+  <aside :class="`sidebar ${sidebar ? 'sidebar--show' : 'sidebar--hide'}`">
     <div class="header">
       <div class="header__main">
         <Bird :user="user" :withName="true" :current="true" />
@@ -111,22 +105,20 @@ export default {
   @media screen and (max-width: 900px) {
     width: 100%;
     background-color: #272b34;
-    transition: transform 0.4s ease-out;
+    transition: transform 0.3s ease-out;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-     z-index: 1000;
+    z-index: 1000;
 
     &--hide {
       transform: translateY(100vh);
-      
     }
 
     &--show {
       transform: translateY(0);
-     
     }
   }
 }
@@ -171,17 +163,11 @@ export default {
       justify-content: center;
       margin-left: 0.5rem;
       outline: none;
+      display: none;
 
       @media screen and (max-width: 900px) {
         padding: 0.6rem;
-      }
-
-      &--mobile {
-        display: none;
-
-        @media screen and (max-width: 900px) {
-          display: inline-block;
-        }
+        display: inline-block;
       }
     }
   }
@@ -241,11 +227,15 @@ export default {
   }
 
   @media screen and (max-width: 900px) {
-    padding: 1rem 2rem;
+    padding: 1rem 5rem;
   }
 
   @media screen and (max-width: 600px) {
-    padding: 1rem 0;
+    padding: 1rem 2rem;
+  }
+
+  @media screen and (max-width: 365px) {
+    padding: 1rem;
   }
 }
 </style>
