@@ -2,8 +2,6 @@ import firebase from "firebase";
 import "firebase/auth";
 import "firebase/firestore";
 
-console.log(process.env.VUE_APP_FIREBASE_API_KEY);
-
 const config = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
   authDomain: "birdbox-8194a.firebaseapp.com",

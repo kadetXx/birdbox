@@ -40,10 +40,6 @@ export default {
   props: {
     alertData: Object,
   },
-
-  created() {
-    console.log(this.alertData);
-  },
 };
 </script>
 
