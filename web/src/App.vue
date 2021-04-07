@@ -118,5 +118,25 @@ body {
     padding: 0;
     list-style: none;
   }
+  
+  .orange {
+    color: #EB7A4F;
+  }
+
+  .blue {
+    color: #557ADE;
+  }
+
+  .pink {
+    color: #f2507b;
+  }
+
+  .purple {
+    color: #9764c9;
+  }
+
+  .green {
+    color: #61d258;
+  }
 }
 </style>

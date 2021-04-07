@@ -91,7 +91,10 @@ class Manager {
         users: spaces[space],
         total: spaces[space].length,
         online: spaces[space].filter(item => item.online).length,
-        offline: spaces[space].filter(item => !item.online).length
+        offline: spaces[space].filter(item => !item.online).length,
+        males: spaces[space].filter(item => item.gender === 'Male').length,
+        females: spaces[space].filter(item => item.gender === 'Female').length,
+        nonBinary: spaces[space].filter(item => item.gender === 'Non binary').length
       }
 
       allSpaces.push(newSpace)
