@@ -27,7 +27,7 @@
     </div>
 
     <div class="toolbar__container">
-      <Toolbar :active="'space'" :space="space" :nextSpace="'/sports'" /> 
+      <Toolbar :active="'space'" :space="space" :nextSpace="'/sports'" :user="user" /> 
     </div>
   </aside>
 </template>

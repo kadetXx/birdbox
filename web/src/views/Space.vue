@@ -24,6 +24,9 @@ export default {
       const user = data.users.filter(item => item.id === this.user.id);
       this.user = user[0];
     });
+    
+    const lastSpace = this.space
+    sessionStorage.setItem('lastSpace', lastSpace);
   },
 
   created() {

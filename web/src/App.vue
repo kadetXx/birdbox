@@ -108,6 +108,7 @@ body {
   a {
     font-weight: 500;
     color: #FFFFFF;
+    text-decoration: none;
 
     &.router-link-exact-active {
       color: #557ADE;
@@ -137,6 +138,10 @@ body {
 
   .green {
     color: #61d258;
+  }
+
+  .lightblue {
+    color: #A6A7B2;
   }
 }
 </style>

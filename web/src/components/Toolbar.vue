@@ -1,21 +1,32 @@
 <template>
   <div class="toolbar">
-    <router-link to="#" @click="forLogout" class="toolbar__icon">
-      <span class="material-icons-outlined"> power_settings_new </span>
+    <router-link
+      :to="user !== null && user !== undefined ? '#' : '/sign-in'"
+      @click="forLogout"
+      class="toolbar__icon"
+    >
+      <span class="material-icons-outlined">
+        {{
+          user !== null && user !== undefined ? "power_settings_new" : "vpn_key"
+        }}
+      </span>
     </router-link>
 
     <router-link to="#" @click="forFunds" class="toolbar__icon">
       <span class="material-icons-outlined"> credit_card </span>
     </router-link>
 
-    <router-link to="/" class="toolbar__icon">
+    <router-link
+      to="/"
+      :class="`toolbar__icon ${active === 'home' && 'toolbar__icon--active'}`"
+    >
       <span class="material-icons-outlined"> roofing </span>
     </router-link>
     <router-link to="#" @click="forRandom" class="toolbar__icon">
-      <span class="material-icons-outlined"> shuffle </span>
+      <span class="material-icons-outlined"> control_point_duplicate </span>
     </router-link>
     <router-link
-      :to="`/space/${space}`"
+      :to="`/space/${space === undefined ? lastSpace : space}`"
       :class="`toolbar__icon ${active === 'space' && 'toolbar__icon--active'}`"
     >
       <span class="material-icons-outlined"> sms </span>
@@ -37,13 +48,13 @@ export default {
   props: {
     active: String,
     space: String,
+    user: Object
   },
 
   data() {
     return {
       showAlert: false,
-      nextSpace: this.space,
-
+      lastSpace: sessionStorage.getItem('lastSpace'),
       alertData: {
         icon: "info",
         color: "#FFCA48",
@@ -87,15 +98,15 @@ export default {
 
     forRandom: function () {
       this.alertData = {
-        icon: "shuffle",
+        icon: "control_point_duplicate",
         color: "#61D258",
-        title: "Random Space",
-        text: "You'll be added to a random birdbox space",
+        title: "New Space",
+        text: "Create a new birdbox space",
         state: this.setAlert,
         links: [
           {
             text: "Proceed",
-            url: this.random(),
+            url: '/create-space',
             action: () => {
               return;
             },
@@ -103,7 +114,6 @@ export default {
         ],
       };
 
-      this.random()
       this.setAlert(true);
     },
 
@@ -125,19 +135,16 @@ export default {
         ],
       };
 
-      this.setAlert(true);
+      this.user !== null && this.user !== undefined && this.setAlert(true);
     },
 
     setAlert: function (condition) {
       this.showAlert = condition;
     },
 
-    random: function () {
-      return "/wahala dey";
-    },
-
     logout: function () {
       auth.signOut();
+      this.showAlert(false)
     },
   },
 };

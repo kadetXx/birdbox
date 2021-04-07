@@ -4,7 +4,7 @@
       <Logo />
       <h2 class="title">Joined</h2>
 
-      <div class="spaces">
+      <div v-if="user !== null & user !== undefined"  class="spaces">
         <div :key="space.space" v-for="space in mySpaces" class="space">
           <router-link :to="`/space/${space.space}`">
             <h3 class="space__title">
@@ -16,35 +16,20 @@
                 <span class="material-icons-outlined space__infoicon orange">
                   people
                 </span>
-                <span class="space__infotext"> {{ space.total }}</span>
+                <span class="space__infotext"> {{ space.total }} </span>
               </p>
               <p class="space__info">
-                <span class="material-icons space__infoicon green">
-                  fiber_manual_record
+                <span class="material-icons-outlined space__infoicon green">
+                  people
                 </span>
                 <span class="space__infotext"> {{ space.online }} </span>
               </p>
-
-              <p class="space__info">
-                <span class="material-icons space__infoicon-lg blue"> male </span>
-                <span class="space__infotext"> {{ space.males }} </span>
-              </p>
-
-              <p class="space__info">
-                <span class="material-icons space__infoicon-lg pink"> female </span>
-                <span class="space__infotext"> {{ space.females }} </span>
-              </p>
-
-              <p class="space__info">
-                <i class="fas fa-venus-mars space__infoicon purple"></i>
-                <span class="space__infotext"> {{ space.nonBinary }} </span>
-              </p>
             </div>
-          </router-link> 
+          </router-link>
         </div>
       </div>
       <div class="toolbar-container">
-        <Toolbar :active="'home'" />
+        <Toolbar :active="'home'" :user="user" />
       </div>
     </aside>
 
@@ -57,27 +42,48 @@
               {{ space.space.charAt(0).toUpperCase() + space.space.slice(1) }}
             </h3>
 
+            <ul class="space__users">
+              <li class="space__user">
+                Kadet
+                <span class="material-icons user__isadmin">verified</span> ,
+              </li>
+
+              <li class="space__user">Tolu ,</li>
+
+              <li class="space__user">Katherine ,</li>
+
+              <li class="space__user">Omoba ,</li>
+
+              <li class="space__user">Ghost ,</li>
+
+              <li class="space__user">Alice ,</li>
+
+              <li class="space__user">Jocelyn</li>
+
+              <!-- <li class="space__user">
+                
+              </li> -->
+            </ul>
+
             <div class="space__details">
               <p class="space__info">
-                <!-- <span class="material-icons-outlined space__infoicon orange">
+                <span class="material-icons-outlined space__infoicon orange">
                   people
-                </span> -->
+                </span>
                 <span class="space__infotext"> {{ space.total }} members</span>
               </p>
-              <!-- <p class="space__info">
-                <span class="material-icons space__infoicon green">
-                  fiber_manual_record
-                </span>
-                <span class="space__infotext"> {{ space.online }} online </span>
-              </p> -->
 
               <p class="space__info">
-                <span class="material-icons space__infoicon-lg blue"> male </span>
+                <span class="material-icons space__infoicon-lg blue">
+                  male
+                </span>
                 <span class="space__infotext"> {{ space.males }} </span>
               </p>
 
               <p class="space__info">
-                <span class="material-icons space__infoicon-lg pink"> female </span>
+                <span class="material-icons space__infoicon-lg pink">
+                  female
+                </span>
                 <span class="space__infotext"> {{ space.females }} </span>
               </p>
 
@@ -86,7 +92,7 @@
                 <span class="space__infotext"> {{ space.nonBinary }} </span>
               </p>
             </div>
-          </router-link> 
+          </router-link>
         </div>
       </div>
     </main>
@@ -150,6 +156,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   .title {
     margin-top: 2rem;
     font-size: 1.2rem;
@@ -158,6 +165,14 @@ export default {
   .toolbar-container {
     margin-right: 3.8rem;
   }
+
+  .space {
+    .space__details {
+      .space__info:nth-child(2) {
+        margin-left: none;
+      }
+    }
+  }
 }
 
 .main {
@@ -165,6 +180,14 @@ export default {
   padding: 2rem;
   overflow: hidden;
   margin-bottom: 1rem;
+
+  .space {
+    .space__details {
+      .space__info:nth-child(2) {
+        margin-left: auto;
+      }
+    }
+  }
 }
 
 .spaces {
@@ -174,8 +197,13 @@ export default {
   margin-bottom: 1rem;
 }
 
+.row {
+  display: flex;
+  align-items: center;
+}
+
 .title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin: 0 0 1rem;
 }
 
@@ -198,7 +226,31 @@ export default {
 
   &__title {
     margin: 0 0 0.4rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
+  }
+
+  &__users {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 1.5rem 0;
+
+    .space__user {
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      margin-right: 0.5rem;
+      // color: #A6A7B2;
+      color: #fff;
+      opacity: 0.8;
+      line-height: 1.5;
+
+      span,
+      i {
+        font-size: 0.8rem;
+        margin-left: 0.2rem;
+      }
+    }
   }
 
   &__details {
@@ -211,10 +263,6 @@ export default {
       font-size: 0.8rem;
       display: flex;
       align-items: center;
-
-      &:nth-child(3) {
-        margin-left: auto;
-      }
 
       &icon {
         font-size: 0.9rem;

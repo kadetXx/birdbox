@@ -1,18 +1,20 @@
 <template>
-  <div class="logo">
-    <div :class="`logo__wrap ${gender}`">
-      <i class="fab fa-earlybirds logo__icon"></i>
-      <span class="logo__fake-eye"></span>
+  <router-link to="/">
+    <div class="logo">
+      <div :class="`logo__wrap ${gender}`">
+        <i class="fab fa-earlybirds logo__icon"></i>
+        <span class="logo__fake-eye"></span>
+      </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
 export default {
   props: {
-    gender: String
-  }
-}
+    gender: String,
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -29,11 +31,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #EB7A4F;
+    background-color: #eb7a4f;
     border-radius: 15px;
 
     &.Male {
-      background-color:#557ADE;;
+      background-color: #557ade;
     }
 
     &.Female {
@@ -47,13 +49,13 @@ export default {
 
   .logo__icon {
     z-index: 5;
-    color: #272B34;
+    color: #272b34;
   }
 
   .logo__fake-eye {
     width: 1.6rem;
     height: 0.9rem;
-    background-color: #FFF;
+    background-color: #fff;
     opacity: 0.8;
     position: absolute;
     margin-bottom: 0.6rem;
