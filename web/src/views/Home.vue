@@ -30,7 +30,10 @@
                 <span class="material-icons-outlined space__infoicon orange">
                   people
                 </span>
-                <span class="space__infotext"> {{ space.total }} {{ space.total === 1 ? 'member' : 'members' }}</span>
+                <span class="space__infotext">
+                  {{ space.total }}
+                  {{ space.total === 1 ? "member" : "members" }}</span
+                >
               </p>
 
               <p class="space__info">
@@ -88,7 +91,10 @@
                 <span class="material-icons-outlined space__infoicon orange">
                   people
                 </span>
-                <span class="space__infotext"> {{ space.total }} {{ space.total === 1 ? 'member' : 'members' }}</span>
+                <span class="space__infotext">
+                  {{ space.total }}
+                  {{ space.total === 1 ? "member" : "members" }}</span
+                >
               </p>
 
               <p class="space__info">
@@ -178,24 +184,51 @@ export default {
   display: flex;
   justify-content: space-between;
   height: 100%;
+
+  @media screen and (max-width: 900px) {
+    flex-wrap: wrap;
+  }
 }
 
 .sidebar {
   width: 40%;
   padding: 2rem 0.2rem 2rem 4rem;
-
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
+  @media screen and (max-width: 1035px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    padding: 2rem 2rem 0;
+  }
+
   .title {
     margin-top: 2rem;
     font-size: 1.2rem;
+
+    @media screen and (max-width: 900px) {
+      font-size: 1.5rem;
+    }
   }
 
   .toolbar-container {
     margin-right: 3.8rem;
+
+    @media screen and (max-width: 900px) {
+      margin-right: 0;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #272b34;
+      padding: 1rem 2rem;
+      z-index: 100;
+    }
   }
 }
 
@@ -205,6 +238,20 @@ export default {
   overflow: hidden;
   margin-bottom: 2rem;
   margin-top: 1rem;
+
+  @media screen and (max-width: 1035px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    margin-top: 0;
+    padding-top: 0;
+
+    .spaces {
+      padding-bottom: 5rem;
+    }
+  }
 }
 
 .spaces {
@@ -212,6 +259,10 @@ export default {
   overflow: auto;
   padding: 1rem 3.8rem 3rem 0;
   margin-bottom: 1rem;
+
+  @media screen and (max-width: 900px) {
+    padding: 1rem 0;
+  }
 }
 
 .row {
@@ -222,6 +273,10 @@ export default {
 .title {
   font-size: 1.8rem;
   margin: 0 0 1rem;
+
+  @media screen and (max-width: 900px) {
+    font-size: 1.5rem;
+  }
 }
 
 .space {
