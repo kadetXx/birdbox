@@ -17,6 +17,8 @@ export default {
   props: {
     space: String,
     user: Object,
+    sidebar: Boolean,
+    setSidebar: Function
   },
 };
 </script>

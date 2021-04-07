@@ -49,6 +49,8 @@ export default {
   props: {
     space: String,
     user: Object,
+    sidebar: Boolean,
+    setSidebar: Function
   },
 
   data() {
@@ -101,7 +103,7 @@ export default {
   @media screen and (max-width: 900px) {
     width: 100%;
     position: absolute;
-    transform: translateX(-100vw);
+    transform: translateX(100vh);
   }
 }
 
