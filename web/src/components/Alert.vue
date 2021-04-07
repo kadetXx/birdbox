@@ -49,7 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 .alert {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
@@ -77,6 +77,18 @@ export default {
   align-items: center;
   border-radius: 30px;
   position: relative;
+
+  @media screen and (max-width: 1035px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 70%;
+  }
+
+  @media screen and (max-width: 525px) {
+    width: 90%;
+  }
 }
 
 
