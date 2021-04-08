@@ -26,7 +26,7 @@
       <span class="material-icons-outlined"> control_point_duplicate </span>
     </router-link>
     <router-link
-      :to="`/space/${space === undefined ? lastSpace : space}`"
+      :to="`${lastSpaceLink}`"
       :class="`toolbar__icon ${active === 'space' && 'toolbar__icon--active'}`"
     >
       <span class="material-icons-outlined"> sms </span>
@@ -49,6 +49,20 @@ export default {
     active: String,
     space: String,
     user: Object,
+  },
+
+  computed: {
+    lastSpaceLink: function () {
+      let link = '/space/treehouse'
+
+      if (this.space !== undefined) {
+        link = `/space/${this.space}`
+      } else if (this.lastSpace != null) {
+        link = `/space/${this.lastSpace}`
+      }
+
+      return link
+    }
   },
 
   data() {
