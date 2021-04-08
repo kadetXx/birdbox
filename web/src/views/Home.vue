@@ -187,6 +187,10 @@ export default {
       z-index: 100;
     }
 
+    @media screen and (max-width: 600px) {
+      padding: 1rem 2rem;
+    }
+
     @media screen and (max-width: 350px) {
       padding: 1rem;
     }
