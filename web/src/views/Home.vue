@@ -5,59 +5,7 @@
       <h2 class="title">Joined</h2>
 
       <div v-if="(user !== null) & (user !== undefined)" class="spaces">
-        <div :key="space.space" v-for="space in mySpaces" class="space">
-          <router-link :to="`/space/${space.space}`">
-            <h3 class="space__title">
-              {{ space.space.charAt(0).toUpperCase() + space.space.slice(1) }}
-            </h3>
-
-            <ul v-if="space.total !== 0" class="space__users">
-              <li
-                :key="user.id + index"
-                v-for="(user, index) in space.users.slice(0, 6)"
-                class="space__user"
-              >
-                {{ user.username }}
-                <span v-if="user.admin" class="material-icons user__isadmin"
-                  >verified</span
-                >
-                <span v-if="index + 1 !== 6">,</span>
-                <span v-else>...</span>
-              </li>
-            </ul>
-
-            <div class="space__details">
-              <p class="space__info">
-                <span class="material-icons-outlined space__infoicon orange">
-                  people
-                </span>
-                <span class="space__infotext">
-                  {{ space.total }}
-                  {{ space.total === 1 ? "member" : "members" }}</span
-                >
-              </p>
-
-              <p class="space__info">
-                <span class="material-icons space__infoicon-lg blue">
-                  male
-                </span>
-                <span class="space__infotext"> {{ space.males }} </span>
-              </p>
-
-              <p class="space__info">
-                <span class="material-icons space__infoicon-lg pink">
-                  female
-                </span>
-                <span class="space__infotext"> {{ space.females }} </span>
-              </p>
-
-              <p class="space__info">
-                <i class="fas fa-venus-mars space__infoicon purple"></i>
-                <span class="space__infotext"> {{ space.nonBinary }} </span>
-              </p>
-            </div>
-          </router-link>
-        </div>
+        <Spacebox :key="space.space" v-for="space in mySpaces" :space="space" />
       </div>
       <div v-else class="empty-state">
         <span class="material-icons-outlined"> forum </span>
@@ -72,58 +20,11 @@
     <main class="main">
       <h2 class="title">Spaces</h2>
       <div class="spaces">
-        <div :key="space.space" v-for="space in otherSpaces" class="space">
-          <router-link :to="`/space/${space.space}`">
-            <h3 class="space__title">
-              {{ space.space.charAt(0).toUpperCase() + space.space.slice(1) }}
-            </h3>
-
-            <ul v-if="space.total !== 0" class="space__users">
-              <li
-                :key="user.id + index"
-                v-for="(user, index) in space.users"
-                class="space__user"
-              >
-                {{ user.username }}
-                <span v-if="user.admin" class="material-icons user__isadmin"
-                  >verified</span
-                >
-                <span v-if="index + 1 !== space.users.length">,</span>
-              </li>
-            </ul>
-
-            <div class="space__details">
-              <p class="space__info">
-                <span class="material-icons-outlined space__infoicon orange">
-                  people
-                </span>
-                <span class="space__infotext">
-                  {{ space.total }}
-                  {{ space.total === 1 ? "member" : "members" }}</span
-                >
-              </p>
-
-              <p class="space__info">
-                <span class="material-icons space__infoicon-lg blue">
-                  male
-                </span>
-                <span class="space__infotext"> {{ space.males }} </span>
-              </p>
-
-              <p class="space__info">
-                <span class="material-icons space__infoicon-lg pink">
-                  female
-                </span>
-                <span class="space__infotext"> {{ space.females }} </span>
-              </p>
-
-              <p class="space__info">
-                <i class="fas fa-venus-mars space__infoicon purple"></i>
-                <span class="space__infotext"> {{ space.nonBinary }} </span>
-              </p>
-            </div>
-          </router-link>
-        </div>
+        <Spacebox
+          :key="space.space"
+          v-for="space in otherSpaces"
+          :space="space"
+        />
       </div>
     </main>
   </div>
@@ -132,11 +33,13 @@
 <script>
 import Logo from "../components/Logo";
 import Toolbar from "../components/Toolbar";
+import Spacebox from "../components/Spacebox";
 export default {
   name: "Home",
   components: {
     Logo,
     Toolbar,
+    Spacebox,
   },
   data() {
     return {
@@ -232,7 +135,6 @@ export default {
     padding: 0 10%;
 
     @media screen and (max-width: 900px) {
-      // margin-bottom: 0;
       font-size: 0.8rem;
       text-align: center;
     }
@@ -282,6 +184,10 @@ export default {
       background-color: #272b34;
       padding: 1rem 3rem;
       z-index: 100;
+    }
+
+    @media screen and (max-width: 350px) {
+      padding: 1rem;
     }
   }
 }
@@ -334,80 +240,6 @@ export default {
 
   @media screen and (max-width: 900px) {
     font-size: 1.5rem;
-  }
-}
-
-.space {
-  text-decoration: none;
-  padding: 1rem 2rem;
-  width: 100%;
-  background-color: #373d4963;
-  border-radius: 15px;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  border: 1px solid #eb7b4f1a;
-
-  a {
-    all: unset;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  &__title {
-    margin: 0 0 0.4rem;
-    font-size: 1.1rem;
-  }
-
-  &__users {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin: 1.5rem 0;
-
-    .space__user {
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      margin-right: 0.5rem;
-      // color: #A6A7B2;
-      color: #fff;
-      opacity: 0.8;
-      line-height: 1.5;
-
-      span,
-      i {
-        font-size: 0.8rem;
-        margin-left: 0.2rem;
-      }
-    }
-  }
-
-  &__details {
-    display: flex;
-    align-items: center;
-    opacity: 0.8;
-
-    .space__info:nth-child(2) {
-      margin-left: auto;
-    }
-
-    .space__info {
-      margin: 0 0.7rem 0 0;
-      font-size: 0.8rem;
-      display: flex;
-      align-items: center;
-
-      &icon {
-        font-size: 0.9rem;
-        margin-right: 0.2rem;
-      }
-
-      &icon-lg {
-        font-size: 1.2rem;
-        margin-right: 0.1rem;
-      }
-    }
   }
 }
 </style>
