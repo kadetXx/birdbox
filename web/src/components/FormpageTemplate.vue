@@ -124,13 +124,19 @@ export default {
     border-radius: 30px;
     height: 3.5rem;
     font-size: 16px;
-
+    border: 1px solid #373d49;
     -webkit-appearance: none;
     -moz-appearance: none;
+    
 
     &::placeholder {
       color: #7e8596;
       font-weight: normal;
+    }
+
+    &--invalid {
+      border-color: rgb(212, 82, 82);
+      background-color: rgba(88, 67, 65, 0.63);
     }
   }
 

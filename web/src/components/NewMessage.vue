@@ -34,13 +34,15 @@ export default {
     clickButton: function () {
       const space = this.$route.params.space;
 
-      // $socket is socket.io-client instance
-      this.$socket.emit("chatMessage", {
-        ...this.user,
-        message: this.message,
-        space: space,
-      });
-      this.message = "";
+      if (this.message.trim().length !== 0) {
+        // $socket is socket.io-client instance
+        this.$socket.emit("chatMessage", {
+          ...this.user,
+          message: this.message,
+          space: space,
+        });
+        this.message = "";
+      }
     },
   },
 };
@@ -95,7 +97,7 @@ export default {
   align-items: stretch;
   justify-content: stretch;
 
-   @media screen and (max-width: 600px) {
+  @media screen and (max-width: 600px) {
     width: 5rem;
   }
 

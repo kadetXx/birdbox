@@ -8,27 +8,33 @@
 
       <form class="form">
         <input
+          @input="setInputInvalid(false)"
           v-model="formData.username"
           type="text"
-          class="form__input"
+          :class="`form__input ${inputInvalid ? 'form__input--invalid' : ''}`"
           placeholder="Username"
           required
         />
 
         <select
-          required
+          @change="setSelectInvalid(false)"
           v-model="formData.gender"
-          class="form__input"
+          :class="`form__input ${selectInvalid ? 'form__input--invalid' : ''}`"
           name="gender"
         >
           <option value="" disabled hidden>Select Gender</option>
-          <option value="male">Male</option>
+          <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Non binary">Non binary</option>
         </select>
 
         <div class="form__btn-wrap">
-          <button @click.prevent="signUp()" :class="`form__btn ${formData.gender}`">Continue</button>
+          <button
+            @click.prevent="signUp()"
+            :class="`form__btn ${formData.gender}`"
+          >
+            Continue
+          </button>
         </div>
       </form>
     </Template>
@@ -53,26 +59,41 @@ export default {
         username: "",
         gender: "",
       },
-
-      // user: this.$attrs.user
+      inputInvalid: false,
+      selectInvalid: false,
     };
   },
 
   methods: {
+
+    setInputInvalid(value) {
+      this.inputInvalid = value;
+    },
+
+    setSelectInvalid(value) {
+      this.selectInvalid = value;
+    },
+
     async signUp() {
       const { username, gender } = this.formData;
 
-      try {
-        const user = this.userData;
+      if (this.formData.username.trim().length == 0) {
+        this.setInputInvalid(true);
+      } else if (this.formData.gender.length == 0) {
+        this.setSelectInvalid(true);
+      } else {
+        try {
+          const user = this.userData;
 
-        createUserDocument(user, { username, gender });
+          createUserDocument(user, { username, gender });
 
-        this.formData = {
-          username: "",
-          gender: "",
-        };
-      } catch (error) {
-        console.log(error.message);
+          this.formData = {
+            username: "",
+            gender: "",
+          };
+        } catch (error) {
+          console.log(error.message);
+        }
       }
     },
   },
