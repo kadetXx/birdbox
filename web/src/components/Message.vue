@@ -143,8 +143,16 @@ export default {
   align-items: flex-end;
   width: 100%;
   margin-bottom: 22.5px;
-  overflow-wrap: anywhere;
-  word-break: break-all;
+
+  // overflow-wrap: anywhere;
+  // word-break: break-all;
+
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
 
   .message__link {
     text-decoration: underline;
