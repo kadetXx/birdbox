@@ -248,7 +248,7 @@ export default {
   }
 
   @media screen and (max-width: 600px) {
-    padding: 1rem 2rem;
+    padding: 1rem;
   }
 
   @media screen and (max-width: 365px) {
