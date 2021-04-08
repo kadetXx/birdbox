@@ -154,6 +154,10 @@ export default {
     flex-direction: row-reverse;
     padding-left: 40%;
 
+    @media screen and (max-width: 600px) {
+      padding-left: 20%;
+    }
+
     .message__content {
       padding: 0.7rem 1.2rem 0.8rem;
       border-radius: 15px 15px 0 15px;
@@ -189,6 +193,10 @@ export default {
   &__left {
     justify-content: flex-start;
     padding-right: 40%;
+
+    @media screen and (max-width: 600px) {
+      padding-right: 20%;
+    }
 
     .message__content {
       padding: 0.7rem 1.2rem 0.9rem;
