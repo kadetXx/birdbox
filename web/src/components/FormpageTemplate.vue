@@ -123,6 +123,7 @@ export default {
     color: #ffffff;
     border-radius: 30px;
     height: 3.5rem;
+    font-size: 16px;
 
     -webkit-appearance: none;
     -moz-appearance: none;
