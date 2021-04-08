@@ -143,7 +143,7 @@ export default {
         icon: "power_settings_new",
         color: "#FFCA48",
         title: "Sign Out",
-        text: "You'll be signed out of Birdbox on all devices",
+        text: "You'll be signed out of Birdbox",
         state: this.setAlert,
         links: [
           {
