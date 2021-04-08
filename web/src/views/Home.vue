@@ -4,7 +4,10 @@
       <Logo />
       <h2 class="title">Joined</h2>
 
-      <div v-if="(user !== null) && (user !== undefined) && mySpaces.length !== 0" class="spaces">
+      <div
+        v-if="user !== null && user !== undefined && mySpaces.length !== 0"
+        class="spaces"
+      >
         <Spacebox :key="space.space" v-for="space in mySpaces" :space="space" />
       </div>
 
@@ -70,14 +73,16 @@ export default {
 
     mySpaces: function () {
       const mySpaces = [];
-
-      this.spaces.forEach((space) => {
-        const userInSpace =
-          space.users.filter((item) => item.id === this.user.id).length !== 0;
-        if (userInSpace) {
-          mySpaces.push(space);
-        }
-      });
+      
+      if (this.user !== null && this.user !== undefined) {
+        this.spaces.forEach((space) => {
+          const userInSpace =
+            space.users.filter((item) => item.id === this.user.id).length !== 0;
+          if (userInSpace) {
+            mySpaces.push(space);
+          }
+        });
+      }
 
       return mySpaces;
     },
