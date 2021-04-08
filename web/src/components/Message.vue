@@ -144,8 +144,7 @@ export default {
   width: 100%;
   margin-bottom: 22.5px;
 
-  // overflow-wrap: anywhere;
-  // word-break: break-all;
+  /* START CSS WORD WRAP FOR MESSAGES - BY CSS TRICKS */
 
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
@@ -162,6 +161,8 @@ export default {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+
+  /* END CSS WORD WRAP FOR MESSAGES - BY CSS TRICKS */
 
   .message__link {
     text-decoration: underline;
