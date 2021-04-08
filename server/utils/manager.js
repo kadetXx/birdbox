@@ -2,7 +2,7 @@
 let spaces = {
   "treehouse": [],
   "tech people": [],
-  "weebs only": [],
+  "weebs hangout": [],
 };
 
 class Manager {
