@@ -4,10 +4,11 @@
       <Logo />
       <h2 class="title">Joined</h2>
 
-      <div v-if="(user !== null) & (user !== undefined)" class="spaces">
+      <div v-if="(user !== null) && (user !== undefined) && mySpaces.length !== 0" class="spaces">
         <Spacebox :key="space.space" v-for="space in mySpaces" :space="space" />
       </div>
-      <div v-else class="empty-state">
+
+      <div v-if="mySpaces.length === 0" class="empty-state">
         <span class="material-icons-outlined"> forum </span>
         <p>Spaces you join will appear here</p>
       </div>
