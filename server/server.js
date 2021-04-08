@@ -19,6 +19,7 @@ const bots = [
   'Parrot',
   'Raven',
   'Sparrow',
+  "Cuckoo"
 ]
 
 const bot = {
