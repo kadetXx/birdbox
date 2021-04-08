@@ -14,14 +14,15 @@
             <ul v-if="space.total !== 0" class="space__users">
               <li
                 :key="user.id + index"
-                v-for="(user, index) in space.users"
+                v-for="(user, index) in space.users.slice(0, 6)"
                 class="space__user"
               >
                 {{ user.username }}
                 <span v-if="user.admin" class="material-icons user__isadmin"
                   >verified</span
                 >
-                <span v-if="index + 1 !== space.users.length">,</span>
+                <span v-if="index + 1 !== 6">,</span>
+                <span v-else>...</span>
               </li>
             </ul>
 
