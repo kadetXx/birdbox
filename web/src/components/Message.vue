@@ -147,7 +147,8 @@ export default {
   // overflow-wrap: anywhere;
   // word-break: break-all;
 
-  overflow-wrap: anywhere;
+  overflow-wrap: break-all;
+  word-break: break-all;
   word-wrap: break-all;
   -webkit-hyphens: auto;
   -ms-hyphens: auto;
