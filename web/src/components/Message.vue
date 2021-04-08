@@ -147,8 +147,8 @@ export default {
   align-items: flex-end;
   width: 100%;
   margin-bottom: 22.5px;
-  overflow-wrap: wrap;
   overflow-wrap: anywhere;
+  word-break: break-all;
 
   &__right {
     flex-direction: row-reverse;
