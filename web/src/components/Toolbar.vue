@@ -94,7 +94,7 @@ export default {
                   title: "Tag Copied",
                   text: `${
                     this.user !== null
-                      ? this.user.username
+                      ? this.user.username.charAt(0).toUpperCase() + this.user.username.slice(1)
                       : "Omo ologo"
                   } wire wire 🙌🏽`,
                   state: this.setAlert,
