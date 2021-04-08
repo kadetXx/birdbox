@@ -79,7 +79,7 @@ export default {
   outline: none;
   color: #c5c5c5;
   padding: 0.8rem 1.5rem;
-  // border-right: 1px solid #2e333d;
+  font-size: 16px;
 
   &::placeholder {
     color: #919398;

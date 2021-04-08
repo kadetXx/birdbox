@@ -189,6 +189,7 @@ export default {
     outline: none;
     background-color: transparent;
     color: #c5c5c5;
+    font-size: 16px;
 
     &::placeholder {
       color: #919398;
