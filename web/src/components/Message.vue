@@ -25,10 +25,7 @@
           >
         </small>
 
-        <span
-          v-if="isLink"
-          v-html="url"
-        ></span>
+        <span class="message__link" v-if="isLink" v-html="url"></span>
 
         <span v-else>{{ message.message }} </span>
       </p>
@@ -60,8 +57,7 @@ export default {
 
   computed: {
     isLink: function () {
-
-      let isLink = false
+      let isLink = false;
 
       const urlMatchers = [
         "https://",
@@ -76,25 +72,25 @@ export default {
 
       urlMatchers.forEach((matcher) => {
         if (this.message.message.includes(matcher)) {
-          isLink = true
+          isLink = true;
         }
       });
 
-      return isLink
+      return isLink;
     },
 
     url: function () {
-      let html = `<a href='${this.message.message}' target='_blank'> ${this.message.message} </a>`
+      let html = `<a href='${this.message.message}' target='_blank'> ${this.message.message} </a>`;
 
-      const includesHttpProtocol = this.message.message.includes('http://');
-      const includesHttpsProtocol = this.message.message.includes('https://');
+      const includesHttpProtocol = this.message.message.includes("http://");
+      const includesHttpsProtocol = this.message.message.includes("https://");
 
       if (!includesHttpProtocol && !includesHttpsProtocol) {
-        html = `<a href='http://${this.message.message}' target='_blank'> ${this.message.message} </a>`
+        html = `<a href='http://${this.message.message}' target='_blank'> ${this.message.message} </a>`;
       }
 
-      return html
-    }
+      return html;
+    },
   },
 
   mounted() {
@@ -149,6 +145,10 @@ export default {
   margin-bottom: 22.5px;
   overflow-wrap: anywhere;
   word-break: break-all;
+
+  .message__link {
+    text-decoration: underline;
+  }
 
   &__right {
     flex-direction: row-reverse;
