@@ -18,8 +18,8 @@ const io = socketio(server, {
 const bots = [
   'Parrot',
   'Raven',
-  'Sparrow',
-  "Cuckoo"
+  "Cuckoo",
+  'Sparrow'
 ]
 
 const bot = {
