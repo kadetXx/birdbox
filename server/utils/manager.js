@@ -44,7 +44,7 @@ class Manager {
 
       messages = {
         ...messages,
-        [user.space]: {}
+        [user.space]: []
       }
 
       return {...user, admin: true}
@@ -167,7 +167,6 @@ class Manager {
 
   static getMessages(space) {
     const msgs = messages[space];
-
     return msgs
   }
 }
