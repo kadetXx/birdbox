@@ -1,13 +1,19 @@
 <template>
   <div class="toolbar">
     <router-link
-      :to="user !== null && user !== undefined ? '#' : '/sign-in'"
+      :to="
+        user !== null && user !== undefined && signedOut === false
+          ? '#'
+          : '/sign-in'
+      "
       @click="forLogout"
       class="toolbar__icon"
     >
       <span class="material-icons-outlined">
         {{
-          user !== null && user !== undefined ? "power_settings_new" : "vpn_key"
+          user !== null && user !== undefined && signedOut === false
+            ? "power_settings_new"
+            : "vpn_key"
         }}
       </span>
     </router-link>
@@ -53,20 +59,21 @@ export default {
 
   computed: {
     lastSpaceLink: function () {
-      let link = '/space/treehouse'
+      let link = "/space/treehouse";
 
       if (this.space !== undefined) {
-        link = `/space/${this.space}`
+        link = `/space/${this.space}`;
       } else if (this.lastSpace != null) {
-        link = `/space/${this.lastSpace}`
+        link = `/space/${this.lastSpace}`;
       }
 
-      return link
-    }
+      return link;
+    },
   },
 
   data() {
     return {
+      signedOut: false,
       showAlert: false,
       lastSpace: sessionStorage.getItem("lastSpace"),
       alertData: {
@@ -108,7 +115,8 @@ export default {
                   title: "Tag Copied",
                   text: `${
                     this.user !== null
-                      ? this.user.username.charAt(0).toUpperCase() + this.user.username.slice(1)
+                      ? this.user.username.charAt(0).toUpperCase() +
+                        this.user.username.slice(1)
                       : "Omo ologo"
                   } wire wire 🙌🏽`,
                   state: this.setAlert,
@@ -170,7 +178,10 @@ export default {
         ],
       };
 
-      this.user !== null && this.user !== undefined && this.setAlert(true);
+      this.user !== null &&
+        this.user !== undefined &&
+        this.signedOut === false &&
+        this.setAlert(true);
     },
 
     setAlert: function (condition) {
@@ -178,8 +189,25 @@ export default {
     },
 
     logout: function () {
-      auth.signOut();
-      this.setAlert(false);
+      auth.signOut().then(() => {
+        this.alertData = {
+          icon: "done_outline",
+          color: "#61d258",
+          title: "Signed Out",
+          text: `You've been signed out successfully`,
+          state: this.setAlert,
+          links: [
+            {
+              text: "Okay",
+              url: "#0",
+              action: () => {
+                this.setAlert(false);
+                this.signedOut = true;
+              },
+            },
+          ],
+        };
+      });
     },
   },
 };
