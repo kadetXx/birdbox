@@ -58,7 +58,6 @@ export default {
   computed: {
     isLink: function () {
       let isLink = false;
-
       const urlMatchers = [
         "https://",
         "http://",
