@@ -2,9 +2,9 @@
   <div
     v-if="message.user.id !== undefined"
     ref="message"
-    :class="`${message.timeStamp} ${message.class} ${message.user.id} ${
+    :class="`${message.timeStamp} ${message.class} ${message.user.id} message ${
       hasSibling === true ? 'tweak-border' : ''
-    } message`"
+    }`"
   >
     <Bird :user="message.user" :withName="false" />
 
@@ -46,7 +46,7 @@ export default {
   props: {
     message: Object,
     triggerAlert: Function,
-    withSmoothScroll: Boolean
+    withSmoothScroll: Boolean,
   },
 
   data() {
@@ -94,9 +94,9 @@ export default {
   },
 
   mounted() {
-  
     if (this.$refs.message !== undefined) {
       // get previous message from dom
+      // const currentMsg = this.$refs.message;
       const previousMsg = this.$refs.message.previousSibling;
 
       // check if timestamp from previous message is the same with current timestamp
@@ -108,7 +108,9 @@ export default {
           previousTime ===
           `${this.message.timeStamp} ${this.message.class} ${this.message.user.id}`
         ) {
-          previousMsg.classList.add("no-space");
+          previousMsg.style.margin = '0 0 0.2rem 0';
+          previousMsg.querySelector(".message__timestamp").style.display = 'none';
+          previousMsg.querySelector(".user").style.visibility = 'hidden';
           this.hasSibling = true;
         } else {
           this.hasSibling = false;
@@ -116,7 +118,8 @@ export default {
       }
 
       // scroll to last message
-      this.withSmoothScroll && this.$refs.message.scrollIntoView({ behavior: "smooth" });
+      this.withSmoothScroll &&
+        this.$refs.message.scrollIntoView({ behavior: "smooth" });
     } else {
       this.triggerAlert(true);
     }
