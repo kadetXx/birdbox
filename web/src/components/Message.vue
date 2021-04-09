@@ -210,7 +210,7 @@ export default {
       padding: 0.7rem 1.2rem 0.9rem;
       border-radius: 15px 15px 15px 0;
       background-color: #343943;
-      color: #a6a7b2;
+      color: #d3d4e6;
     }
 
     .user {
