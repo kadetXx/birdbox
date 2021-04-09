@@ -4,6 +4,13 @@
       <Message
         :triggerAlert="setAlert"
         v-bind:key="message.id"
+        v-for="message in oldMessages"
+        :message="message"
+      />
+
+      <Message
+        :triggerAlert="setAlert"
+        v-bind:key="message.id"
         v-for="message in messages"
         :message="message"
       />
@@ -29,6 +36,7 @@ export default {
   data() {
     return {
       messages: [],
+      oldMessages: [],
       alertData: {
         icon: "info",
         color: "#FFCA48",
@@ -59,6 +67,11 @@ export default {
     this.sockets.subscribe("message", (data) => {
       this.messages.push(data);
     });
+
+    this.sockets.subscribe("oldMessages", (data) => {
+      this.oldMessages = data
+    })
+
   },
 };
 </script>

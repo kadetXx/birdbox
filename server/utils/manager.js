@@ -5,6 +5,12 @@ let spaces = {
   "weebs hangout": [],
 };
 
+let messages = {
+  "treehouse": [],
+  "tech people": [],
+  "weebs hangout": [],
+}
+
 class Manager {
 
   static formatMsg(user, message, className) {
@@ -23,6 +29,11 @@ class Manager {
         [user.space]: [
           {...user, admin: true},
         ]
+      }
+
+      messages = {
+        ...messages,
+        [user.space]: {}
       }
 
       return {...user, admin: true}
@@ -117,6 +128,36 @@ class Manager {
     if (index !== -1) {
       return spaces[`${user.space}`].splice(index, 1)[0];
     }
+  }
+
+
+
+  // storing messages
+
+  static storeMessage(msg) {
+
+    if (!messages[msg.space]) {
+      messages = {
+        ...messages,
+        [msg.space]: [
+          msg
+        ]
+      }
+    } else {
+      messages = {
+        ...messages,
+        [msg.space]: [
+          ...messages[msg.space],
+          msg
+        ]
+      }
+    }
+  }
+
+  static getMessages(space) {
+    const msgs = messages[space];
+
+    return msgs
   }
 }
 

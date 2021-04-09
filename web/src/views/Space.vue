@@ -37,6 +37,8 @@ export default {
   },
 
   created() {
+    this.$socket.emit("getOldMessages", this.space.toLowerCase())
+
     const isAuthenticated = this.user !== null && this.user !== undefined;
   
     if (!isAuthenticated) {
