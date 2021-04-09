@@ -19,7 +19,7 @@
         :message="message"
       />
     </div>
-
+    <Preloader v-if="loading" />
     <Alert v-if="showAlert === true" v-bind:alertData="alertData" />
   </div>
 </template>
@@ -27,6 +27,7 @@
 <script>
 import Message from "./Message";
 import Alert from "./Alert";
+import Preloader from './Preloader'
 export default {
   name: "Messages",
   props: {
@@ -36,10 +37,12 @@ export default {
   components: {
     Message,
     Alert,
+    Preloader
   },
 
   data() {
     return {
+      loading: true,
       messages: [],
       oldMessages: [],
       alertData: {
