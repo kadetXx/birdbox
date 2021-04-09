@@ -71,7 +71,7 @@ class SocketHandler {
         this.manager.formatMsg(user, msg.message, "message__left")
       );
 
-    this.manager.storeMessage(msg);
+    this.manager.storeMessage(user, msg, "");
   }
 
   handleDisconnection() {
@@ -114,12 +114,9 @@ class SocketHandler {
     const messages = this.manager.getMessages(space);
 
     const formatedMessages = messages.map((msg) => {
-      return {
-        message: msg.message,
-        user: { ...msg },
-      };
+      return msg;
     });
-    
+
     // send space users info
     this.io.to(space).emit("oldMessages", formatedMessages);
   }

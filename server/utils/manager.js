@@ -14,10 +14,21 @@ let messages = {
 class Manager {
 
   static formatMsg(user, message, className) {
+     // fetch message timestamp is created
+     const date = new Date();
+     const hours = date.getHours();
+     const mins = String(date.getMinutes());
+ 
+     // create timestamp string
+     const time = `${hours}:${mins.length < 2 ? "0" + mins : mins} ${
+       hours < 12 ? "AM" : "PM"
+     }`;
+
     return {
       user: {...user},
-      message,
+      message: message,
       class: className,
+      timeStamp: time
     };
   }
 
@@ -134,13 +145,13 @@ class Manager {
 
   // storing messages
 
-  static storeMessage(msg) {
+  static storeMessage(user, msg, classname) {
 
     if (!messages[msg.space]) {
       messages = {
         ...messages,
         [msg.space]: [
-          msg
+          this.formatMsg(user, msg.message, classname)
         ]
       }
     } else {
@@ -148,7 +159,7 @@ class Manager {
         ...messages,
         [msg.space]: [
           ...messages[msg.space],
-          msg
+          this.formatMsg(user, msg.message, classname)
         ]
       }
     }

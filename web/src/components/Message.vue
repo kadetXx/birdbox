@@ -2,7 +2,7 @@
   <div
     v-if="message.user.id !== undefined"
     ref="message"
-    :class="`${timeStamp} ${message.class} ${message.user.id} ${
+    :class="`${message.timeStamp} ${message.class} ${message.user.id} ${
       hasSibling === true ? 'tweak-border' : ''
     } message`"
   >
@@ -30,7 +30,7 @@
         <span v-else>{{ message.message }} </span>
       </p>
       <p class="message__timestamp">
-        {{ timeStamp }}
+        {{ message.timeStamp }}
       </p>
     </div>
   </div>
@@ -46,11 +46,11 @@ export default {
   props: {
     message: Object,
     triggerAlert: Function,
+    withSmoothScroll: Boolean
   },
 
   data() {
     return {
-      timeStamp: null,
       hasSibling: false,
     };
   },
@@ -94,19 +94,7 @@ export default {
   },
 
   mounted() {
-    // fetch message timestamp is created
-    const date = new Date();
-    const hours = date.getHours();
-    const mins = String(date.getMinutes());
-
-    // create timestamp string
-    const time = `${hours}:${mins.length < 2 ? "0" + mins : mins} ${
-      hours < 12 ? "AM" : "PM"
-    }`;
-
-    // set message timestamp to timestamp string
-    this.timeStamp = time;
-
+  
     if (this.$refs.message !== undefined) {
       // get previous message from dom
       const previousMsg = this.$refs.message.previousSibling;
@@ -118,7 +106,7 @@ export default {
         // add spacing to message accordingly
         if (
           previousTime ===
-          `${this.timeStamp} ${this.message.class} ${this.message.user.id}`
+          `${this.message.timeStamp} ${this.message.class} ${this.message.user.id}`
         ) {
           previousMsg.classList.add("no-space");
           this.hasSibling = true;
@@ -128,7 +116,7 @@ export default {
       }
 
       // scroll to last message
-      this.$refs.message.scrollIntoView({ behavior: "smooth" });
+      this.withSmoothScroll && this.$refs.message.scrollIntoView({ behavior: "smooth" });
     } else {
       this.triggerAlert(true);
     }

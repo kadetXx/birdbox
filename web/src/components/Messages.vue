@@ -1,14 +1,18 @@
 <template>
   <div class="messages">
-    <div class="messages__container">
-      <Message
-        :triggerAlert="setAlert"
-        v-bind:key="message.id"
-        v-for="message in oldMessages"
-        :message="message"
-      />
+    <div ref="scroll" class="messages__container">
+      <div>
+        <Message
+          :withSmoothScroll="false"
+          :triggerAlert="setAlert"
+          v-bind:key="message.id"
+          v-for="message in oldMessages"
+          :message="message"
+        />
+      </div>
 
       <Message
+        :withSmoothScroll="true"
         :triggerAlert="setAlert"
         v-bind:key="message.id"
         v-for="message in messages"
@@ -27,10 +31,11 @@ export default {
   name: "Messages",
   props: {
     space: String,
+    user: Object,
   },
   components: {
     Message,
-    Alert
+    Alert,
   },
 
   data() {
@@ -64,14 +69,30 @@ export default {
   },
 
   created() {
+    this.$socket.emit("getOldMessages", this.space.toLowerCase());
+
     this.sockets.subscribe("message", (data) => {
       this.messages.push(data);
     });
 
     this.sockets.subscribe("oldMessages", (data) => {
-      this.oldMessages = data
-    })
+      const messages = data.map((item) => {
+        return {
+          ...item,
+          class:
+            item.user.id !== this.user.id ? "message__left" : "message__right",
+        };
+      });
 
+      this.oldMessages = messages;
+    });
+  },
+
+  mounted() {
+    setTimeout(() => {
+      this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight;
+      this.loading = false;
+    }, 1000);
   },
 };
 </script>
@@ -95,7 +116,7 @@ export default {
   overflow: auto;
   padding: 1rem 2.6rem 0 0;
 
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     padding: 1rem 0.5rem 0 0;
   }
 }
