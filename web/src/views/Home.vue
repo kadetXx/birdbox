@@ -31,6 +31,8 @@
         />
       </div>
     </main>
+
+    <Preloader v-if="spaces.length === 0" />
   </div>
 </template>
 
@@ -38,12 +40,14 @@
 import Logo from "../components/Logo";
 import Toolbar from "../components/Toolbar";
 import Spacebox from "../components/Spacebox";
+import Preloader from '../components/Preloader'
 export default {
   name: "Home",
   components: {
     Logo,
     Toolbar,
     Spacebox,
+    Preloader
   },
   data() {
     return {
