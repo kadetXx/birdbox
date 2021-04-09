@@ -1,7 +1,7 @@
 <template>
   <div class="messages">
     <div ref="scroll" class="messages__container">
-      <div>
+      <div v-if="oldMessages !== null">
         <Message
           :withSmoothScroll="false"
           :triggerAlert="setAlert"
@@ -27,7 +27,7 @@
 <script>
 import Message from "./Message";
 import Alert from "./Alert";
-import Preloader from './Preloader'
+import Preloader from "./Preloader";
 export default {
   name: "Messages",
   props: {
@@ -37,14 +37,14 @@ export default {
   components: {
     Message,
     Alert,
-    Preloader
+    Preloader,
   },
 
   data() {
     return {
       loading: true,
       messages: [],
-      oldMessages: [],
+      oldMessages: null,
       alertData: {
         icon: "info",
         color: "#FFCA48",
@@ -71,6 +71,15 @@ export default {
     },
   },
 
+  watch: {
+    oldMessages() {
+      setTimeout(() => {
+        this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight;
+        this.loading = false;
+      }, 500);
+    },
+  },
+
   created() {
     this.$socket.emit("getOldMessages", this.space.toLowerCase());
 
@@ -89,13 +98,6 @@ export default {
 
       this.oldMessages = messages;
     });
-  },
-
-  mounted() {
-    setTimeout(() => {
-      this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight;
-      this.loading = false;
-    }, 1000);
   },
 };
 </script>
