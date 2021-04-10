@@ -94,7 +94,7 @@ export default {
       margin-right: 0.5rem;
       // color: #A6A7B2;
       color: #fff;
-      opacity: 0.8;
+      opacity: 0.7;
       line-height: 1.5;
 
       span,
