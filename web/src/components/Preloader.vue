@@ -153,6 +153,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #272b34;
 }
 
 .preloader__inner {

@@ -2,9 +2,9 @@
   <div
     v-if="message.user.id !== undefined"
     ref="message"
-    :class="`${timeStamp} ${message.class} ${message.user.id} ${
+    :class="`${message.timeStamp} ${message.class} ${message.user.id} message ${
       hasSibling === true ? 'tweak-border' : ''
-    } message`"
+    }`"
   >
     <Bird :user="message.user" :withName="false" />
 
@@ -30,7 +30,7 @@
         <span v-else>{{ message.message }} </span>
       </p>
       <p class="message__timestamp">
-        {{ timeStamp }}
+        {{ message.timeStamp }}
       </p>
     </div>
   </div>
@@ -46,11 +46,11 @@ export default {
   props: {
     message: Object,
     triggerAlert: Function,
+    withSmoothScroll: Boolean,
   },
 
   data() {
     return {
-      timeStamp: null,
       hasSibling: false,
     };
   },
@@ -58,7 +58,6 @@ export default {
   computed: {
     isLink: function () {
       let isLink = false;
-
       const urlMatchers = [
         "https://",
         "http://",
@@ -94,21 +93,9 @@ export default {
   },
 
   mounted() {
-    // fetch message timestamp is created
-    const date = new Date();
-    const hours = date.getHours();
-    const mins = String(date.getMinutes());
-
-    // create timestamp string
-    const time = `${hours}:${mins.length < 2 ? "0" + mins : mins} ${
-      hours < 12 ? "AM" : "PM"
-    }`;
-
-    // set message timestamp to timestamp string
-    this.timeStamp = time;
-
     if (this.$refs.message !== undefined) {
       // get previous message from dom
+      // const currentMsg = this.$refs.message;
       const previousMsg = this.$refs.message.previousSibling;
 
       // check if timestamp from previous message is the same with current timestamp
@@ -118,9 +105,11 @@ export default {
         // add spacing to message accordingly
         if (
           previousTime ===
-          `${this.timeStamp} ${this.message.class} ${this.message.user.id}`
+          `${this.message.timeStamp} ${this.message.class} ${this.message.user.id}`
         ) {
-          previousMsg.classList.add("no-space");
+          previousMsg.style.margin = '0 0 0.2rem 0';
+          previousMsg.querySelector(".message__timestamp").style.display = 'none';
+          previousMsg.querySelector(".user").style.visibility = 'hidden';
           this.hasSibling = true;
         } else {
           this.hasSibling = false;
@@ -128,7 +117,8 @@ export default {
       }
 
       // scroll to last message
-      this.$refs.message.scrollIntoView({ behavior: "smooth" });
+      this.withSmoothScroll &&
+        this.$refs.message.scrollIntoView({ behavior: "smooth" });
     } else {
       this.triggerAlert(true);
     }
@@ -220,7 +210,7 @@ export default {
       padding: 0.7rem 1.2rem 0.9rem;
       border-radius: 15px 15px 15px 0;
       background-color: #343943;
-      color: #a6a7b2;
+      color: #d3d4e6;
     }
 
     .user {

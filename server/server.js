@@ -59,6 +59,10 @@ io.on("connection", (socket) => {
   socket.on("leaveSpace", (user) => {
     handler.handleLeave(user)
   })
+
+  socket.on("getOldMessages", (space) => {
+    handler.getOldMessages(space);
+  })
 });
 
 // set static folder

@@ -1,14 +1,25 @@
 <template>
   <div class="messages">
-    <div class="messages__container">
+    <div ref="scroll" class="messages__container">
+      <div v-if="oldMessages !== null">
+        <Message
+          :withSmoothScroll="false"
+          :triggerAlert="setAlert"
+          v-bind:key="message.id"
+          v-for="message in oldMessages"
+          :message="message"
+        />
+      </div>
+
       <Message
+        :withSmoothScroll="true"
         :triggerAlert="setAlert"
         v-bind:key="message.id"
         v-for="message in messages"
         :message="message"
       />
     </div>
-
+    <Preloader v-if="loading" />
     <Alert v-if="showAlert === true" v-bind:alertData="alertData" />
   </div>
 </template>
@@ -16,19 +27,24 @@
 <script>
 import Message from "./Message";
 import Alert from "./Alert";
+import Preloader from "./Preloader";
 export default {
   name: "Messages",
   props: {
     space: String,
+    user: Object,
   },
   components: {
     Message,
-    Alert
+    Alert,
+    Preloader,
   },
 
   data() {
     return {
+      loading: true,
       messages: [],
+      oldMessages: null,
       alertData: {
         icon: "info",
         color: "#FFCA48",
@@ -55,9 +71,32 @@ export default {
     },
   },
 
+  watch: {
+    oldMessages() {
+      setTimeout(() => {
+        this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight;
+        this.loading = false;
+      }, 500);
+    },
+  },
+
   created() {
+    this.$socket.emit("getOldMessages", this.space.toLowerCase());
+
     this.sockets.subscribe("message", (data) => {
       this.messages.push(data);
+    });
+
+    this.sockets.subscribe("oldMessages", (data) => {
+      const messages = data.map((item) => {
+        return {
+          ...item,
+          class:
+            item.user.id !== this.user.id ? "message__left" : "message__right",
+        };
+      });
+
+      this.oldMessages = messages;
     });
   },
 };
@@ -82,7 +121,7 @@ export default {
   overflow: auto;
   padding: 1rem 2.6rem 0 0;
 
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     padding: 1rem 0.5rem 0 0;
   }
 }

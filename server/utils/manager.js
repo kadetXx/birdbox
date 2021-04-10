@@ -5,13 +5,30 @@ let spaces = {
   "weebs hangout": [],
 };
 
+let messages = {
+  "treehouse": [],
+  "tech people": [],
+  "weebs hangout": [],
+}
+
 class Manager {
 
   static formatMsg(user, message, className) {
+     // fetch message timestamp is created
+     const date = new Date();
+     const hours = date.getHours();
+     const mins = String(date.getMinutes());
+ 
+     // create timestamp string
+     const time = `${hours}:${mins.length < 2 ? "0" + mins : mins} ${
+       hours < 12 ? "AM" : "PM"
+     }`;
+
     return {
       user: {...user},
-      message,
+      message: message,
       class: className,
+      timeStamp: time
     };
   }
 
@@ -23,6 +40,11 @@ class Manager {
         [user.space]: [
           {...user, admin: true},
         ]
+      }
+
+      messages = {
+        ...messages,
+        [user.space]: []
       }
 
       return {...user, admin: true}
@@ -117,6 +139,35 @@ class Manager {
     if (index !== -1) {
       return spaces[`${user.space}`].splice(index, 1)[0];
     }
+  }
+
+
+
+  // storing messages
+
+  static storeMessage(user, msg, classname) {
+
+    if (!messages[msg.space]) {
+      messages = {
+        ...messages,
+        [msg.space]: [
+          this.formatMsg(user, msg.message, classname)
+        ]
+      }
+    } else {
+      messages = {
+        ...messages,
+        [msg.space]: [
+          ...messages[msg.space],
+          this.formatMsg(user, msg.message, classname)
+        ]
+      }
+    }
+  }
+
+  static getMessages(space) {
+    const msgs = messages[space];
+    return msgs
   }
 }
 
