@@ -8,9 +8,9 @@
     "dev": "nodemon server.js"
   },
   "keywords": [
-    "Game",
-    "tictactoe",
-    "multiplayer"
+    "Chat",
+    "Social",
+    "Forum"
   ],
   "author": "kadet",
   "license": "MIT",
